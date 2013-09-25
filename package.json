@@ -1,0 +1,19 @@
+{
+  "name": "selenium-standalone",
+  "version": "0.0.0",
+  "description": "installs a `start-selenium` command line to start a standalone selenium server with chrome-driver",
+  "dependencies": {
+    "request": "~2.27.0",
+    "unzip": "~0.1.9",
+    "async": "~0.2.9",
+    "fstream": "~0.1.24"
+  },
+  "bin": {
+    "start-selenium": "./bin/start-selenium"
+  },
+  "scripts": {
+    "install": "node install.js"
+  },
+  "author": "Vincent Voyer <vincent.voyer@gmail.com>",
+  "license": "MIT"
+}

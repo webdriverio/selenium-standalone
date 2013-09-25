@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+var spawn = require('child_process').spawn;
+var conf = require('../conf.js');
+
+spawn('java', [
+  '-jar',
+  conf.selenium.path,
+  '-Dwebdriver.chrome.driver=' + conf.chromeDr.path
+], {
+  stdio: 'inherit'
+});
