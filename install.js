@@ -1,25 +1,41 @@
 var conf = require('./conf.js');
 var async = require('async');
+var mkdirp = require('mkdirp');
+var rimraf = require('rimraf');
+var path = require('path');
 
-async.parallel([
-  installChromeDr.bind(null, conf.chromeDr.path, conf.chromeDr.v),
-  installSelenium.bind(null, conf.selenium.path, conf.selenium.v)
-], function(err) {
+async.series([
+  setup,
+  download
+], end);
+
+function setup(cb) {
+  async.series([
+    rimraf.bind(null, path.join(__dirname, '.selenium')),
+    mkdirp.bind(null, path.dirname(conf.selenium.path))
+  ], cb);
+}
+
+function download(cb) {
+  async.parallel([
+    installChromeDr.bind(null, conf.chromeDr.path, conf.chromeDr.v),
+    installSelenium.bind(null, conf.selenium.path, conf.selenium.v)
+  ], cb)
+}
+
+function end(err) {
   if (err) {
     throw err
   }
-});
+}
 
 function installSelenium(to, version, cb) {
   var seleniumStandaloneUrl = 'https://selenium.googlecode.com/files/selenium-server-standalone-%s.jar'
   var util = require('util');
   var dl = util.format(seleniumStandaloneUrl, version);
   var request = require('request');
-  var fstream = require('fstream');
-  var destination = fstream.Writer({
-    path: to,
-    type: 'File'
-  });
+  var fs = require('fs');
+  var destination = fs.createWriteStream(to);
 
   destination.on('error', cb);
   destination.on('close', cb);
@@ -33,6 +49,7 @@ function installSelenium(to, version, cb) {
 function installChromeDr(to, version, cb) {
   var path = require('path');
   var util = require('util');
+  var request = require('request');
 
   var chromedriverUrl = 'https://chromedriver.googlecode.com/files/chromedriver_%s_%s.zip';
   var platform = getChromeDriverPlatform();
@@ -44,7 +61,7 @@ function installChromeDr(to, version, cb) {
   var dl = util.format(chromedriverUrl, platform, version);
 
   console.log('Downloading ' + dl);
-  downloadAndExtractZip(dl, path.dirname(to), function(err) {
+  downloadAndExtractZip(dl, to, function(err) {
     if (err) {
       return cb(err);
     }
@@ -55,13 +72,10 @@ function installChromeDr(to, version, cb) {
 }
 
 function downloadAndExtractZip(from, to, cb) {
-  var fstream = require('fstream');
+  var fs = require('fs');
   var request = require('request');
   var unzip = require('unzip');
-  var destination = fstream.Writer({
-    path: to,
-    type: 'Directory'
-  });
+  var destination = fs.createWriteStream(to);
 
   destination.on('close', cb);
   destination.on('error', cb);
@@ -69,7 +83,9 @@ function downloadAndExtractZip(from, to, cb) {
   request(from)
     .on('error', cb)
     .pipe(unzip.Parse())
-    .pipe(destination)
+    .once('entry', function(file) {
+      file.pipe(destination);
+    })
 }
 
 function getChromeDriverPlatform() {

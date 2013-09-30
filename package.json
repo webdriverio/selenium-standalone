@@ -6,7 +6,8 @@
     "request": "~2.27.0",
     "unzip": "~0.1.9",
     "async": "~0.2.9",
-    "fstream": "~0.1.24"
+    "mkdirp": "~0.3.5",
+    "rimraf": "~2.2.2"
   },
   "bin": {
     "start-selenium": "./bin/start-selenium"
