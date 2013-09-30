@@ -6,7 +6,7 @@ server along with the chromedriver.
 Currently installs selenium `2.35.0` and chrome driver `2.3`.
 
 ```shell
-npm install start-selenium -g
+npm install selenium-standalone -g
 start-selenium
 ```
 
