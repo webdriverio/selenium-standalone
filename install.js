@@ -90,7 +90,7 @@ function installIExploreDr(to, version, cb){
     return;
   }
 
-  var dl = util.format(iexploredriverUrl, plafform, version);
+  var dl = util.format(iexploredriverUrl, platform, version);
   console.log('Downloading ' + dl);
 
   downloadAndExtractZip(dl, to, function(err) {
