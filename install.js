@@ -19,7 +19,9 @@ function setup(cb) {
 function download(cb) {
   async.parallel([
     installChromeDr.bind(null, conf.chromeDr.path, conf.chromeDr.v),
+    installIExploreDr.bind(null, conf.iexploreDr.path, conf.iexploreDr.v),
     installSelenium.bind(null, conf.selenium.path, conf.selenium.v)
+
   ], cb)
 }
 
@@ -66,9 +68,37 @@ function installChromeDr(to, version, cb) {
       return cb(err);
     }
 
-    var fs = require('fs');
-    fs.chmod(to, '0755', cb);
+    if(platform != 'win32')
+    {
+      var fs = require('fs');
+      fs.chmod(to, '0755', cb);
+    }  
   });
+}
+
+
+function installIExploreDr(to, version, cb){
+  var path = require('path');
+  var util = require('util');
+  var fs = require('fs');
+  var unzip = require('unzip');
+  var request = require('request');
+  var iexploredriverUrl = 'https://selenium.googlecode.com/files/IEDriverServer_%s_%s.zip';
+  var platform = getIExploreDriverPlatform();
+
+  if(platform == null) {
+    //return;
+  }
+
+  var dl = util.format(iexploredriverUrl, 'Win32', version);
+  console.log('Downloading ' + dl);
+
+  downloadAndExtractZip(dl, to, function(err) {
+    if (err) {
+      return cb(err);
+    }
+  });
+
 }
 
 function downloadAndExtractZip(from, to, cb) {
@@ -103,3 +133,20 @@ function getChromeDriverPlatform() {
 
   return platform;
 }
+
+function getIExploreDriverPlatform(){
+  var platform;
+
+
+  if (process.platform === 'win64') {
+    platform = 'Win64';
+  } else if (process.platform === 'win32') {
+    platform = 'Win32'
+  } else {
+    platform=null;
+  }
+
+  return platform;
+
+}
+
