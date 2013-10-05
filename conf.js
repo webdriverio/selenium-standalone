@@ -11,6 +11,6 @@ module.exports = {
   chromeDr: {
     path: path.join(__dirname, '.selenium', version, 'chromedriver'),
     // see https://code.google.com/p/chromedriver/downloads/list
-    v: '2.3'
+    v: '2.4'
   }
 };

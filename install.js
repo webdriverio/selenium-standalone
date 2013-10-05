@@ -51,14 +51,14 @@ function installChromeDr(to, version, cb) {
   var util = require('util');
   var request = require('request');
 
-  var chromedriverUrl = 'https://chromedriver.googlecode.com/files/chromedriver_%s_%s.zip';
+  var chromedriverUrl = 'http://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip';
   var platform = getChromeDriverPlatform();
 
   if(platform instanceof Error) {
     return cb(platform);
   }
 
-  var dl = util.format(chromedriverUrl, platform, version);
+  var dl = util.format(chromedriverUrl, version, platform);
 
   console.log('Downloading ' + dl);
   downloadAndExtractZip(dl, to, function(err) {
