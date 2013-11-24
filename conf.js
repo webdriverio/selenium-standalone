@@ -1,7 +1,7 @@
 var path = require('path');
 
 // see https://code.google.com/p/selenium/downloads/list for latest
-var version = '2.37.0';
+var version = '2.35.0';
 
 module.exports = {
   selenium: {
