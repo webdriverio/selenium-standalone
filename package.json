@@ -1,6 +1,6 @@
 {
   "name": "selenium-standalone",
-  "version": "2.37.0-2.6.1",
+  "version": "2.35.0-2.6.1",
   "description": "installs a `start-selenium` command line to start a standalone selenium server with chrome-driver",
   "dependencies": {
     "request": "~2.27.0",
