@@ -20,4 +20,16 @@ wd shell
 (wd): browser = wd.remote(); browser.init(function(){browser.get('http://www.google.com')})
 ```
 
+## Programmatic use
+
+```
+var selenium = require('selenium-standalone');
+var spawnOptions = { stdio: 'pipe' };
+var server = selenium.start(spawnOptions);
+
+server.stdout.on('data', function(output) {
+  console.log(output);
+});
+```
+
 `selenium-standalone` versions maps `selenium` versions.
