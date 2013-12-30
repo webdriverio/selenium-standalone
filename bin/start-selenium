@@ -1,21 +1,7 @@
 #!/usr/bin/env node
-var spawn = require('child_process').spawn;
-var conf = require('../conf.js');
+var spawnOptions = {
+  stdio: 'inherit'
+};
+var seleniumArgs = process.argv.slice(2);
 
-process.on('SIGINT', kill);
-process.on('exit', kill);
-
-var args = [
-    '-jar',
-  conf.selenium.path,
-  '-Dwebdriver.chrome.driver=' + conf.chromeDr.path
-].concat(process.argv.slice(2));
-
-var selenium = spawn('java', args, { stdio: 'inherit' });
-
-function kill() {
-  if (selenium) {
-    selenium.kill('SIGKILL');
-    selenium = null;
-  }
-}
+require('../index.js')(spawnOptions, seleniumArgs);

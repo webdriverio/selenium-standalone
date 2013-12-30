@@ -1,6 +1,6 @@
 {
   "name": "selenium-standalone",
-  "version": "2.39.0-2.8.0",
+  "version": "2.39.0-2.8.0-1",
   "description": "installs a `start-selenium` command line to start a standalone selenium server with chrome-driver",
   "dependencies": {
     "request": "~2.27.0",
@@ -9,12 +9,17 @@
     "mkdirp": "~0.3.5",
     "rimraf": "~2.2.2"
   },
+  "main": "index.js",
+  "scripts": {
+    "install": "node install.js",
+    "test": "mocha test.js -R tap | faucet"
+  },
   "bin": {
     "start-selenium": "./bin/start-selenium"
   },
-  "scripts": {
-    "install": "node install.js"
-  },
-  "author": "Vincent Voyer <vincent.voyer@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "~1.16.2",
+    "faucet": "0.0.0"
+  }
 }
