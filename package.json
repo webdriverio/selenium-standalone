@@ -11,14 +11,15 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "install": "node install.js",
+    "test": "mocha test.js -R tap | faucet"
   },
   "bin": {
     "start-selenium": "./bin/start-selenium"
   },
-  "scripts": {
-    "install": "node install.js"
-  },
-  "author": "Vincent Voyer <vincent.voyer@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "~1.16.2",
+    "faucet": "0.0.0"
+  }
 }

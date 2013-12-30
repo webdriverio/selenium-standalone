@@ -6,9 +6,20 @@ server along with the chromedriver.
 Currently installs selenium `2.37.0` and chrome driver `2.6`.
 
 ```shell
-npm install selenium-standalone -g
+npm install --production selenium-standalone -g
 start-selenium
 ```
+
+Any arguments passed to `start-selenium` are then passed to
+`java -jar ...jar args`.
+
+So you can `start-selenium -debug` to launch standalone selenium server
+in debug mode.
+
+## Available browsers
+
+By default, google chrome, firefox and phantomjs are available
+if installed on the sytem.
 
 ## Example: launch www.google.com
 
@@ -22,10 +33,23 @@ wd shell
 
 ## Programmatic use
 
-```
+```js
 var selenium = require('selenium-standalone');
+
 var spawnOptions = { stdio: 'pipe' };
-var server = selenium.start(spawnOptions);
+
+// options to pass to `java -jar selenium-server-standalone-X.XX.X.jar`
+var seleniumArgs = [
+  '-debug'
+];
+
+var server = selenium(spawnOptions, seleniumArgs);
+// or, var server = selenium();
+// returns ChildProcess instance
+// http://nodejs.org/api/child_process.html#child_process_class_childprocess
+
+// spawnOptions defaults to `{ stdio: 'pipe' }`
+// seleniumArgs defaults to `[]`
 
 server.stdout.on('data', function(output) {
   console.log(output);

@@ -1,17 +1,29 @@
 var spawn = require('child_process').spawn;
 var conf = require('./conf.js');
 
-function start(spawnOptions) {
+module.exports = standalone;
+
+/**
+ * Get a standalone selenium server running with
+ * chromedriver available
+ * @param  {Object} spawnOptions={ stdio: 'inherit' }
+ * @param  {string[]} seleniumArgs=[]
+ * @return {ChildProcess}
+ */
+function standalone(spawnOptions, seleniumArgs) {
   process.on('SIGINT', kill);
   process.on('exit', kill);
+
+  spawnOptions = spawnOptions || { stdio: 'inherit' };
+  seleniumArgs = seleniumArgs || [];
 
   var args = [
     '-jar',
     conf.selenium.path,
     '-Dwebdriver.chrome.driver=' + conf.chromeDr.path
-  ].concat(process.argv.slice(2));
+  ].concat(seleniumArgs);
 
-  var selenium = spawn('java', args, spawnOptions || { stdio: 'inherit' });
+  var selenium = spawn('java', args, spawnOptions);
 
   function kill() {
     if (selenium) {
@@ -23,4 +35,6 @@ function start(spawnOptions) {
   return selenium;
 }
 
-exports.start = start;
+// backward compat with original programmatic PR
+// https://github.com/vvo/selenium-standalone/pull/4
+standalone.start = standalone;

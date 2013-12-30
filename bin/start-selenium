@@ -1,3 +1,7 @@
 #!/usr/bin/env node
+var spawnOptions = {
+  stdio: 'inherit'
+};
+var seleniumArgs = process.argv.slice(2);
 
-require('../index.js').start();
+require('../index.js')(spawnOptions, seleniumArgs);
