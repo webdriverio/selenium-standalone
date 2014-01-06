@@ -3,7 +3,7 @@
 Intalls a `start-selenium` command line starting a selenium standalone
 server along with the chromedriver.
 
-Currently installs selenium `2.37.0` and chrome driver `2.6`.
+Currently installs selenium `2.39.0` and chrome driver `2.8`.
 
 ```shell
 npm install --production selenium-standalone -g
