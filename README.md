@@ -16,6 +16,16 @@ Any arguments passed to `start-selenium` are then passed to
 So you can `start-selenium -debug` to launch standalone selenium server
 in debug mode.
 
+## Running headlessly
+
+On linux,
+
+To run headlessly, you can use [xvfb](http://en.wikipedia.org/wiki/Xvfb):
+
+```shell
+xvfb-run --server-args="-screen 0, 1366x768x24" start-selenium
+```
+
 ## Available browsers
 
 By default, google chrome, firefox and phantomjs are available
