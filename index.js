@@ -11,8 +11,7 @@ module.exports = standalone;
  * @return {ChildProcess}
  */
 function standalone(spawnOptions, seleniumArgs) {
-  process.on('SIGINT', kill);
-  process.on('exit', kill);
+  process.on('SIGTERM', kill);
 
   spawnOptions = spawnOptions || { stdio: 'inherit' };
   seleniumArgs = seleniumArgs || [];
@@ -27,7 +26,7 @@ function standalone(spawnOptions, seleniumArgs) {
 
   function kill() {
     if (selenium) {
-      selenium.kill('SIGKILL');
+      selenium.kill('SIGTERM');
       selenium = null;
     }
   }
