@@ -11,6 +11,6 @@ module.exports = {
   chromeDr: {
     path: path.join(__dirname, '.selenium', version, 'chromedriver'),
     // see http://chromedriver.storage.googleapis.com/index.html
-    v: '2.8'
+    v: '2.9'
   }
 };
