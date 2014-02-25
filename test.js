@@ -1,6 +1,6 @@
 describe('programmatic use', function () {
   it('should start', function(done) {
-    this.timeout(100000);
+    this.timeout(20000);
     var selenium = require('./index.js');
     var proc = selenium.start({ stdio: 'pipe' });
 

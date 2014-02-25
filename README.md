@@ -1,12 +1,12 @@
-# selenium-standalone
+# selenium-standalone [![Dependency Status](https://david-dm.org/vvo/selenium-standalone.svg?theme=shields.io)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](https://david-dm.org/vvo/selenium-standalone/dev-status.svg?theme=shields.io)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
 Intalls a `start-selenium` command line starting a selenium standalone
 server along with the chromedriver.
 
-Currently installs selenium `2.39.0` and chrome driver `2.8`.
+Currently installs selenium `2.40.0` and chrome driver `2.9`.
 
 ```shell
-npm install --production selenium-standalone -g
+npm install --production selenium-standalone@latest -g
 start-selenium
 ```
 

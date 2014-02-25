@@ -6,7 +6,8 @@ var path = require('path');
 
 async.series([
   setup,
-  download
+  download,
+  chmodChromeDr.bind(null, conf.chromeDr.path)
 ], end);
 
 function setup(cb) {
@@ -24,32 +25,40 @@ function download(cb) {
 }
 
 function end(err) {
+  console.log('Installation finished');
   if (err) {
     throw err
   }
 }
 
 function installSelenium(to, version, cb) {
-  var seleniumStandaloneUrl = 'https://selenium.googlecode.com/files/selenium-server-standalone-%s.jar'
-  var util = require('util');
-  var dl = util.format(seleniumStandaloneUrl, version);
-  var request = require('request');
-  var fs = require('fs');
-  var destination = fs.createWriteStream(to);
+  var seleniumStandaloneUrl =
+    'http://selenium-release.storage.googleapis.com/%s/selenium-server-standalone-%s.jar';
 
-  destination.on('error', cb);
-  destination.on('close', cb);
+  var dl = require('util').format(seleniumStandaloneUrl,
+    version.slice(0, version.lastIndexOf('.')),
+    version);
 
-  console.log('Downloading ' + dl);
-  request(dl)
-    .on('error', cb)
-    .pipe(destination);
+  getDownloadStream(dl, function(err, stream) {
+    if (err) {
+      return cb(err);
+    }
+
+    stream
+      .pipe(require('fs').createWriteStream(to))
+      .once('error', cb.bind(null, new Error('Could not write to ' + to)))
+      .once('finish', cb);
+  });
+}
+
+function chmodChromeDr(where, cb) {
+  console.log('chmod+x chromedriver');
+  require('fs').chmod(where, 0755, cb);
 }
 
 function installChromeDr(to, version, cb) {
   var path = require('path');
   var util = require('util');
-  var request = require('request');
 
   var chromedriverUrl = 'http://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip';
   var platform = getChromeDriverPlatform();
@@ -60,32 +69,43 @@ function installChromeDr(to, version, cb) {
 
   var dl = util.format(chromedriverUrl, version, platform);
 
-  console.log('Downloading ' + dl);
-  downloadAndExtractZip(dl, to, function(err) {
+  getDownloadStream(dl, function(err, stream) {
     if (err) {
       return cb(err);
     }
 
-    var fs = require('fs');
-    fs.chmod(to, '0755', cb);
-  });
+    var unzip = require('unzip');
+
+    console.log('Unzipping ' + dl);
+
+    stream
+      .pipe(require('unzip').Parse())
+      .once('entry', function(file) {
+        file
+          .pipe(require('fs').createWriteStream(to))
+          .once('error', cb.bind(null, new Error('Could not write to ' + to)))
+          .once('finish', cb)
+      })
+      .once('error', cb.bind(null, new Error('Could not unzip ' + dl)))
+  })
 }
 
-function downloadAndExtractZip(from, to, cb) {
-  var fs = require('fs');
-  var request = require('request');
-  var unzip = require('unzip');
-  var destination = fs.createWriteStream(to);
+function getDownloadStream(dl, cb) {
+  var r =
+    require('http')
+      .request(dl, function(res) {
+        console.log('Downloading ' + dl);
 
-  destination.on('close', cb);
-  destination.on('error', cb);
+        if (res.statusCode !== 200) {
+          return cb(new Error('Could not download ' + dl));
+        }
 
-  request(from)
-    .on('error', cb)
-    .pipe(unzip.Parse())
-    .once('entry', function(file) {
-      file.pipe(destination);
-    })
+        cb(null, res);
+      })
+      .once('error', cb.bind(null, new Error('Could not download ' + dl)))
+
+  // initiate request
+  r.end();
 }
 
 function getChromeDriverPlatform() {
