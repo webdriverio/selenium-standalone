@@ -1,7 +1,7 @@
 var path = require('path');
 
 // see http://selenium-release.storage.googleapis.com/index.html for latest
-var version = '2.40.0';
+var version = '2.41.0';
 
 module.exports = {
   selenium: {
