@@ -1,5 +1,7 @@
 var spawn = require('child_process').spawn;
-var conf = require('./conf.js');
+var conf = require( './conf.js' );
+var async = require( 'async' );
+var whereis = require( 'whereis' );
 
 module.exports = standalone;
 
@@ -10,28 +12,48 @@ module.exports = standalone;
  * @param  {string[]} seleniumArgs=[]
  * @return {ChildProcess}
  */
-function standalone(spawnOptions, seleniumArgs) {
-  process.on('SIGTERM', kill);
+function standalone( spawnOptions, seleniumArgs ) {
+  var selenium = null;
 
-  spawnOptions = spawnOptions || { stdio: 'inherit' };
-  seleniumArgs = seleniumArgs || [];
+  async.series( [
+  findJava,
+  start
+  ] );
 
-  var args = [
-    '-jar',
-    conf.selenium.path,
-    '-Dwebdriver.chrome.driver=' + conf.chromeDr.path
-  ].concat(seleniumArgs);
+  return ( selenium );
 
-  var selenium = spawn('java', args, spawnOptions);
+  function findJava( cb ) {
+    function onWhere( err, res ) {
+      if ( err ) {
+        console.log( err );
+        return cb( err );
+      }
+      cb();
+    }
+    whereis( 'java', onWhere );
+  };
 
-  function kill() {
-    if (selenium) {
-      selenium.kill('SIGTERM');
-      selenium = null;
+  function start( cb ) {
+    process.on( 'SIGTERM', kill );
+
+    spawnOptions = spawnOptions || { stdio: 'inherit' };
+    seleniumArgs = seleniumArgs || [];
+
+    var args = [
+      '-jar',
+      conf.selenium.path,
+      '-Dwebdriver.chrome.driver=' + conf.chromeDr.path
+    ].concat( seleniumArgs );
+
+    selenium = spawn( 'java', args, spawnOptions );
+
+    function kill() {
+      if ( selenium ) {
+        selenium.kill( 'SIGTERM' );
+        selenium = null;
+      }
     }
   }
-
-  return selenium;
 }
 
 // backward compat with original programmatic PR
