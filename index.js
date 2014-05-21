@@ -12,29 +12,29 @@ module.exports = standalone;
  * @param  {string[]} seleniumArgs=[]
  * @return {ChildProcess}
  */
-function standalone( spawnOptions, seleniumArgs ) {
+function standalone(spawnOptions, seleniumArgs) {
   var selenium = null;
 
-  async.series( [
-  findJava,
-  start
-  ] );
+  async.series([
+    findJava,
+    start
+  ]);
 
-  return ( selenium );
+  return (selenium);
 
-  function findJava( cb ) {
-    function onWhere( err, res ) {
-      if ( err ) {
-        console.log( err );
-        return cb( err );
+  function findJava(cb) {
+    function onWhere(err, res) {
+      if (err) {
+        console.error(err);
+        return cb(err);
       }
       cb();
     }
-    whereis( 'java', onWhere );
+    whereis('java', onWhere);
   };
 
-  function start( cb ) {
-    process.on( 'SIGTERM', kill );
+  function start(cb) {
+    process.on('SIGTERM', kill);
 
     spawnOptions = spawnOptions || { stdio: 'inherit' };
     seleniumArgs = seleniumArgs || [];
@@ -43,13 +43,13 @@ function standalone( spawnOptions, seleniumArgs ) {
       '-jar',
       conf.selenium.path,
       '-Dwebdriver.chrome.driver=' + conf.chromeDr.path
-    ].concat( seleniumArgs );
+    ].concat(seleniumArgs);
 
-    selenium = spawn( 'java', args, spawnOptions );
+    selenium = spawn('java', args, spawnOptions);
 
     function kill() {
-      if ( selenium ) {
-        selenium.kill( 'SIGTERM' );
+      if (selenium) {
+        selenium.kill('SIGTERM');
         selenium = null;
       }
     }
