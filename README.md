@@ -1,7 +1,10 @@
-# selenium-standalone [![Dependency Status](https://david-dm.org/vvo/selenium-standalone.svg?theme=shields.io)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](https://david-dm.org/vvo/selenium-standalone/dev-status.svg?theme=shields.io)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
+# selenium-standalone
+[![Dependency Status](https://david-dm.org/vvo/selenium-standalone.svg?theme=shields.io)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](https://david-dm.org/vvo/selenium-standalone/dev-status.svg?theme=shields.io)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
-Intalls a `start-selenium` command line starting a selenium standalone
-server along with the chromedriver.
+Command line or programmatic install and launch of latest selenium standalone
+server and chrome driver.
+
+It will install a `start-selenium`.
 
 Currently installs selenium `2.41.0` and chrome driver `2.9`.
 

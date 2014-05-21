@@ -94,7 +94,12 @@ function getDownloadStream(dl, cb) {
   var r =
     require('http')
       .request(dl, function(res) {
-        console.log('Downloading ' + dl);
+        console.log('Downloading ' + dl, res.statusCode);
+
+        if (res.statusCode === 302 && res.headers.location) {
+          r.abort();
+          return getDownloadStream(res.headers.location, cb);
+        }
 
         if (res.statusCode !== 200) {
           return cb(new Error('Could not download ' + dl));
