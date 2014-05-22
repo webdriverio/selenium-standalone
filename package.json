@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "install": "node install.js",
-    "test": "mocha test.js -R tap | faucet"
+    "test": "mocha"
   },
   "bin": {
     "start-selenium": "./bin/start-selenium"
@@ -28,7 +28,6 @@
     "whereis": "0.2.1"
   },
   "devDependencies": {
-    "mocha": "^1.19.0",
-    "faucet": "^0.0.1"
+    "mocha": "^1.19.0"
   }
 }

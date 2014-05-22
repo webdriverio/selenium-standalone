@@ -4,4 +4,10 @@ var spawnOptions = {
 };
 var seleniumArgs = process.argv.slice(2);
 
-require('../index.js')(spawnOptions, seleniumArgs);
+require('whereis')('java', function searched(err) {
+  if (err) {
+    return console.error('Could not find `java`, make sure it is installed in your $PATH');
+  }
+
+  require('../index.js')(spawnOptions, seleniumArgs);
+});
