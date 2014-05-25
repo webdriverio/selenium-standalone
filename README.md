@@ -61,7 +61,7 @@ var server = selenium(spawnOptions, seleniumArgs);
 // returns ChildProcess instance
 // http://nodejs.org/api/child_process.html#child_process_class_childprocess
 
-// spawnOptions defaults to `{ stdio: 'pipe' }`
+// spawnOptions defaults to `{ stdio: 'inherit' }`
 // seleniumArgs defaults to `[]`
 
 server.stdout.on('data', function(output) {
