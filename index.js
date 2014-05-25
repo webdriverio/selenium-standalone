@@ -42,4 +42,3 @@ function standalone(spawnOptions, seleniumArgs) {
 // backward compat with original programmatic PR
 // https://github.com/vvo/selenium-standalone/pull/4
 standalone.start = standalone;
-
