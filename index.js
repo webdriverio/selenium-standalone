@@ -8,12 +8,12 @@ module.exports = standalone;
 /**
  * Get a standalone selenium server running with
  * chromedriver available
- * @param  {Object} spawnOptions={ stdio: 'inherit' }
+ * @param  {Object} spawnOptions={ stdio: 'pipe' }
  * @param  {string[]} seleniumArgs=[]
  * @return {ChildProcess}
  */
 function standalone(spawnOptions, seleniumArgs) {
-  spawnOptions = spawnOptions || { stdio: 'inherit' };
+  spawnOptions = spawnOptions || { stdio: 'pipe' };
   seleniumArgs = seleniumArgs || [];
 
   var args = [
