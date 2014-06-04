@@ -91,10 +91,24 @@ function installChromeDr(to, version, cb) {
 }
 
 function getDownloadStream(dl, cb) {
+  var proxy = process.env.HTTP_PROXY || process.env.http_proxy;
+
+  if (proxy) {
+    var regexp = /(https?:\/\/)?([^:/]*)/;
+    dl = {
+      host: proxy.match(regexp)[2],
+      port: proxy.match(/:(\d+)/)[1] || 8080,
+      path: dl,
+      headers: {
+        Host: dl.match(regexp)[2]
+      }
+    };
+  }
+
   var r =
     require('http')
       .request(dl, function(res) {
-        console.log('Downloading ' + dl, res.statusCode);
+        console.log('Downloading ' + (dl.path || dl), res.statusCode);
 
         if (res.statusCode === 302 && res.headers.location) {
           r.abort();
@@ -102,12 +116,12 @@ function getDownloadStream(dl, cb) {
         }
 
         if (res.statusCode !== 200) {
-          return cb(new Error('Could not download ' + dl));
+          return cb(new Error('Could not download ' + (dl.path || dl)));
         }
 
         cb(null, res);
       })
-      .once('error', cb.bind(null, new Error('Could not download ' + dl)))
+      .once('error', cb.bind(null, new Error('Could not download ' + (dl.path || dl))))
 
   // initiate request
   r.end();
