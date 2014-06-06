@@ -67,16 +67,16 @@ function installChromeDr(to, version, cb) {
     return cb(platform);
   }
 
-  var dl = util.format(chromedriverUrl, version, platform);
+  var downloadUrl = util.format(chromedriverUrl, version, platform);
 
-  getDownloadStream(dl, function(err, stream) {
+  getDownloadStream(downloadUrl, function(err, stream) {
     if (err) {
       return cb(err);
     }
 
     var unzip = require('unzip');
 
-    console.log('Unzipping ' + dl);
+    console.log('Unzipping ' + downloadUrl);
 
     stream
       .pipe(require('unzip').Parse())
@@ -86,15 +86,31 @@ function installChromeDr(to, version, cb) {
           .once('error', cb.bind(null, new Error('Could not write to ' + to)))
           .once('finish', cb)
       })
-      .once('error', cb.bind(null, new Error('Could not unzip ' + dl)))
+      .once('error', cb.bind(null, new Error('Could not unzip ' + downloadUrl)))
   })
 }
 
-function getDownloadStream(dl, cb) {
+function getDownloadStream(downloadUrl, cb) {
+  var proxy = process.env.HTTP_PROXY || process.env.http_proxy;
+
+  var requestOpts = downloadUrl;
+
+  if (proxy) {
+    var regexp = /(https?:\/\/)?([^:/]*)/;
+    requestOpts = {
+      host: proxy.match(regexp)[2],
+      port: proxy.match(/:(\d+)/)[1] || 8080,
+      path: downloadUrl,
+      headers: {
+        Host: downloadUrl.match(regexp)[2]
+      }
+    };
+  }
+
   var r =
     require('http')
-      .request(dl, function(res) {
-        console.log('Downloading ' + dl, res.statusCode);
+      .request(requestOpts, function(res) {
+        console.log('Downloading ' + downloadUrl, res.statusCode);
 
         if (res.statusCode === 302 && res.headers.location) {
           r.abort();
@@ -102,12 +118,12 @@ function getDownloadStream(dl, cb) {
         }
 
         if (res.statusCode !== 200) {
-          return cb(new Error('Could not download ' + dl));
+          return cb(new Error('Could not download ' + downloadUrl));
         }
 
         cb(null, res);
       })
-      .once('error', cb.bind(null, new Error('Could not download ' + dl)))
+      .once('error', cb.bind(null, new Error('Could not download ' + downloadUrl)))
 
   // initiate request
   r.end();
