@@ -1,8 +1,8 @@
 # selenium-standalone
 
-[![Build Status](https://travis-ci.org/vvo/selenium-standalone.svg?style=flat-square&branch=master)](https://travis-ci.org/vvo/selenium-standalone)
-[![Dependency Status](https://david-dm.org/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone)
-[![devDependency Status](https://david-dm.org/vvo/selenium-standalone/dev-status.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
+[![Build Status](http://img.shields.io/travis/vvo/selenium-standalone/master.svg?style=flat-square)](https://travis-ci.org/vvo/selenium-standalone)
+[![Dependency Status](http://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone)
+[![devDependency Status](http://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
 Command line or programmatic install and launch of latest selenium standalone
 server and chrome driver.
