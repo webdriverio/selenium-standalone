@@ -1,6 +1,6 @@
 # selenium-standalone
 
-[![Build Status](https://travis-ci.org/vvo/selenium-standalone.svg?branch=master)](https://travis-ci.org/vvo/selenium-standalone)
+[![Build Status](https://travis-ci.org/vvo/selenium-standalone.svg?style=flat-square&branch=master)](https://travis-ci.org/vvo/selenium-standalone)
 [![Dependency Status](https://david-dm.org/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone)
 [![devDependency Status](https://david-dm.org/vvo/selenium-standalone/dev-status.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
