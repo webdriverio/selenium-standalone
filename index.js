@@ -5,6 +5,8 @@ var whereis = require( 'whereis' );
 
 module.exports = standalone;
 
+var processes = [];
+
 /**
  * Get a standalone selenium server running with
  * chromedriver available
@@ -24,20 +26,21 @@ function standalone(spawnOptions, seleniumArgs) {
 
   var selenium = spawn('java', args, spawnOptions);
 
-  ['exit', 'SIGTERM', 'SIGINT'].forEach(function listenAndKill(evName) {
-    process.on(evName, kill);
-  });
-
-  function kill() {
-    // we may not have started the selenium process at this stage
-    if (selenium) {
-      selenium.kill('SIGTERM');
-      selenium = null;
-    }
-  }
+  processes.push(selenium);
 
   return selenium;
 }
+
+function kill() {
+  var process;
+  while (process = processes.shift()) {
+    process.kill('SIGTERM');
+  }
+}
+
+['exit', 'SIGTERM', 'SIGINT'].forEach(function listenAndKill(evName) {
+  process.on(evName, kill);
+});
 
 // backward compat with original programmatic PR
 // https://github.com/vvo/selenium-standalone/pull/4
