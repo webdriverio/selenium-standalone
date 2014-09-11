@@ -5,13 +5,16 @@ describe('programmatic use', function () {
     var selenium = require('./index.js');
     var proc = selenium.start({ stdio: 'pipe' });
 
-    proc.stdout.on('data', function(data) {
-      var line = data.toString().trim();
-      if (line.indexOf('Started SocketListener on 0.0.0.0:4444') > -1) {
-        proc.kill();
-        clearTimeout(timedout);
-        done();
-      }
+    // selenium 2.43.1 now outputs its info log on stderr
+    ['stderr', 'stdout'].forEach(function(output) {
+      proc[output].on('data', function seleniumSays(data) {
+        var line = data.toString().trim();
+        if (line.indexOf('Started SocketListener on 0.0.0.0:4444') > -1) {
+          proc.kill();
+          clearTimeout(timedout);
+          done();
+        }
+      })
     });
 
     timedout = setTimeout(function() {
