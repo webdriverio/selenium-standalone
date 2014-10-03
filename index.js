@@ -2,6 +2,7 @@ var spawn = require('child_process').spawn;
 var conf = require( './conf.js' );
 var async = require( 'async' );
 var whereis = require( 'whereis' );
+var path = require( 'path' );
 
 module.exports = standalone;
 
@@ -23,6 +24,10 @@ function standalone(spawnOptions, seleniumArgs) {
     conf.selenium.path,
     '-Dwebdriver.chrome.driver=' + conf.chromeDr.path
   ].concat(seleniumArgs);
+
+  if (process.platform === 'win32') {
+    process.env['PATH'] = path.dirname(conf.ieDr.path) + ';' + process.env['PATH'];
+  }
 
   var selenium = spawn('java', args, spawnOptions);
 

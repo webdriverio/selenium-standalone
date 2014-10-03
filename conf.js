@@ -12,5 +12,10 @@ module.exports = {
     path: path.join(__dirname, '.selenium', version, 'chromedriver'),
     // see http://chromedriver.storage.googleapis.com/index.html
     v: '2.9'
+  },
+  ieDr: {
+    path: path.join(__dirname, '.selenium', version, 'IEDriverServer.exe'),
+    // see http://selenium-release.storage.googleapis.com/index.html
+    v: '2.43.0'
   }
 };

@@ -18,10 +18,16 @@ function setup(cb) {
 }
 
 function download(cb) {
-  async.parallel([
+  var steps = [
     installChromeDr.bind(null, conf.chromeDr.path, conf.chromeDr.v),
     installSelenium.bind(null, conf.selenium.path, conf.selenium.v)
-  ], cb)
+  ];
+
+  if (process.platform === 'win32') {
+    steps.push(installIeDr.bind(null, conf.ieDr.path, conf.selenium.v, conf.ieDr.v));
+  }
+
+  async.parallel(steps, cb);
 }
 
 function end(err) {
@@ -57,9 +63,6 @@ function chmodChromeDr(where, cb) {
 }
 
 function installChromeDr(to, version, cb) {
-  var path = require('path');
-  var util = require('util');
-
   var chromedriverUrl = 'http://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip';
   var platform = getChromeDriverPlatform();
 
@@ -67,16 +70,35 @@ function installChromeDr(to, version, cb) {
     return cb(platform);
   }
 
-  var downloadUrl = util.format(chromedriverUrl, version, platform);
+  var downloadUrl = require('util').format(chromedriverUrl, version, platform);
 
-  getDownloadStream(downloadUrl, function(err, stream) {
+  installZippedFile(to, downloadUrl, cb);
+}
+
+function installIeDr(to, seleniumVersion, version, cb) {
+  var ieDriverUrl = 'http://selenium-release.storage.googleapis.com/%s/IEDriverServer_%s_%s.zip';
+  var platform = getIeDriverPlatform();
+  if (typeof platform !== 'string') {
+    return cb(platform);
+  }
+
+  var downloadUrl = require('util').format(ieDriverUrl,
+    seleniumVersion.slice(0, version.lastIndexOf('.')),
+    platform,
+    version);
+
+  installZippedFile(to, downloadUrl, cb);
+}
+
+function installZippedFile(to, url, cb) {
+  getDownloadStream(url, function(err, stream) {
     if (err) {
       return cb(err);
     }
 
     var unzip = require('unzip');
 
-    console.log('Unzipping ' + downloadUrl);
+    console.log('Unzipping ' + url);
 
     stream
       .pipe(require('unzip').Parse())
@@ -86,7 +108,7 @@ function installChromeDr(to, version, cb) {
           .once('error', cb.bind(null, new Error('Could not write to ' + to)))
           .once('finish', cb)
       })
-      .once('error', cb.bind(null, new Error('Could not unzip ' + downloadUrl)))
+      .once('error', cb.bind(null, new Error('Could not unzip ' + url)))
   })
 }
 
@@ -143,4 +165,14 @@ function getChromeDriverPlatform() {
   }
 
   return platform;
+}
+
+function getIeDriverPlatform() {
+  if (process.arch === 'ia32') {
+    return 'Win32';
+  } else if (process.arch === 'x64') {
+    return 'x64';
+  } else {
+    return new Error('Architecture not supported');
+  }
 }
