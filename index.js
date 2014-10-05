@@ -23,11 +23,13 @@ function standalone(spawnOptions, seleniumArgs) {
     '-jar',
     conf.selenium.path,
     '-Dwebdriver.chrome.driver=' + conf.chromeDr.path
-  ].concat(seleniumArgs);
+  ];
 
   if (process.platform === 'win32') {
-    process.env['PATH'] = path.dirname(conf.ieDr.path) + ';' + process.env['PATH'];
+    args.push('-Dwebdriver.ie.driver=' + conf.ieDr.path);
   }
+
+  args = args.concat(seleniumArgs);
 
   var selenium = spawn('java', args, spawnOptions);
 
