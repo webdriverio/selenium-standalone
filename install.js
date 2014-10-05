@@ -1,8 +1,11 @@
-var conf = require('./conf.js');
 var async = require('async');
+var fs = require('fs');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 var path = require('path');
+var util = require('util');
+
+var conf = require('./conf.js');
 
 async.series([
   setup,
@@ -41,7 +44,7 @@ function installSelenium(to, version, cb) {
   var seleniumStandaloneUrl =
     'http://selenium-release.storage.googleapis.com/%s/selenium-server-standalone-%s.jar';
 
-  var dl = require('util').format(seleniumStandaloneUrl,
+  var dl = util.format(seleniumStandaloneUrl,
     version.slice(0, version.lastIndexOf('.')),
     version);
 
@@ -51,7 +54,7 @@ function installSelenium(to, version, cb) {
     }
 
     stream
-      .pipe(require('fs').createWriteStream(to))
+      .pipe(fs.createWriteStream(to))
       .once('error', cb.bind(null, new Error('Could not write to ' + to)))
       .once('finish', cb);
   });
@@ -59,7 +62,7 @@ function installSelenium(to, version, cb) {
 
 function chmodChromeDr(where, cb) {
   console.log('chmod+x chromedriver');
-  require('fs').chmod(where, 0755, cb);
+  fs.chmod(where, 0755, cb);
 }
 
 function installChromeDr(to, version, cb) {
@@ -70,7 +73,7 @@ function installChromeDr(to, version, cb) {
     return cb(platform);
   }
 
-  var downloadUrl = require('util').format(chromedriverUrl, version, platform);
+  var downloadUrl = util.format(chromedriverUrl, version, platform);
 
   installZippedFile(to, downloadUrl, cb);
 }
@@ -78,14 +81,17 @@ function installChromeDr(to, version, cb) {
 function installIeDr(to, seleniumVersion, version, cb) {
   var ieDriverUrl = 'http://selenium-release.storage.googleapis.com/%s/IEDriverServer_%s_%s.zip';
   var platform = getIeDriverPlatform();
-  if (typeof platform !== 'string') {
+  if (platform instanceof Error) {
     return cb(platform);
   }
 
-  var downloadUrl = require('util').format(ieDriverUrl,
+  var downloadUrl = util.format(
+    ieDriverUrl,
+    //
     seleniumVersion.slice(0, version.lastIndexOf('.')),
     platform,
-    version);
+    version
+  );
 
   installZippedFile(to, downloadUrl, cb);
 }
@@ -101,10 +107,10 @@ function installZippedFile(to, url, cb) {
     console.log('Unzipping ' + url);
 
     stream
-      .pipe(require('unzip').Parse())
+      .pipe(unzip.Parse())
       .once('entry', function(file) {
         file
-          .pipe(require('fs').createWriteStream(to))
+          .pipe(fs.createWriteStream(to))
           .once('error', cb.bind(null, new Error('Could not write to ' + to)))
           .once('finish', cb)
       })
@@ -113,6 +119,8 @@ function installZippedFile(to, url, cb) {
 }
 
 function getDownloadStream(downloadUrl, cb) {
+  var http = require('http');
+
   var proxy = process.env.HTTP_PROXY || process.env.http_proxy;
 
   var requestOpts = downloadUrl;
@@ -130,7 +138,7 @@ function getDownloadStream(downloadUrl, cb) {
   }
 
   var r =
-    require('http')
+    http
       .request(requestOpts, function(res) {
         console.log('Downloading ' + downloadUrl, res.statusCode);
 

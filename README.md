@@ -4,12 +4,12 @@
 [![Dependency Status](http://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone)
 [![devDependency Status](http://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
-Command line or programmatic install and launch of latest selenium standalone
-server and chrome driver.
+Command line or programmatic install and launch of latest [selenium](http://www.seleniumhq.org/download/) standalone
+server, [chrome driver](https://code.google.com/p/selenium/wiki/ChromeDriver) and [internet explorer driver](https://code.google.com/p/selenium/wiki/InternetExplorerDriver).
 
-It will install a `start-selenium`.
+It will install a `start-selenium` command line that will be able to launch firefox, chrome, internet explorer or phantomjs for your tests.
 
-Currently installs selenium `2.43.1` and chrome driver `2.9`.
+Currently installs selenium `2.43.1`, chrome driver `2.10` and internet explorer driver `2.43.0`.
 
 ```shell
 npm install --production selenium-standalone@latest -g
