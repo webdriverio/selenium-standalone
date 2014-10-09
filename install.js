@@ -179,7 +179,7 @@ function getIeDriverPlatform() {
   if (process.arch === 'ia32') {
     return 'Win32';
   } else if (process.arch === 'x64') {
-    return 'x64';
+    return process.env.use64bitie !== undefined ? 'x64' : 'Win32';
   } else {
     return new Error('Architecture not supported');
   }
