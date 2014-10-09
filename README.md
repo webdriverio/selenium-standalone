@@ -9,7 +9,7 @@ server, [chrome driver](https://code.google.com/p/selenium/wiki/ChromeDriver) an
 
 It will install a `start-selenium` command line that will be able to launch firefox, chrome, internet explorer or phantomjs for your tests.
 
-Currently installs selenium `2.43.1`, chrome driver `2.10` and internet explorer driver `2.43.0`.
+Currently installs selenium `2.43.1`, chrome driver `2.11` and internet explorer driver `2.43.0`.
 
 ```shell
 npm install --production selenium-standalone@latest -g
