@@ -12,7 +12,7 @@ It will install a `start-selenium` command line that will be able to launch fire
 Currently installs selenium `2.43.1`, chrome driver `2.11` and internet explorer driver `2.43.0`.
 
 ```shell
-npm install --production selenium-standalone@latest -g
+npm install selenium-standalone@latest -g
 start-selenium
 ```
 
