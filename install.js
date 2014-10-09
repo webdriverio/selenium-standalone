@@ -176,9 +176,9 @@ function getChromeDriverPlatform() {
 }
 
 function getIeDriverPlatform() {
-  if (process.arch === 'ia32') {
+  if (conf.ieDr.arch === 'ia32') {
     return 'Win32';
-  } else if (process.arch === 'x64') {
+  } else if (conf.ieDr.arch === 'x64') {
     return 'x64';
   } else {
     return new Error('Architecture not supported');

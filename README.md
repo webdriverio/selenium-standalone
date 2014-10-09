@@ -72,4 +72,16 @@ server.stdout.on('data', function(output) {
 });
 ```
 
+## IEDriverServer architecture
+
+IEDriverServer 32/64bit version is downloaded according to processor architecture. There are [known issues with sendkeys](https://code.google.com/p/selenium/issues/detail?id=5116) being slow on 64bit version of Internet Explorer. To address this issue, IEDriverServer architecture can be configured using IEDRIVER_ARCH environment variable. Supported values are `ia32` and `x64`.
+
+### Example: Force 32bit IEDriverServer to be used
+
+```shell
+set IEDRIVER_ARCH=ia32
+npm install selenium-standalone@latest -g
+start-selenium
+```
+
 `selenium-standalone` versions maps `selenium` versions.
