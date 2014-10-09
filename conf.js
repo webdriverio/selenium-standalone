@@ -16,6 +16,7 @@ module.exports = {
   ieDr: {
     path: path.join(__dirname, '.selenium', version, 'IEDriverServer.exe'),
     // see http://selenium-release.storage.googleapis.com/index.html
-    v: '2.43.0'
+    v: '2.43.0',
+    arch: process.env.IEDRIVER_ARCH !== undefined ? process.env.IEDRIVER_ARCH : process.arch
   }
 };
