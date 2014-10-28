@@ -1,7 +1,7 @@
 var path = require('path');
 
 // see http://selenium-release.storage.googleapis.com/index.html for latest
-var version = '2.43.1';
+var version = '2.44.0';
 
 module.exports = {
   selenium: {
@@ -11,12 +11,12 @@ module.exports = {
   chromeDr: {
     path: path.join(__dirname, '.selenium', version, 'chromedriver'),
     // see http://chromedriver.storage.googleapis.com/index.html
-    v: '2.11'
+    v: '2.12'
   },
   ieDr: {
     path: path.join(__dirname, '.selenium', version, 'IEDriverServer.exe'),
     // see http://selenium-release.storage.googleapis.com/index.html
-    v: '2.43.0',
+    v: '2.44.0',
     arch: process.env.IEDRIVER_ARCH !== undefined ? process.env.IEDRIVER_ARCH : process.arch
   }
 };

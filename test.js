@@ -5,7 +5,7 @@ describe('programmatic use', function () {
     var selenium = require('./index.js');
     var proc = selenium.start({ stdio: 'pipe' });
 
-    // selenium 2.43.1 now outputs its info log on stderr
+    // since selenium 2.43.1, selenium now outputs its info log on stderr
     ['stderr', 'stdout'].forEach(function(output) {
       proc[output].on('data', function seleniumSays(data) {
         var line = data.toString().trim();
