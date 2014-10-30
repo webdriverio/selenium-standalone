@@ -4,6 +4,7 @@ var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 var path = require('path');
 var util = require('util');
+var request = require('request');
 
 var conf = require('./conf.js');
 
@@ -119,27 +120,9 @@ function installZippedFile(to, url, cb) {
 }
 
 function getDownloadStream(downloadUrl, cb) {
-  var http = require('http');
-
-  var proxy = process.env.HTTP_PROXY || process.env.http_proxy;
-
-  var requestOpts = downloadUrl;
-
-  if (proxy) {
-    var regexp = /(https?:\/\/)?([^:/]*)/;
-    requestOpts = {
-      host: proxy.match(regexp)[2],
-      port: proxy.match(/:(\d+)/)[1] || 8080,
-      path: downloadUrl,
-      headers: {
-        Host: downloadUrl.match(regexp)[2]
-      }
-    };
-  }
 
   var r =
-    http
-      .request(requestOpts, function(res) {
+       request(downloadUrl).on('response', function(res) {
         console.log('Downloading ' + downloadUrl, res.statusCode);
 
         if (res.statusCode === 302 && res.headers.location) {
