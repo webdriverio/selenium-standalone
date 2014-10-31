@@ -120,23 +120,22 @@ function installZippedFile(to, url, cb) {
 }
 
 function getDownloadStream(downloadUrl, cb) {
+  var r = request(downloadUrl)
+    .on('response', function(res) {
+      console.log('Downloading ' + downloadUrl, res.statusCode);
 
-  var r =
-       request(downloadUrl).on('response', function(res) {
-        console.log('Downloading ' + downloadUrl, res.statusCode);
+      if (res.statusCode === 302 && res.headers.location) {
+        r.abort();
+        return getDownloadStream(res.headers.location, cb);
+      }
 
-        if (res.statusCode === 302 && res.headers.location) {
-          r.abort();
-          return getDownloadStream(res.headers.location, cb);
-        }
+      if (res.statusCode !== 200) {
+        return cb(new Error('Could not download ' + downloadUrl));
+      }
 
-        if (res.statusCode !== 200) {
-          return cb(new Error('Could not download ' + downloadUrl));
-        }
-
-        cb(null, res);
-      })
-      .once('error', cb.bind(null, new Error('Could not download ' + downloadUrl)))
+      cb(null, res);
+    })
+    .once('error', cb.bind(null, new Error('Could not download ' + downloadUrl)));
 
   // initiate request
   r.end();
