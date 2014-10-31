@@ -29,6 +29,6 @@
     "whereis": "^0.4.0"
   },
   "devDependencies": {
-    "mocha": "^1.19.0"
+    "mocha": "^2.0.1"
   }
 }
