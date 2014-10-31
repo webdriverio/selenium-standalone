@@ -124,11 +124,6 @@ function getDownloadStream(downloadUrl, cb) {
     .on('response', function(res) {
       console.log('Downloading ' + downloadUrl, res.statusCode);
 
-      if (res.statusCode === 302 && res.headers.location) {
-        r.abort();
-        return getDownloadStream(res.headers.location, cb);
-      }
-
       if (res.statusCode !== 200) {
         return cb(new Error('Could not download ' + downloadUrl));
       }
