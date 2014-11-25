@@ -38,16 +38,15 @@ function standalone(spawnOptions, seleniumArgs) {
   return selenium;
 }
 
+// Kill child processes when exit event is called.
 function kill() {
   var process;
   while (process = processes.shift()) {
     process.kill('SIGTERM');
   }
 }
+process.on('exit', kill);
 
-['exit', 'SIGTERM', 'SIGINT'].forEach(function listenAndKill(evName) {
-  process.on(evName, kill);
-});
 
 // backward compat with original programmatic PR
 // https://github.com/vvo/selenium-standalone/pull/4
