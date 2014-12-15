@@ -6,7 +6,9 @@ var path = require( 'path' );
 
 module.exports = standalone;
 
+var killEvents = ['exit', 'SIGTERM', 'SIGINT'];
 var processes = [];
+var registered = false;
 
 /**
  * Get a standalone selenium server running with
@@ -16,6 +18,11 @@ var processes = [];
  * @return {ChildProcess}
  */
 function standalone(spawnOptions, seleniumArgs) {
+  if (!registered) {
+    killEvents.forEach(listenAndKill);
+    registered = true;
+  }
+
   spawnOptions = spawnOptions || { stdio: 'inherit' };
   seleniumArgs = seleniumArgs || [];
 
@@ -43,11 +50,17 @@ function kill() {
   while (process = processes.shift()) {
     process.kill('SIGTERM');
   }
+
+  killEvents.forEach(unregister);
 }
 
-['exit', 'SIGTERM', 'SIGINT'].forEach(function listenAndKill(evName) {
+function listenAndKill(evName) {
   process.on(evName, kill);
-});
+}
+
+function unregister(evName) {
+  process.removeListener(evName, kill);
+}
 
 // backward compat with original programmatic PR
 // https://github.com/vvo/selenium-standalone/pull/4
