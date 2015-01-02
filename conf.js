@@ -11,7 +11,7 @@ module.exports = {
   chromeDr: {
     path: path.join(__dirname, '.selenium', version, 'chromedriver'),
     // see http://chromedriver.storage.googleapis.com/index.html
-    v: process.env.CHROMEDRIVER_VERSION || '2.12'
+    v: process.env.CHROMEDRIVER_VERSION || '2.13'
   },
   ieDr: {
     path: path.join(__dirname, '.selenium', version, 'IEDriverServer.exe'),

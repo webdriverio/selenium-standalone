@@ -22,7 +22,7 @@ in debug mode.
 
 ## Selenium version
 
-Currently installs selenium `2.44.0`, chrome driver `2.12` and internet explorer driver `2.44.0` by default. You can override the versions installed by defining `SELENIUM_VERSION`, `CHROMEDRIVER_VERSION` or `IEDRIVER_VERSION` env variables before `npm install`ing
+Currently installs selenium `2.44.0`, chrome driver `2.13` and internet explorer driver `2.44.0` by default. You can override the versions installed by defining `SELENIUM_VERSION`, `CHROMEDRIVER_VERSION` or `IEDRIVER_VERSION` env variables before `npm install`ing
 
 ```shell
 SELENIUM_VERSION=2.42.0 npm install selenium-standalone@latest -g
