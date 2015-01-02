@@ -9,8 +9,6 @@ server, [chrome driver](https://code.google.com/p/selenium/wiki/ChromeDriver) an
 
 It will install a `start-selenium` command line that will be able to launch firefox, chrome, internet explorer or phantomjs for your tests.
 
-Currently installs selenium `2.44.0`, chrome driver `2.12` and internet explorer driver `2.44.0`.
-
 ```shell
 npm install selenium-standalone@latest -g
 start-selenium
@@ -21,6 +19,15 @@ Any arguments passed to `start-selenium` are then passed to
 
 So you can `start-selenium -debug` to launch standalone selenium server
 in debug mode.
+
+## Selenium version
+
+Currently installs selenium `2.44.0`, chrome driver `2.12` and internet explorer driver `2.44.0` by default. You can override the versions installed by defining `SELENIUM_VERSION`, `CHROMEDRIVER_VERSION` or `IEDRIVER_VERSION` env variables before `npm install`ing
+
+```shell
+SELENIUM_VERSION=2.42.0 npm install selenium-standalone@latest -g
+start-selenium
+```
 
 ## Running headlessly
 
