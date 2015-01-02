@@ -6,7 +6,8 @@ var version = process.env.SELENIUM_VERSION || '2.44.0';
 module.exports = {
   selenium: {
     path: path.join(__dirname, '.selenium', version, 'server.jar'),
-    v: version
+    v: version,
+    hub: 'http://localhost:4444/wd/hub/status'
   },
   chromeDr: {
     path: path.join(__dirname, '.selenium', version, 'chromedriver'),

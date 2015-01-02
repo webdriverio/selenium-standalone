@@ -66,16 +66,17 @@ var seleniumArgs = [
   '-debug'
 ];
 
-var server = selenium(spawnOptions, seleniumArgs);
-// or, var server = selenium();
-// returns ChildProcess instance
-// http://nodejs.org/api/child_process.html#child_process_class_childprocess
+selenium(spawnOptions, seleniumArgs, function(err, server) {
+  // or, var server = selenium();
+  // returns ChildProcess instance
+  // http://nodejs.org/api/child_process.html#child_process_class_childprocess
 
-// spawnOptions defaults to `{ stdio: 'inherit' }`
-// seleniumArgs defaults to `[]`
+  // spawnOptions defaults to `{ stdio: 'inherit' }`
+  // seleniumArgs defaults to `[]`
 
-server.stdout.on('data', function(output) {
-  console.log(output);
+  server.stdout.on('data', function(output) {
+    console.log(output);
+  });
 });
 ```
 

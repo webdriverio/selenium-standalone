@@ -3,6 +3,7 @@ var conf = require( './conf.js' );
 var async = require( 'async' );
 var whereis = require( 'whereis' );
 var path = require( 'path' );
+var request = require('request').defaults({json: true});
 
 module.exports = standalone;
 
@@ -10,14 +11,19 @@ var killEvents = ['exit', 'SIGTERM', 'SIGINT'];
 var processes = [];
 var registered = false;
 
+var RETRIES = 60;
+var RETRY_INTERVAL = 1000;
+
 /**
  * Get a standalone selenium server running with
  * chromedriver available
  * @param  {Object} spawnOptions={ stdio: 'inherit' }
  * @param  {string[]} seleniumArgs=[]
+ * @param  {Function} callback=function() {}
  * @return {ChildProcess}
  */
-function standalone(spawnOptions, seleniumArgs) {
+function standalone(spawnOptions, seleniumArgs, callback) {
+
   if (!registered) {
     killEvents.forEach(listenAndKill);
     registered = true;
@@ -42,7 +48,36 @@ function standalone(spawnOptions, seleniumArgs) {
 
   processes.push(selenium);
 
+  checkStarted(function(err) {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, selenium);
+    }
+  });
+
   return selenium;
+}
+
+function checkStarted(callback) {
+
+  var retries = 0;
+  var started = function () {
+
+    if (++retries > RETRIES) {
+      return callback('Unable to connect to selenium');
+    }
+
+    request(conf.selenium.hub, function (err, resp) {
+      if (resp && resp.statusCode === 200) {
+        callback(null);
+      } else {
+        setTimeout(started, RETRY_INTERVAL);
+      }
+    });
+  };
+
+  started();
 }
 
 function kill() {
