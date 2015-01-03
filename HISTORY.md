@@ -2,6 +2,7 @@
 
   * add tests on new `cb()` functionnality
   * backward compat for people not using a `cb`
+  * lower down callback loop to 200ms
 
 # 2.44.0-5 (2015-01-03)
   
