@@ -1,8 +1,8 @@
-describe('programmatic use', function () {
+describe('simple programmatic use', function () {
   it('should start', function(done) {
     this.timeout(20000);
     var timedout;
-    var selenium = require('./index.js');
+    var selenium = require('../index.js');
     var proc = selenium.start({ stdio: 'pipe' });
 
     // since selenium 2.43.1, selenium now outputs its info log on stderr

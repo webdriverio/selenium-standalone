@@ -66,7 +66,7 @@ var seleniumArgs = [
   '-debug'
 ];
 
-selenium(spawnOptions, seleniumArgs, function(err, server) {
+selenium(spawnOptions, seleniumArgs, function started(err, server) {
   // or, var server = selenium();
   // returns ChildProcess instance
   // http://nodejs.org/api/child_process.html#child_process_class_childprocess

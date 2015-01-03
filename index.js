@@ -11,22 +11,29 @@ var killEvents = ['exit', 'SIGTERM', 'SIGINT'];
 var processes = [];
 var registered = false;
 
-var RETRIES = 60;
-var RETRY_INTERVAL = 1000;
-
 /**
  * Get a standalone selenium server running with
  * chromedriver available
  * @param  {Object} spawnOptions={ stdio: 'inherit' }
  * @param  {string[]} seleniumArgs=[]
- * @param  {Function} callback=function() {}
+ * @param  {Function} cb=function() {}
  * @return {ChildProcess}
  */
-function standalone(spawnOptions, seleniumArgs, callback) {
+function standalone(spawnOptions, seleniumArgs, cb) {
 
   if (!registered) {
     killEvents.forEach(listenAndKill);
     registered = true;
+  }
+
+  if (typeof spawnOptions === 'function') {
+    cb = spawnOptions;
+    spawnOptions = null;
+  }
+
+  if (typeof seleniumArgs === 'function') {
+    cb = seleniumArgs;
+    seleniumArgs = null;
   }
 
   spawnOptions = spawnOptions || { stdio: 'inherit' };
@@ -48,36 +55,44 @@ function standalone(spawnOptions, seleniumArgs, callback) {
 
   processes.push(selenium);
 
-  checkStarted(function(err) {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, selenium);
-    }
-  });
+  if (cb) {
+    checkStarted(function started(err) {
+      if (err) {
+        cb(err);
+        return;
+      }
+
+      cb(null, selenium);
+    });
+  }
 
   return selenium;
 }
 
-function checkStarted(callback) {
-
+function checkStarted(cb) {
   var retries = 0;
-  var started = function () {
+  var maxRetries = 60;
+  var retryInterval = 200;
 
-    if (++retries > RETRIES) {
-      return callback('Unable to connect to selenium');
+  function hasStarted() {
+    retries++;
+
+    if (retries > maxRetries) {
+      cb(new Error('Unable to connect to selenium'));
+      return;
     }
 
     request(conf.selenium.hub, function (err, resp) {
       if (resp && resp.statusCode === 200) {
-        callback(null);
-      } else {
-        setTimeout(started, RETRY_INTERVAL);
+        cb(null);
+        return;
       }
+
+      setTimeout(hasStarted, retryInterval);
     });
   };
 
-  started();
+  hasStarted();
 }
 
 function kill() {
