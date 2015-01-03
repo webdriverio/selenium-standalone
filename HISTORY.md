@@ -1,3 +1,8 @@
+# 2.44.0-6 (2015-01-03)
+
+  * add tests on new `cb()` functionnality
+  * backward compat for people not using a `cb`
+
 # 2.44.0-5 (2015-01-03)
   
   * fix start-selenium command line (missing callback)
