@@ -1,3 +1,7 @@
+# 2.44.0-7 (2015-01-04)
+  
+  * fix start-selenium when port is not `4444`
+
 # 2.44.0-6 (2015-01-03)
 
   * add tests on new `cb()` functionnality
