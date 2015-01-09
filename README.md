@@ -7,10 +7,11 @@
 Command line or programmatic install and launch of latest [selenium](http://www.seleniumhq.org/download/) standalone
 server, [chrome driver](https://code.google.com/p/selenium/wiki/ChromeDriver) and [internet explorer driver](https://code.google.com/p/selenium/wiki/InternetExplorerDriver).
 
-It will install a `start-selenium` command line that will be able to launch firefox, chrome, internet explorer or phantomjs for your tests.
+It will install `install-selenium` and `start-selenium` commands that will be able to launch firefox, chrome, internet explorer or phantomjs for your tests.
 
 ```shell
 npm install selenium-standalone@latest -g
+install-selenium
 start-selenium
 ```
 
@@ -66,16 +67,18 @@ var seleniumArgs = [
   '-debug'
 ];
 
-selenium(spawnOptions, seleniumArgs, function started(err, server) {
-  // or, var server = selenium();
-  // returns ChildProcess instance
-  // http://nodejs.org/api/child_process.html#child_process_class_childprocess
+selenium.install(function (err, res) {
 
-  // spawnOptions defaults to `{ stdio: 'inherit' }`
-  // seleniumArgs defaults to `[]`
+  selenium.start(spawnOptions, seleniumArgs, function started(err, server) {
+    // server is a ChildProcess instance
+    // http://nodejs.org/api/child_process.html#child_process_class_childprocess
 
-  server.stdout.on('data', function(output) {
-    console.log(output);
+    // spawnOptions defaults to `{ stdio: 'inherit' }`
+    // seleniumArgs defaults to `[]`
+
+    server.stdout.on('data', function(output) {
+        console.log(output);
+    });
   });
 });
 ```
@@ -89,7 +92,6 @@ IEDriverServer 32/64bit version is downloaded according to processor architectur
 ```shell
 set IEDRIVER_ARCH=ia32
 npm install selenium-standalone@latest -g
+install-selenium
 start-selenium
 ```
-
-`selenium-standalone` versions maps `selenium` versions.

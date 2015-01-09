@@ -8,12 +8,6 @@ var request = require('request');
 
 var conf = require('./conf.js');
 
-async.series([
-  setup,
-  download,
-  chmodChromeDr.bind(null, conf.chromeDr.path)
-], end);
-
 function setup(cb) {
   async.series([
     rimraf.bind(null, path.join(__dirname, '.selenium')),
@@ -160,4 +154,16 @@ function getIeDriverPlatform() {
   } else {
     return new Error('Architecture not supported');
   }
+}
+
+exports.install = function(callback) {
+  async.series([
+    setup,
+    download,
+    chmodChromeDr.bind(null, conf.chromeDr.path)
+  ], callback);
+}
+
+if (require.main === module) {
+  exports.install(end);
 }
