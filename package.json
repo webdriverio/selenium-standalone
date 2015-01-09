@@ -4,11 +4,11 @@
   "description": "installs a `start-selenium` command line to start a standalone selenium server with chrome-driver",
   "main": "index.js",
   "scripts": {
-    "install": "node install.js",
     "test": "mocha"
   },
   "bin": {
-    "start-selenium": "./bin/start-selenium"
+    "start-selenium": "./bin/start-selenium",
+    "install-selenium": "./bin/install-selenium"
   },
   "repository": {
     "type": "git",

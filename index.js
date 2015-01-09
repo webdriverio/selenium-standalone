@@ -5,7 +5,8 @@ var whereis = require( 'whereis' );
 var path = require( 'path' );
 var request = require('request').defaults({json: true});
 
-module.exports = standalone;
+module.exports.start = standalone;
+module.exports.install = require(__dirname + '/install.js');
 
 var killEvents = ['exit', 'SIGTERM', 'SIGINT'];
 var processes = [];
@@ -111,7 +112,3 @@ function listenAndKill(evName) {
 function unregister(evName) {
   process.removeListener(evName, kill);
 }
-
-// backward compat with original programmatic PR
-// https://github.com/vvo/selenium-standalone/pull/4
-standalone.start = standalone;
