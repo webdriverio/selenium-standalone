@@ -71,8 +71,8 @@ function standalone(spawnOptions, seleniumArgs, cb) {
 
 function checkStarted(cb) {
   var retries = 0;
-  var maxRetries = 60;
-  var retryInterval = 200;
+  var maxRetries = 90;
+  var retryInterval = 1000;
 
   function hasStarted() {
     retries++;
