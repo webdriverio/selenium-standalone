@@ -1,3 +1,7 @@
+# 3.0.1 (2015-01-10)
+  
+  * ie fix
+
 # 3.0.0 (2015-01-10)
   
   * complete refactoring
