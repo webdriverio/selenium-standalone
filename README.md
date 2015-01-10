@@ -57,9 +57,10 @@ selenium.install({
 }, cb);
 ```
 
-### selenium.install(opts, cb)
+### selenium.install([opts,] cb)
 
-`opts.version` [selenium version](http://selenium-release.storage.googleapis.com/index.html) to install
+`opts.version` [selenium version](http://selenium-release.storage.googleapis.com/index.html) to install.
+
 `opts.drivers` map of drivers to download and install along with selenium standalone server.
 
 Here are the current defaults:
@@ -82,16 +83,16 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `cb(err)` called when install finished or errored.
 
-### selenium.start(opts, cb)
+### selenium.start([opts,] cb)
 
 `opts.drivers` map of drivers to run along with selenium standalone server, same
 as `selenium.install`.
 
 By default all drivers are loaded, you only control and change the versions or archs.
 
-`opts.spawnOptions` [spawn options](http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for the selenium server.
+`opts.spawnOptions` [spawn options](http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for the selenium server. Defaults to `undefined`
 
-`opts.seleniumArgs` array of arguments for the selenium server, passed directly to [child_process.spawn](http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options).
+`opts.seleniumArgs` array of arguments for the selenium server, passed directly to [child_process.spawn](http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options). Defaults to `[]`.
 
 `cb(err, child)` called when the server is running and listening, child is the [ChildProcess](http://nodejs.org/api/child_process.html#child_process_class_childprocess) instance created.
 
