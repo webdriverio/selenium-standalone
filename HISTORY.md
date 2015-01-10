@@ -1,3 +1,7 @@
+# 3.0.3 (2015-01-10)
+  
+  * inform user that `start-selenium` is deprecated
+
 # 3.0.2 (2015-01-10)
 
   * ie fix
