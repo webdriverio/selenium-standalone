@@ -7,7 +7,8 @@
     "test": "./bin/selenium-standalone install && mocha"
   },
   "bin": {
-    "selenium-standalone": "./bin/selenium-standalone"
+    "selenium-standalone": "./bin/selenium-standalone",
+    "start-selenium": "./bin/start-selenium"
   },
   "repository": {
     "type": "git",
