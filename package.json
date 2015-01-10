@@ -1,14 +1,13 @@
 {
   "name": "selenium-standalone",
   "version": "2.44.0-7",
-  "description": "installs a `start-selenium` command line to start a standalone selenium server with chrome-driver",
+  "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
-    "install": "node install.js",
-    "test": "mocha"
+    "test": "./bin/selenium-standalone install && mocha"
   },
   "bin": {
-    "start-selenium": "./bin/start-selenium"
+    "selenium-standalone": "./bin/selenium-standalone"
   },
   "repository": {
     "type": "git",
@@ -22,6 +21,10 @@
   "license": "MIT",
   "dependencies": {
     "async": "^0.9.0",
+    "commander": "^2.6.0",
+    "debug": "^2.1.1",
+    "lodash": "^2.4.1",
+    "minimist": "^1.1.0",
     "mkdirp": "^0.5.0",
     "request": "^2.51.0",
     "rimraf": "^2.2.8",
