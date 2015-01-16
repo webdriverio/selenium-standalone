@@ -1,3 +1,14 @@
+# 3.1.0 (2015-01-17)
+  
+  * add `opts.logger` to `install()`, defaults to `noop`
+  * add `opts.progressCb` to `install(opts)`, now you can receive progress information
+  * log more info when installing: source, destination
+  * show progress when installing
+  * check for pathsexistence before starting and error accordingly
+  * add `opts.spawnCb` to `start()`, now you can receive the spawned process asap
+  * more tests
+  * readme tweaks
+
 # 3.0.3 (2015-01-10)
   
   * inform user that `start-selenium` is deprecated
