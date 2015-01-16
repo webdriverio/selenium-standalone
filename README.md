@@ -43,13 +43,19 @@ selenium-standalone start --drivers.ie.arch=ia32
 var selenium = require('selenium-standalone');
 
 selenium.install({
+  // check for more recent versions of selenium here:
+  // http://selenium-release.storage.googleapis.com/index.html
   version: '2.44.0',
   drivers: {
     chrome: {
+      // check for more recent versions of chrome driver here:
+      // http://chromedriver.storage.googleapis.com/index.html
       version: '2.13',
       arch: process.arch
     },
     ie: {
+      // check for more recent versions of internet explorer driver here:
+      // http://selenium-release.storage.googleapis.com/index.html
       version: '2.44',
       arch: process.arch
     }
