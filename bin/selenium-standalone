@@ -37,6 +37,8 @@ whereis('java', function javaFound(err) {
     stdio: 'inherit'
   };
 
+  options.logger = console.log;
+
   actions[action](options);
 });
 
@@ -51,7 +53,7 @@ var actions = {
         throw err;
       }
 
-      console.log('SELENIUM-STANDALONE: Selenium started');
+      console.log('Selenium started');
 
       killEvents.forEach(register);
 
@@ -70,14 +72,37 @@ var actions = {
     }
   },
   install: function(options) {
-    selenium.install(options, installed);
+    var ProgressBar = require('progress');
+    var bar;
+    var firstProgress = true;
+
+    selenium.install(options);
+
+    options.endCb = installed;
+    options.progressCb = progressCb;
 
     function installed(err) {
       if (err) {
         throw err;
       }
+    }
 
-      console.log('SELENIUM-STANDALONE: Selenium installed');
+    function progressCb(total, progress, chunk) {
+      if (firstProgress) {
+        console.log('');
+        console.log('');
+        firstProgress = false;
+      }
+
+      bar = bar || new ProgressBar(
+        'selenium-standalone installation [:bar] :percent :etas', {
+        total: total,
+        complete: '=',
+        incomplete: ' ',
+        width: 20
+      });
+
+      bar.tick(chunk);
     }
   }
 };

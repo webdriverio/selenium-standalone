@@ -53,6 +53,12 @@ selenium.install({
       version: '2.44',
       arch: process.arch
     }
+  },
+  logger: function(message) {
+
+  },
+  progressCb: function(totalLength, progressLength, chunkLength) {
+
   }
 }, cb);
 ```
@@ -80,6 +86,10 @@ Here are the current defaults:
 
 `arch` is either `ia32` or `x64`, it's here because you might want to switch to a particular
 arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
+
+`opts.progressCb(totalLength, progressLength, chunkLength)` will be called if provided with raw bytes length numbers about the current download process. It is used by the command line to show a progress bar.
+
+`opts.logger` will be called if provided with some debugging information about the installation process.
 
 `cb(err)` called when install finished or errored.
 
