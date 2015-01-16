@@ -79,7 +79,8 @@ Here are the current defaults:
 ```
 
 `arch` is either `ia32` or `x64`, it's here because you might want to switch to a particular
-arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
+arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9). Note that the
+chrome driver [lives elsewhere](http://chromedriver.storage.googleapis.com/index.html).
 
 `cb(err)` called when install finished or errored.
 
