@@ -1,3 +1,7 @@
+# 3.1.2 (2015-01-17)
+
+  * try to force npm to publish
+
 # 3.1.1 (2015-01-17)
 
   * fixes #60, programmatic `install` without a `progressCb`
