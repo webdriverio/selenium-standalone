@@ -1,3 +1,7 @@
+# 3.1.1 (2015-01-17)
+
+  * fixes #60, programmatic `install` without a `progressCb`
+
 # 3.1.0 (2015-01-17)
   
   * add `opts.logger` to `install()`, defaults to `noop`
