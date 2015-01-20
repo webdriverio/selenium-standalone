@@ -33,6 +33,20 @@ selenium-standalone install --drivers.chrome.version=2.13
 selenium-standalone start --drivers.ie.arch=ia32
 ```
 
+### Custom binaries url
+
+To use a mirror of the binaries use `PATH` variables `CHROMEDRIVER_CDNURL` and `SELENIUM_CDNURL`.
+
+Defaults:
+
+- `CHROMEDRIVER_CDNURL=http://chromedriver.storage.googleapis.com`
+- `SELENIUM_CDNURL=http://selenium-release.storage.googleapis.com`
+
+```shell
+CHROMEDRIVER_CDNURL=http://npm.taobao.org/mirrors/chromedriver \
+SELENIUM_CDNURL=http://npm.taobao.org/mirrors/selenium selenium-standalone install
+```
+
 ## Programmatic API
 
 ### Example
