@@ -1,3 +1,7 @@
+# 3.2.0 (2015-01-23)
+
+  * add --baseURL, --drivers.*.baseURL options, also in programmatic API
+
 # 3.1.2 (2015-01-17)
 
   * try to force npm to publish
