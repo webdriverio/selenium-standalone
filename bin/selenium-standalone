@@ -76,9 +76,8 @@ var actions = {
     var bar;
     var firstProgress = true;
 
-    selenium.install(options);
+    selenium.install(options, installed);
 
-    options.endCb = installed;
     options.progressCb = progressCb;
 
     function installed(err) {

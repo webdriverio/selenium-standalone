@@ -24,13 +24,13 @@ selenium-standalone start
 selenium-standalone start -- -debug
 
 # choose selenium version
-selenium-standalone install --version=2.44.0
+selenium-standalone install --version=2.44.0 --baseURL=http://selenium-release.storage.googleapis.com
 
 # choose chrome driver version
-selenium-standalone install --drivers.chrome.version=2.13
+selenium-standalone install --drivers.chrome.version=2.13 --drivers.chrome.baseURL=http://chromedriver.storage.googleapis.com
 
 # choose ie driver architecture
-selenium-standalone start --drivers.ie.arch=ia32
+selenium-standalone start --drivers.ie.arch=ia32 --drivers.ie.baseURL=http://selenium-release.storage.googleapis.com
 ```
 
 ## Programmatic API
@@ -44,18 +44,21 @@ selenium.install({
   // check for more recent versions of selenium here:
   // http://selenium-release.storage.googleapis.com/index.html
   version: '2.44.0',
+  baseURL: 'http://selenium-release.storage.googleapis.com',
   drivers: {
     chrome: {
       // check for more recent versions of chrome driver here:
       // http://chromedriver.storage.googleapis.com/index.html
       version: '2.13',
-      arch: process.arch
+      arch: process.arch,
+      baseURL: 'http://chromedriver.storage.googleapis.com'
     },
     ie: {
       // check for more recent versions of internet explorer driver here:
       // http://selenium-release.storage.googleapis.com/index.html
       version: '2.44',
-      arch: process.arch
+      arch: process.arch,
+      baseURL: 'http://selenium-release.storage.googleapis.com'
     }
   },
   logger: function(message) {
@@ -79,17 +82,21 @@ Here are the current defaults:
 {
   chrome: {
     version: '2.13',
-    arch: process.arch
+    arch: process.arch,
+    baseURL: 'http://chromedriver.storage.googleapis.com'
   },
   ie: {
     version: '2.44.0',
-    arch: process.arch
+    arch: process.arch,
+    baseURL: 'http://selenium-release.storage.googleapis.com'
   }
 }
 ```
 
 `arch` is either `ia32` or `x64`, it's here because you might want to switch to a particular
 arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
+
+`baseURL` is used to find the server having the selenium or drivers files.
 
 `opts.progressCb(totalLength, progressLength, chunkLength)` will be called if provided with raw bytes length numbers about the current download process. It is used by the command line to show a progress bar.
 
