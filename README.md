@@ -1,5 +1,7 @@
 # selenium-standalone [![Build Status](http://img.shields.io/travis/vvo/selenium-standalone/master.svg?style=flat-square)](https://travis-ci.org/vvo/selenium-standalone) [![Dependency Status](http://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](http://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vvo/selenium-standalone?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Command line or programmatic install and launch of [selenium](http://www.seleniumhq.org/download/) standalone
 server, [chrome driver](https://code.google.com/p/selenium/wiki/ChromeDriver), [internet explorer driver](https://code.google.com/p/selenium/wiki/InternetExplorerDriver), [firefox driver](https://code.google.com/p/selenium/wiki/FirefoxDriver) and phantomjs
 
