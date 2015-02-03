@@ -1,3 +1,7 @@
+# 3.3.0 (2015-02-03)
+
+  * forward request error to install error, #64
+
 # 3.2.0 (2015-01-23)
 
   * add --baseURL, --drivers.*.baseURL options, also in programmatic API
