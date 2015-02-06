@@ -1,3 +1,7 @@
+# 4.1.0 (2015-02-06)
+
+  * update chrome driver to [2.14](http://chromedriver.storage.googleapis.com/2.14/notes.txt)
+
 # 4.0.0 (2015-02-06)
   
   * cache downloads, see #68
