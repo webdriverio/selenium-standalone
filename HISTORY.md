@@ -1,3 +1,7 @@
+# 4.0.0 (2015-02-06)
+  
+  * cache downloads, see #68
+
 # 3.3.0 (2015-02-03)
 
   * forward request error to install error, #64
