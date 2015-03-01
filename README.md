@@ -45,7 +45,7 @@ var selenium = require('selenium-standalone');
 selenium.install({
   // check for more recent versions of selenium here:
   // http://selenium-release.storage.googleapis.com/index.html
-  version: '2.44.0',
+  version: '2.45.0',
   baseURL: 'http://selenium-release.storage.googleapis.com',
   drivers: {
     chrome: {
@@ -58,7 +58,7 @@ selenium.install({
     ie: {
       // check for more recent versions of internet explorer driver here:
       // http://selenium-release.storage.googleapis.com/index.html
-      version: '2.44',
+      version: '2.45',
       arch: process.arch,
       baseURL: 'http://selenium-release.storage.googleapis.com'
     }
@@ -88,7 +88,7 @@ Here are the current defaults:
     baseURL: 'http://chromedriver.storage.googleapis.com'
   },
   ie: {
-    version: '2.44.0',
+    version: '2.45.0',
     arch: process.arch,
     baseURL: 'http://selenium-release.storage.googleapis.com'
   }
