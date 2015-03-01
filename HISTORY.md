@@ -1,3 +1,7 @@
+# 4.2.0 (2015-03-02)
+
+  * upgrade to selenium 2.45.0
+
 # 4.1.0 (2015-02-06)
 
   * update chrome driver to [2.14](http://chromedriver.storage.googleapis.com/2.14/notes.txt)
