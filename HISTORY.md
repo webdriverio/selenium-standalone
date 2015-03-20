@@ -1,3 +1,7 @@
+# 4.2.1 (2015-03-20)
+
+  * FIX: flush stderr/stdout of selenium so that it does not fails
+
 # 4.2.0 (2015-03-02)
 
   * upgrade to selenium 2.45.0
