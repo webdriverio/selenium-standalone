@@ -139,3 +139,28 @@ To run headlessly, you can use [xvfb](http://en.wikipedia.org/wiki/Xvfb):
 ```shell
 xvfb-run --server-args="-screen 0, 1366x768x24" selenium-standalone start
 ```
+
+
+### Logging
+
+By default, Selenium throws a ton of logging messages, these are redirected to stderr.
+
+There are two ways to retrieve these logs from stderr, either by directly listening to the stderr stream:
+
+```
+child.stderr.on('data', function(data){
+    console.log(data.toString());
+});
+```
+
+or by providing the stdio spawnoptions:
+
+```
+selenium.start({
+    spawnOptions: {
+        stdio: 'inherit'
+    }
+}, function(err, child){});
+```
+
+This makes the std stream shared with nodejs, and you will receive both out and err in your nodejs console.
