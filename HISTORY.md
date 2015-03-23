@@ -1,3 +1,7 @@
+# 4.2.2 (2015-03-23)
+  
+  * fix selenium binary start
+
 # 4.2.1 (2015-03-20)
 
   * FIX: flush stderr/stdout of selenium so that it does not fails
