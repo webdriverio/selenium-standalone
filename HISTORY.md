@@ -1,3 +1,7 @@
+# 4.4.0 (2015-04-17)
+
+  * upgrade chrome driver to [2.15](https://chromedriver.storage.googleapis.com/2.15/notes.txt)
+
 # 4.3.0 (2015-04-17)
 
   * parse selenium's -hub argument to find the hub hostname
