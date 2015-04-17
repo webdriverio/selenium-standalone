@@ -1,3 +1,7 @@
+# 4.3.0 (2015-04-17)
+
+  * parse selenium's -hub argument to find the hub hostname
+
 # 4.2.2 (2015-03-23)
   
   * fix selenium binary start
