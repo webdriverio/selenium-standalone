@@ -26,10 +26,10 @@ selenium-standalone start
 selenium-standalone start -- -debug
 
 # choose selenium version
-selenium-standalone install --version=2.43.0 --baseURL=http://selenium-release.storage.googleapis.com
+selenium-standalone install --version=2.45.0 --baseURL=http://selenium-release.storage.googleapis.com
 
 # choose chrome driver version
-selenium-standalone install --drivers.chrome.version=2.12 --drivers.chrome.baseURL=http://chromedriver.storage.googleapis.com
+selenium-standalone install --drivers.chrome.version=2.15 --drivers.chrome.baseURL=http://chromedriver.storage.googleapis.com
 
 # choose ie driver architecture
 selenium-standalone start --drivers.ie.arch=ia32 --drivers.ie.baseURL=http://selenium-release.storage.googleapis.com
@@ -51,7 +51,7 @@ selenium.install({
     chrome: {
       // check for more recent versions of chrome driver here:
       // http://chromedriver.storage.googleapis.com/index.html
-      version: '2.14',
+      version: '2.15',
       arch: process.arch,
       baseURL: 'http://chromedriver.storage.googleapis.com'
     },
@@ -83,7 +83,7 @@ Here are the current defaults:
 ```js
 {
   chrome: {
-    version: '2.14',
+    version: '2.15',
     arch: process.arch,
     baseURL: 'http://chromedriver.storage.googleapis.com'
   },
