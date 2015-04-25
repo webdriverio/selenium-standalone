@@ -169,3 +169,7 @@ selenium.start({
   // child.stderr now sent to your `process.stderr`
 });
 ```
+
+### Examples of combining with other tools
+
+- [Gulp + WebdriverIO + Mocha](http://twin.github.io/selenium-testing-workflow-with-webdriverio/)
