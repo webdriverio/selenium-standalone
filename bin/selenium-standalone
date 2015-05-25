@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 var minimist = require('minimist');
-var whereis = require('whereis');
+var which = require('which');
 
 var selenium = require('../');
 
-whereis('java', function javaFound(err) {
+which('java', function javaFound(err, javaPath) {
   if (err) {
     console.error('Could not find `java`, make sure it is installed in your $PATH');
     return;
@@ -38,6 +38,7 @@ whereis('java', function javaFound(err) {
   };
 
   options.logger = console.log;
+  options.javaPath = javaPath;
 
   actions[action](options);
 });
