@@ -119,6 +119,8 @@ By default all drivers are loaded, you only control and change the versions or a
 
 `opts.spawnCb` will be called if provided as soon as the selenium child process was spawned. It may be interesting if you want to do some more debug.
 
+`opts.javaPath` set the javaPath manually, otherwise we use `[which](https://github.com/isaacs/node-which).sync('java')`
+
 `cb(err, child)` called when the server is running and listening, child is the [ChildProcess](http://nodejs.org/api/child_process.html#child_process_class_childprocess) instance created.
 
 So you can `child.kill()` when you are done.
