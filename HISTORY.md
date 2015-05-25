@@ -1,3 +1,7 @@
+# 4.4.2 (2015-05-25)
+
+  * fix: programmatic usage was broken
+
 # 4.4.1 (2015-05-25)
 
   * fix: use isaacs/node-which instead of vvo/whereis to find JAVA path
