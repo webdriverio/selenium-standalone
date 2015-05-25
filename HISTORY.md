@@ -1,3 +1,11 @@
+# 4.4.1 (2015-05-25)
+
+  * fix: use isaacs/node-which instead of vvo/whereis to find JAVA path
+    - fixes #96
+  * fix: better handle selenium started event (when roles are hub or node)
+    - fixes #98
+    - fixes #97
+
 # 4.4.0 (2015-04-17)
 
   * upgrade chrome driver to [2.15](https://chromedriver.storage.googleapis.com/2.15/notes.txt)
