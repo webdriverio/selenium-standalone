@@ -1,3 +1,7 @@
+# 4.4.3 (2015-07-06)
+
+  * fix: error if already started
+
 # 4.4.2 (2015-05-25)
 
   * fix: programmatic usage was broken
