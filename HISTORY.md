@@ -1,3 +1,7 @@
+# 4.5.3 (2015-07-06)
+
+  * feat: update to latest selenium/drivers version
+
 # 4.4.3 (2015-07-06)
 
   * fix: error if already started
