@@ -31,6 +31,13 @@ selenium-standalone install --drivers.chrome.version=2.15 --drivers.chrome.baseU
 
 # choose ie driver architecture
 selenium-standalone start --drivers.ie.arch=ia32 --drivers.ie.baseURL=http://selenium-release.storage.googleapis.com
+
+# specify hub and nodes to setup your own selenium grid
+selenium-standalone start -- -role hub
+selenium-standalone start -- -role node -hub http://localhost:4444/grid/register
+selenium-standalone start -- -role node -hub http://localhost:4444/grid/register -port 5556
+
+
 ```
 
 ## Programmatic API
