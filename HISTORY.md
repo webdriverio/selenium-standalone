@@ -1,4 +1,4 @@
-# UNRELEASED
+# 4.6.0 (2015-09-01)
 
   * feat: selenium 2.47.1, ie driver 2.47.0, chrome 2.18
   * fix: fix default IE driver download url computation
