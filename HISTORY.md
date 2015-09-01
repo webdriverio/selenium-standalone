@@ -1,3 +1,7 @@
+# UNRELEASED
+
+  * release: do not include .selenium in package
+
 # 4.6.0 (2015-09-01)
 
   * feat: selenium 2.47.1, ie driver 2.47.0, chrome 2.18
