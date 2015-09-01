@@ -1,3 +1,9 @@
+# UNRELEASED
+
+  * feat: selenium 2.47.1, ie driver 2.47.0, chrome 2.18
+  * fix: fix default IE driver download url computation
+  * fix: only append default stderr stdout listeners if not added by user
+
 # 4.5.3 (2015-07-06)
 
   * feat: update to latest selenium/drivers version
