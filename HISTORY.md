@@ -1,4 +1,4 @@
-# UNRELEASED
+# 4.6.1 (2015-09-01)
 
   * release: do not include .selenium in package
 
