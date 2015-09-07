@@ -133,7 +133,7 @@ So you can `child.kill()` when you are done.
 ## Available browsers
 
 By default, google chrome, firefox and phantomjs are available
-when installed on the sytem.
+when installed on the host system.
 
 ## Tips
 
