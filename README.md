@@ -130,6 +130,14 @@ By default all drivers are loaded, you only control and change the versions or a
 
 So you can `child.kill()` when you are done.
 
+#### `Error: Another Selenium process is already running`
+
+If you're getting this error, it means that you didn't shut down the server successfully the last time you started it, so it's still running in the background. The process is named `java` so you can kill it by running:
+
+```shell
+pkill java
+```
+
 ## Available browsers
 
 By default, google chrome, firefox and phantomjs are available
