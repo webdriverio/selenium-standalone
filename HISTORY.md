@@ -1,3 +1,7 @@
+# 4.6.3 (2015-09-25)
+
+  * fix require urijs
+
 # 4.6.2 (2015-09-25)
 
   * update urijs package (renamed)
