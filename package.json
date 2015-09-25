@@ -21,7 +21,7 @@
   "author": "Vincent Voyer <vincent@zeroload.net>",
   "license": "MIT",
   "dependencies": {
-    "URIjs": "1.15.0",
+    "urijs": "1.16.1",
     "async": "1.2.1",
     "commander": "2.6.0",
     "lodash": "3.9.3",
