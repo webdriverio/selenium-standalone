@@ -1,3 +1,7 @@
+# 4.6.2 (2015-09-25)
+
+  * update urijs package (renamed)
+
 # 4.6.1 (2015-09-01)
 
   * release: do not include .selenium in package
