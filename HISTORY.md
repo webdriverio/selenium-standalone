@@ -1,3 +1,7 @@
+# 4.7.0 (2015-09-30)
+
+  * feat(install): add `install --silent`
+
 # 4.6.3 (2015-09-25)
 
   * fix require urijs
