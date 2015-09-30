@@ -20,6 +20,9 @@ selenium-standalone start
 selenium-standalone install
 selenium-standalone start
 
+# install defaults, but silently
+selenium-standalone install --silent
+
 # specify selenium args, everything after -- is for selenium
 selenium-standalone start -- -debug
 
