@@ -37,7 +37,7 @@ which('java', function javaFound(err, javaPath) {
     stdio: 'inherit'
   };
 
-  options.logger = console.log;
+  options.logger = options.silent ? null : console.log;
   options.javaPath = javaPath;
 
   actions[action](options);
@@ -77,9 +77,9 @@ var actions = {
     var bar;
     var firstProgress = true;
 
-    selenium.install(options, installed);
+    options.progressCb = options.silent ? null : progressCb;
 
-    options.progressCb = progressCb;
+    selenium.install(options, installed);
 
     function installed(err) {
       if (err) {
