@@ -11,7 +11,9 @@ which('java', function javaFound(err, javaPath) {
     return;
   }
 
-  var argv = minimist(process.argv.slice(2));
+  var argv = minimist(process.argv.slice(2), {
+    string: ['version', 'drivers.chrome.version', 'drivers.ie.version']
+  });
 
   var action = argv._[0];
 
