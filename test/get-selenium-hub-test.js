@@ -5,7 +5,7 @@ var hubStatusAPIPath = '/grid/api/hub';
 
 describe('getSeleniumStatusUrl', function () {
   var data = [
-              // If started with both modes active, check the status of the `node`
+              // If started as a standalone node (not in a grid), check the status of itself
               {args: [], expectedUrl: 'localhost:4444' + nodeStatusAPIPath},
               {args: ['-port', '5555'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath},
               {args: ['-hub', 'http://foo/wd/register'], expectedUrl: 'foo:4444' + nodeStatusAPIPath},
@@ -13,10 +13,10 @@ describe('getSeleniumStatusUrl', function () {
               {args: ['-hub', 'http://foo/wd/register', '-port', '7777'], expectedUrl: 'foo:7777' + nodeStatusAPIPath},
               {args: ['-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'foo:7777' + nodeStatusAPIPath},
 
-              // If started with only `hub` mode, only check status of itself
+              // If started with the `hub` role of the grid, check status of itself
               {args: ['-role', 'hub'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
 
-              // If started with only `node` mode, check status of remote hub instance
+              // If started with the `node` role of the grid, check status of remote hub instance
               {args: ['-role', 'node'], expectedUrl: 'localhost:5555' + hubStatusAPIPath},
               {args: ['-role', 'node', '-hub', 'http://foo:6666/wd/register'], expectedUrl: 'foo:6666' + hubStatusAPIPath}
             ];
