@@ -1,29 +1,56 @@
 var assert = require("assert");
-var getSeleniumStatusUrl = require('../lib/get-selenium-status-url');
+var statusUrl = require('../lib/get-selenium-status-url');
+
 var nodeStatusAPIPath = '/wd/hub/status';
 var hubStatusAPIPath = '/grid/api/hub';
 
+describe('getRunningProcessType', function () {
+  var tests = [
+    // Started as a standalone Selenium Server
+    {args: [], expected: statusUrl.PROCESS_TYPES.STANDALONE},
+    {args: ['-port', '5555'], expected: statusUrl.PROCESS_TYPES.STANDALONE},
+    {args: ['-hub', 'http://foo/wd/register'], expected: statusUrl.PROCESS_TYPES.STANDALONE}, // `-hub` arg is ignored
+
+    // Started as a Selenium Grid hub
+    {args: ['-role', 'hub'], expected: statusUrl.PROCESS_TYPES.GRID_HUB},
+
+    // Started as a Selenium Grid node
+    {args: ['-role', 'node'], expected: statusUrl.PROCESS_TYPES.GRID_NODE},
+    {args: ['-role', 'node', '-hub', 'http://foo/wd/register'], expected: statusUrl.PROCESS_TYPES.GRID_NODE},
+  ];
+
+  tests.forEach(function(test) {
+    it('getRunningProcessType with seleniumArgs: ' + test.args.join(' '), function() {
+      var actual = statusUrl.getRunningProcessType(test.args);
+      assert.equal(actual, test.expected);
+    });
+  });
+});
+
 describe('getSeleniumStatusUrl', function () {
   var data = [
-              // If started as a standalone node (not in a grid), check the status of itself
+              // Started as a standalone Selenium Server
               {args: [], expectedUrl: 'localhost:4444' + nodeStatusAPIPath},
-              {args: ['-port', '5555'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath},
-              {args: ['-hub', 'http://foo/wd/register'], expectedUrl: 'foo:4444' + nodeStatusAPIPath},
-              {args: ['-hub', 'http://foo:6666/wd/register'], expectedUrl: 'foo:6666' + nodeStatusAPIPath},
-              {args: ['-hub', 'http://foo/wd/register', '-port', '7777'], expectedUrl: 'foo:7777' + nodeStatusAPIPath},
-              {args: ['-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'foo:7777' + nodeStatusAPIPath},
+              {args: ['-port', '5678'], expectedUrl: 'localhost:5678' + nodeStatusAPIPath},
+              {args: ['-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:4444' + nodeStatusAPIPath},
+              {args: ['-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath},
 
-              // If started with the `hub` role of the grid, check status of itself
+              // Started as a Selenium Grid hub
               {args: ['-role', 'hub'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
+              {args: ['-role', 'hub', '-port', '12345'], expectedUrl: 'localhost:12345' + hubStatusAPIPath},
+              {args: ['-role', 'hub', '-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
+              {args: ['-role', 'hub', '-hub', 'http://foo:6666/wd/register', '-port', '12345'], expectedUrl: 'localhost:12345' + hubStatusAPIPath},
 
-              // If started with the `node` role of the grid, check status of remote hub instance
-              {args: ['-role', 'node'], expectedUrl: 'localhost:5555' + hubStatusAPIPath},
-              {args: ['-role', 'node', '-hub', 'http://foo:6666/wd/register'], expectedUrl: 'foo:6666' + hubStatusAPIPath}
+              // Started as a Selenium Grid node
+              {args: ['-role', 'node'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath},
+              {args: ['-role', 'node', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath},
+              {args: ['-role', 'node', '-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath},
+              {args: ['-role', 'node', '-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath}
             ];
 
   var testWithData = function (dataItem) {
     return function () {
-      var actual = getSeleniumStatusUrl(dataItem.args);
+      var actual = statusUrl.getSeleniumStatusUrl(dataItem.args);
       var expected = 'http://' + dataItem.expectedUrl;
 
       assert.equal(actual, expected);
@@ -34,3 +61,39 @@ describe('getSeleniumStatusUrl', function () {
     it('getSeleniumStatusUrl with seleniumArgs: ' + dataItem.args.join(' '), testWithData(dataItem));
   });
 });
+
+describe('getRemoteSeleniumHubStatusUrl', function () {
+  var data = [
+              // Started as a standalone Selenium Server
+              {args: [], expectedUrl: 'localhost:4444' + nodeStatusAPIPath},
+              {args: ['-port', '5678'], expectedUrl: 'localhost:5678' + nodeStatusAPIPath},
+              {args: ['-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:4444' + nodeStatusAPIPath},
+              {args: ['-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath},
+
+              // Started as a Selenium Grid hub
+              {args: ['-role', 'hub'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
+              {args: ['-role', 'hub', '-port', '12345'], expectedUrl: 'localhost:12345' + hubStatusAPIPath},
+              {args: ['-role', 'hub', '-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
+              {args: ['-role', 'hub', '-hub', 'http://foo:6666/wd/register', '-port', '12345'], expectedUrl: 'localhost:12345' + hubStatusAPIPath},
+
+              // Started as a Selenium Grid node
+              {args: ['-role', 'node'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
+              {args: ['-role', 'node', '-port', '7777'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
+              {args: ['-role', 'node', '-hub', 'http://foo/wd/register'], expectedUrl: 'foo' + hubStatusAPIPath},
+              {args: ['-role', 'node', '-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'foo:6666' + hubStatusAPIPath}
+            ];
+
+  var testWithData = function (dataItem) {
+    return function () {
+      var actual = statusUrl.getRemoteSeleniumHubStatusUrl(dataItem.args);
+      var expected = 'http://' + dataItem.expectedUrl;
+
+      assert.equal(actual, expected);
+    };
+  };
+
+  data.forEach(function (dataItem) {
+    it('getRemoteSeleniumHubStatusUrl with seleniumArgs: ' + dataItem.args.join(' '), testWithData(dataItem));
+  });
+});
+
