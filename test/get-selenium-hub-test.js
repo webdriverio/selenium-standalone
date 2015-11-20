@@ -63,39 +63,3 @@ describe('getSeleniumStatusUrl', function () {
     it('getSeleniumStatusUrl with seleniumArgs: ' + dataItem.args.join(' '), testWithData(dataItem));
   });
 });
-
-describe('getRemoteSeleniumHubStatusUrl', function () {
-  var data = [
-              // Started as a standalone Selenium Server
-              {args: [], expectedUrl: 'localhost:4444' + nodeStatusAPIPath},
-              {args: ['-port', '5678'], expectedUrl: 'localhost:5678' + nodeStatusAPIPath},
-              {args: ['-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:4444' + nodeStatusAPIPath},
-              {args: ['-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath},
-
-              // Started as a Selenium Grid hub
-              {args: ['-role', 'hub'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
-              {args: ['-role', 'hub', '-port', '12345'], expectedUrl: 'localhost:12345' + hubStatusAPIPath},
-              {args: ['-role', 'hub', '-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
-              {args: ['-role', 'hub', '-hub', 'http://foo:6666/wd/register', '-port', '12345'], expectedUrl: 'localhost:12345' + hubStatusAPIPath},
-
-              // Started as a Selenium Grid node
-              {args: ['-role', 'node'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
-              {args: ['-role', 'node', '-port', '7777'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
-              {args: ['-role', 'node', '-hub', 'http://foo/wd/register'], expectedUrl: 'foo' + hubStatusAPIPath},
-              {args: ['-role', 'node', '-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'foo:6666' + hubStatusAPIPath}
-            ];
-
-  var testWithData = function (dataItem) {
-    return function () {
-      var actual = statusUrl.getRemoteSeleniumHubStatusUrl(dataItem.args);
-      var expected = 'http://' + dataItem.expectedUrl;
-
-      assert.equal(actual, expected);
-    };
-  };
-
-  data.forEach(function (dataItem) {
-    it('getRemoteSeleniumHubStatusUrl with seleniumArgs: ' + dataItem.args.join(' '), testWithData(dataItem));
-  });
-});
-
