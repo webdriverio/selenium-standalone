@@ -38,12 +38,14 @@ describe('getSeleniumStatusUrl', function () {
               // Started as a Selenium Grid hub
               {args: ['-role', 'hub'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
               {args: ['-role', 'hub', '-port', '12345'], expectedUrl: 'localhost:12345' + hubStatusAPIPath},
+              {args: ['-role', 'hub', '-host', 'alias', '-port', '12345'], expectedUrl: 'alias:12345' + hubStatusAPIPath},
               {args: ['-role', 'hub', '-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:4444' + hubStatusAPIPath},
               {args: ['-role', 'hub', '-hub', 'http://foo:6666/wd/register', '-port', '12345'], expectedUrl: 'localhost:12345' + hubStatusAPIPath},
 
               // Started as a Selenium Grid node
               {args: ['-role', 'node'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath},
               {args: ['-role', 'node', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath},
+              {args: ['-role', 'node', '-host', 'alias', '-port', '7777'], expectedUrl: 'alias:7777' + nodeStatusAPIPath},
               {args: ['-role', 'node', '-hub', 'http://foo/wd/register'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath},
               {args: ['-role', 'node', '-hub', 'http://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath}
             ];
