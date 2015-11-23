@@ -66,7 +66,7 @@ selenium.install({
     ie: {
       // check for more recent versions of internet explorer driver here:
       // http://selenium-release.storage.googleapis.com/index.html
-      version: '2.45',
+      version: '2.45.0',
       arch: process.arch,
       baseURL: 'http://selenium-release.storage.googleapis.com'
     }
