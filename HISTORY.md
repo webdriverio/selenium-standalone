@@ -1,3 +1,7 @@
+# 4.7.2 (2015-11-23)
+
+  * fix(hub): selenium-standalone can now be run as hub
+
 # 4.7.1 (2015-10-22)
 
   * fix(version): treat version as strings to allow 2.20 version, fixes #142
