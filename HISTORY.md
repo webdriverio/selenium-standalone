@@ -70,7 +70,7 @@
 
 # 4.1.0 (2015-02-06)
 
-  * update chrome driver to [2.14](http://chromedriver.storage.googleapis.com/2.14/notes.txt)
+  * update chrome driver to [2.14](https://chromedriver.storage.googleapis.com/2.14/notes.txt)
 
 # 4.0.0 (2015-02-06)
   
@@ -144,7 +144,7 @@
 
 # 2.44.0-3 (2015-01-02)
   
-  * update chromedriver to [2.13](http://chromedriver.storage.googleapis.com/2.13/notes.txt)
+  * update chromedriver to [2.13](https://chromedriver.storage.googleapis.com/2.13/notes.txt)
 
 # 2.44.0-2 (2015-01-02)
 

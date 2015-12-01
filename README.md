@@ -1,4 +1,4 @@
-# selenium-standalone [![Build Status](http://img.shields.io/travis/vvo/selenium-standalone/master.svg?style=flat-square)](https://travis-ci.org/vvo/selenium-standalone) [![Dependency Status](http://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](http://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
+# selenium-standalone [![Build Status](https://img.shields.io/travis/vvo/selenium-standalone/master.svg?style=flat-square)](https://travis-ci.org/vvo/selenium-standalone) [![Dependency Status](https://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](https://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
 Command line or programmatic install and launch of [selenium](http://www.seleniumhq.org/download/) standalone
 server, [chrome driver](https://code.google.com/p/selenium/wiki/ChromeDriver), [internet explorer driver](https://code.google.com/p/selenium/wiki/InternetExplorerDriver), [firefox driver](https://code.google.com/p/selenium/wiki/FirefoxDriver) and phantomjs
@@ -27,13 +27,13 @@ selenium-standalone install --silent
 selenium-standalone start -- -debug
 
 # choose selenium version
-selenium-standalone install --version=2.45.0 --baseURL=http://selenium-release.storage.googleapis.com
+selenium-standalone install --version=2.45.0 --baseURL=https://selenium-release.storage.googleapis.com
 
 # choose chrome driver version
-selenium-standalone install --drivers.chrome.version=2.15 --drivers.chrome.baseURL=http://chromedriver.storage.googleapis.com
+selenium-standalone install --drivers.chrome.version=2.15 --drivers.chrome.baseURL=https://chromedriver.storage.googleapis.com
 
 # choose ie driver architecture
-selenium-standalone start --drivers.ie.arch=ia32 --drivers.ie.baseURL=http://selenium-release.storage.googleapis.com
+selenium-standalone start --drivers.ie.arch=ia32 --drivers.ie.baseURL=https://selenium-release.storage.googleapis.com
 
 # specify hub and nodes to setup your own selenium grid
 selenium-standalone start -- -role hub
@@ -52,23 +52,23 @@ var selenium = require('selenium-standalone');
 
 selenium.install({
   // check for more recent versions of selenium here:
-  // http://selenium-release.storage.googleapis.com/index.html
+  // https://selenium-release.storage.googleapis.com/index.html
   version: '2.45.0',
-  baseURL: 'http://selenium-release.storage.googleapis.com',
+  baseURL: 'https://selenium-release.storage.googleapis.com',
   drivers: {
     chrome: {
       // check for more recent versions of chrome driver here:
-      // http://chromedriver.storage.googleapis.com/index.html
+      // https://chromedriver.storage.googleapis.com/index.html
       version: '2.15',
       arch: process.arch,
-      baseURL: 'http://chromedriver.storage.googleapis.com'
+      baseURL: 'https://chromedriver.storage.googleapis.com'
     },
     ie: {
       // check for more recent versions of internet explorer driver here:
-      // http://selenium-release.storage.googleapis.com/index.html
+      // https://selenium-release.storage.googleapis.com/index.html
       version: '2.45.0',
       arch: process.arch,
-      baseURL: 'http://selenium-release.storage.googleapis.com'
+      baseURL: 'https://selenium-release.storage.googleapis.com'
     }
   },
   logger: function(message) {
@@ -82,7 +82,7 @@ selenium.install({
 
 ### selenium.install([opts,] cb)
 
-`opts.version` [selenium version](http://selenium-release.storage.googleapis.com/index.html) to install.
+`opts.version` [selenium version](https://selenium-release.storage.googleapis.com/index.html) to install.
 
 `opts.drivers` map of drivers to download and install along with selenium standalone server.
 
@@ -93,12 +93,12 @@ Here are the current defaults:
   chrome: {
     version: '2.15',
     arch: process.arch,
-    baseURL: 'http://chromedriver.storage.googleapis.com'
+    baseURL: 'https://chromedriver.storage.googleapis.com'
   },
   ie: {
     version: '2.45.0',
     arch: process.arch,
-    baseURL: 'http://selenium-release.storage.googleapis.com'
+    baseURL: 'https://selenium-release.storage.googleapis.com'
   }
 }
 ```
@@ -121,15 +121,15 @@ as `selenium.install`.
 
 By default all drivers are loaded, you only control and change the versions or archs.
 
-`opts.spawnOptions` [spawn options](http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for the selenium server. Defaults to `undefined`
+`opts.spawnOptions` [spawn options](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for the selenium server. Defaults to `undefined`
 
-`opts.seleniumArgs` array of arguments for the selenium server, passed directly to [child_process.spawn](http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options). Defaults to `[]`.
+`opts.seleniumArgs` array of arguments for the selenium server, passed directly to [child_process.spawn](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options). Defaults to `[]`.
 
 `opts.spawnCb` will be called if provided as soon as the selenium child process was spawned. It may be interesting if you want to do some more debug.
 
 `opts.javaPath` set the javaPath manually, otherwise we use `[which](https://github.com/isaacs/node-which).sync('java')`
 
-`cb(err, child)` called when the server is running and listening, child is the [ChildProcess](http://nodejs.org/api/child_process.html#child_process_class_childprocess) instance created.
+`cb(err, child)` called when the server is running and listening, child is the [ChildProcess](https://nodejs.org/api/child_process.html#child_process_class_childprocess) instance created.
 
 So you can `child.kill()` when you are done.
 
@@ -156,14 +156,14 @@ After installing selenium-standalone globally, execute the following commands to
 ln -s /usr/local/bin/selenium-standalone /etc/init.d/
 update-rc.d selenium-standalone defaults
 ```
-For more information: http://stackoverflow.com/questions/3666794/selenium-server-on-startup/30392437#30392437
+For more information: https://stackoverflow.com/questions/3666794/selenium-server-on-startup/30392437#30392437
 
 
 ### Running headlessly
 
 On linux,
 
-To run headlessly, you can use [xvfb](http://en.wikipedia.org/wiki/Xvfb):
+To run headlessly, you can use [xvfb](https://en.wikipedia.org/wiki/Xvfb):
 
 ```shell
 xvfb-run --server-args="-screen 0, 1366x768x24" selenium-standalone start
@@ -201,4 +201,4 @@ selenium.start({
 
 ### Examples of combining with other tools
 
-- [Gulp + WebdriverIO + Mocha](http://twin.github.io/selenium-testing-workflow-with-webdriverio/)
+- [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
