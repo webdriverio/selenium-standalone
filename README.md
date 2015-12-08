@@ -108,7 +108,7 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `baseURL` is used to find the server having the selenium or drivers files.
 
-`opts.basePath` sets the base directory used to store the selenium standalone `.jar` and drivers.
+`opts.basePath` sets the base directory used to store the selenium standalone `.jar` and drivers. Defaults to current working directory + .selenium/
 
 `opts.progressCb(totalLength, progressLength, chunkLength)` will be called if provided with raw bytes length numbers about the current download process. It is used by the command line to show a progress bar.
 
