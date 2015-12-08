@@ -1,3 +1,8 @@
+# 4.8.0 (2015-12-08)
+
+  * feat(paths): support basePath option
+  * feat(https): use https downloads by default
+
 # 4.7.2 (2015-11-23)
 
   * fix(hub): selenium-standalone can now be run as hub
