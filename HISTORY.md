@@ -1,3 +1,9 @@
+# 4.9.0 (2016-02-02)
+
+  * feat(upgrades): upgrade default versions
+    - Selenium version `2.50.1` and IE version `2.50.0` via http://www.seleniumhq.org/download/
+    - Chromedriver version `2.21` via https://chromedriver.storage.googleapis.com
+
 # 4.8.0 (2015-12-08)
 
   * feat(paths): support basePath option
