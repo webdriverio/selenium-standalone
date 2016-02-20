@@ -1,3 +1,7 @@
+# 4.9.1 (2016-02-20)
+
+* node 0.10 compat for fs.access
+
 # 4.9.0 (2016-02-02)
 
   * feat(upgrades): upgrade default versions
