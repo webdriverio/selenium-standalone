@@ -1,3 +1,8 @@
+# 5.0.0 (2016-02-24)
+
+* BREAKING CHANGE when opts.drivers are passed on the programmatic interface,
+do not merge all drivers option, only the one passed. So if you use {drivers: {chrome: {version: 42}}}, you will only get chrome version 42, not IE, not firefox
+
 # 4.9.1 (2016-02-20)
 
 * node 0.10 compat for fs.access
