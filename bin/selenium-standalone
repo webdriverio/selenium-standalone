@@ -2,8 +2,10 @@
 
 var minimist = require('minimist');
 var which = require('which');
+var merge = require('lodash').merge;
 
 var selenium = require('../');
+var defaultConfig = require('../lib/default-config');
 
 which('java', function javaFound(err, javaPath) {
   if (err) {
@@ -33,6 +35,9 @@ which('java', function javaFound(err, javaPath) {
 
     return prev;
   }, {});
+
+  // Merge in default options
+  options = merge({}, defaultConfig, options);
 
   options.seleniumArgs = seleniumArgs;
   options.spawnOptions = {
