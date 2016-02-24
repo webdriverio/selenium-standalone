@@ -1,5 +1,7 @@
 describe('when files are installed', function () {
 
+    this.timeout(10000);
+
     it('should not reinstall them', function (done) {
 
         var fs = require('fs');
