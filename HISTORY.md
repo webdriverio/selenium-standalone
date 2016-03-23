@@ -1,3 +1,7 @@
+# 5.1.0 (2016-03-23)
+
+* update to latest versions
+
 # 5.0.0 (2016-02-24)
 
 * BREAKING CHANGE when opts.drivers are passed on the programmatic interface,
@@ -77,7 +81,7 @@ do not merge all drivers option, only the one passed. So if you use {drivers: {c
   * parse selenium's -hub argument to find the hub hostname
 
 # 4.2.2 (2015-03-23)
-  
+
   * fix selenium binary start
 
 # 4.2.1 (2015-03-20)
@@ -93,7 +97,7 @@ do not merge all drivers option, only the one passed. So if you use {drivers: {c
   * update chrome driver to [2.14](https://chromedriver.storage.googleapis.com/2.14/notes.txt)
 
 # 4.0.0 (2015-02-06)
-  
+
   * cache downloads, see #68
 
 # 3.3.0 (2015-02-03)
@@ -113,7 +117,7 @@ do not merge all drivers option, only the one passed. So if you use {drivers: {c
   * fixes #60, programmatic `install` without a `progressCb`
 
 # 3.1.0 (2015-01-17)
-  
+
   * add `opts.logger` to `install()`, defaults to `noop`
   * add `opts.progressCb` to `install(opts)`, now you can receive progress information
   * log more info when installing: source, destination
@@ -124,7 +128,7 @@ do not merge all drivers option, only the one passed. So if you use {drivers: {c
   * readme tweaks
 
 # 3.0.3 (2015-01-10)
-  
+
   * inform user that `start-selenium` is deprecated
 
 # 3.0.2 (2015-01-10)
@@ -132,11 +136,11 @@ do not merge all drivers option, only the one passed. So if you use {drivers: {c
   * ie fix
 
 # 3.0.1 (2015-01-10)
-  
+
   * ie fix
 
 # 3.0.0 (2015-01-10)
-  
+
   * complete refactoring
   * command line is now named `selenium-standalone`
   * you must use `selenium-standalone install` and then `selenium-standalone start`
@@ -145,7 +149,7 @@ do not merge all drivers option, only the one passed. So if you use {drivers: {c
   * you can now install and start different selenium versions and drivers versions
 
 # 2.44.0-7 (2015-01-04)
-  
+
   * fix start-selenium when port is not `4444`
 
 # 2.44.0-6 (2015-01-03)
@@ -155,18 +159,17 @@ do not merge all drivers option, only the one passed. So if you use {drivers: {c
   * lower down callback loop to 200ms
 
 # 2.44.0-5 (2015-01-03)
-  
+
   * fix start-selenium command line (missing callback)
 
 # 2.44.0-4 (2015-01-02)
-  
+
   * programmatic API now exposes a callback to inform when selenium has started
 
 # 2.44.0-3 (2015-01-02)
-  
+
   * update chromedriver to [2.13](https://chromedriver.storage.googleapis.com/2.13/notes.txt)
 
 # 2.44.0-2 (2015-01-02)
 
   * initial history generation
-
