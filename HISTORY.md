@@ -1,3 +1,7 @@
+# patch (2016-06-10)
+
+* Remove deprecated graceful-fs@3.x dependency
+
 # 5.1.0 (2016-03-23)
 
 * update to latest versions
