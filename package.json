@@ -21,7 +21,6 @@
   "author": "Vincent Voyer <vincent@zeroload.net>",
   "license": "MIT",
   "dependencies": {
-    "urijs": "1.16.1",
     "async": "1.2.1",
     "commander": "2.6.0",
     "lodash": "3.9.3",
@@ -29,8 +28,9 @@
     "mkdirp": "0.5.0",
     "progress": "1.1.8",
     "request": "2.51.0",
-    "unzip": "0.1.11",
-    "which": "1.1.1"
+    "urijs": "1.16.1",
+    "which": "1.1.1",
+    "yauzl": "^2.5.0"
   },
   "devDependencies": {
     "mocha": "2.1.0"
