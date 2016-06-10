@@ -13,7 +13,7 @@ selenium-standalone start
 
 ![screencast](screencast.gif)
 
-## Command line API
+## Command line interface
 
 ```shell
 # simple, use defaults and latest selenium
@@ -43,7 +43,7 @@ selenium-standalone start -- -role node -hub http://localhost:4444/grid/register
 
 ```
 
-## Programmatic API
+## Application Programming Interface (API)
 
 ### Example
 
