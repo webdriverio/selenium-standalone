@@ -1,3 +1,8 @@
+# minor (2016-06-28)
+
+* add marionette driver
+* bump chromedriver
+
 # 5.1.1 (2016-06-10)
 
 * Remove deprecated graceful-fs@3.x dependency
