@@ -1,3 +1,7 @@
+# 5.3.0 (2016-06-28)
+
+* fix firefox win32 download url
+
 # 5.2.0 (2016-06-28)
 
 * add marionette driver
