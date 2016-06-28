@@ -1,3 +1,5 @@
+# 5.3.1 (2016-06-28)
+
 # 5.3.0 (2016-06-28)
 
 * fix firefox win32 download url
