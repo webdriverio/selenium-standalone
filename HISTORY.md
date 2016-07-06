@@ -1,3 +1,6 @@
+# 5.4.1 (2016-07-06)
+  * fix install script when geckodriver downloaded
+
 # 5.4.0 (2016-07-01)
   * update geckodriver to v0.9.0
   * update selenium to 2.53.1
