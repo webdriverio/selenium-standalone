@@ -71,6 +71,7 @@ selenium.install({
       baseURL: 'https://selenium-release.storage.googleapis.com'
     }
   },
+  proxy: 'http://localproxy.com', // see https://github.com/request/request#proxies
   logger: function(message) {
 
   },
