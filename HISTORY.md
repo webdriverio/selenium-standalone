@@ -1,3 +1,6 @@
+# 5.5.0 (2016-07-08)
+  * add proxy option to programmatic interface
+
 # 5.4.1 (2016-07-06)
   * fix install script when geckodriver downloaded
 
