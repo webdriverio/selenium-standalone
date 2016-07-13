@@ -207,3 +207,15 @@ selenium.start({
 ### Examples of combining with other tools
 
 - [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
+
+### Issues when running behind running behind proxy
+
+If you see errors on startup (e.g. like #194) and you are behind a proxy, please try the following:
+
+On OSX:
+
+```export NODE_TLS_REJECT_UNAUTHORIZED=0```
+
+On Windows:
+
+```setx NODE_TLS_REJECT_UNAUTHORIZED 0```
