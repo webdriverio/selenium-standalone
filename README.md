@@ -208,13 +208,14 @@ selenium.start({
 
 - [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
 
-### Issues when running behind running behind proxy
+### `Error: unable to get local issuer certificate`
 
-If you see errors on startup (e.g. like #194) and you are behind a proxy, please try the following:
+This error might happen when you are behind a specific proxy. Then you need to set some environement variables:
 
-On OSX:
-
-```export NODE_TLS_REJECT_UNAUTHORIZED=0```
+```sh
+NODE_TLS_REJECT_UNAUTHORIZED=0 selenium-standalone install`
+NODE_TLS_REJECT_UNAUTHORIZED=0 selenium-standalone start
+```
 
 On Windows:
 
