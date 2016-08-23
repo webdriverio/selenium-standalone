@@ -1,3 +1,8 @@
+# 5.6.0 (2016-08-23)
+  * upgrade chromedriver to 2.23
+  * upgrade firefox driver to 0.10.0
+  * better error message when java is possibly outdated
+
 # 5.5.0 (2016-07-08)
   * add proxy option to programmatic interface
 
