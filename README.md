@@ -45,6 +45,10 @@ selenium-standalone start -- -role node -hub http://localhost:4444/grid/register
 
 ## Application Programming Interface (API)
 
+### Sample configuration object
+Here you can find an up-to-date example of the configuration object:
+[lib/default-config.js](lib/default-config.js)
+
 ### Example
 
 ```js
