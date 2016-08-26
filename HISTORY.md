@@ -1,3 +1,6 @@
+# 5.6.1 (2016-08-23)
+  * update download path for firefox driver 0.10.0 on mac
+
 # 5.6.0 (2016-08-23)
   * upgrade chromedriver to 2.23
   * upgrade firefox driver to 0.10.0
