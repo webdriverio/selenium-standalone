@@ -30,7 +30,7 @@ function end(err) {
 }
 
 function installSelenium(to, version, cb) {
-  var seleniumStandaloneUrl = 'https://selenium.googlecode.com/files/selenium-server-standalone-%s.jar'
+  var seleniumStandaloneUrl = 'https://selenium-release.storage.googleapis.com/2.39/selenium-server-standalone-%s.jar'
   var util = require('util');
   var dl = util.format(seleniumStandaloneUrl, version);
   var request = require('request');
