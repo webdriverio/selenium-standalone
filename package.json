@@ -1,6 +1,6 @@
 {
   "name": "selenium-standalone",
-  "version": "5.6.1",
+  "version": "5.6.2",
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
