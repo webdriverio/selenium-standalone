@@ -1,3 +1,7 @@
+# 5.6.2 (2016-08-29)
+  * allow beta versions of selenium to be used #206
+  * allow installing old chrome driver versions #213
+
 # 5.6.1 (2016-08-23)
   * update download path for firefox driver 0.10.0 on mac
 
