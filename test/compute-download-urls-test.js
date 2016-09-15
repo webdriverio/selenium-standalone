@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var computeDownloadUrls = require('../lib/compute-download-urls');
+var computeDownloadUrls;
 
 /*
 default-config
@@ -36,6 +36,22 @@ module.exports = {
  * handling when paths formats differ between versions of the same driver.
  */
 describe('compute-download-urls', function() {
+  // Allow tests to mock `process.platform`
+  before(function() {
+    this.originalPlatform = Object.getOwnPropertyDescriptor(process, 'platform');
+  });
+  after(function() {
+    Object.defineProperty(process, 'platform', this.originalPlatform);
+  });
+
+  // Ensure that any internal state of the module is clean for each test
+  beforeEach(function() {
+    computeDownloadUrls = require('../lib/compute-download-urls');
+  });
+  afterEach(function() {
+    delete require.cache[require.resolve('../lib/compute-download-urls')];
+  });
+
   var opts;
   
   describe('selenium-jar', function() {
@@ -82,15 +98,82 @@ describe('compute-download-urls', function() {
     });
     
     describe('linux', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'linux'
+        });
+      });
 
+      it('x32', function() {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '2.0',
+          arch: 'x32'
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chrome, 'https://localhost/2.0/chromedriver_linux32.zip');
+      });
+
+      it('x64', function() {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '2.0',
+          arch: 'x64'
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chrome, 'https://localhost/2.0/chromedriver_linux64.zip');
+      });
     });
 
     describe('mac', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'darwin'
+        });
+      });
 
+      it('Use `mac32` for versions < 2.23', function() {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '2.22',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chrome, 'https://localhost/2.22/chromedriver_mac32.zip');
+      })
+
+      it('Use `mac64` for versions >= 2.23', function() {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '2.23',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chrome, 'https://localhost/2.23/chromedriver_mac64.zip');
+      })
     });
 
     describe('win', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'win'
+        });
+      });
 
+      it('basic version', function() {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '2.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chrome, 'https://localhost/2.0/chromedriver_win32.zip');
+      });
     });
   });
 
