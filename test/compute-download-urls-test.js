@@ -160,7 +160,7 @@ describe('compute-download-urls', function() {
     describe('win', function() {
       before(function() {
         Object.defineProperty(process, 'platform', {
-          value: 'win'
+          value: 'win32'
         });
       });
 
@@ -189,15 +189,150 @@ describe('compute-download-urls', function() {
     });
     
     describe('linux', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'linux'
+        });
+      });
 
+      it('uses `wires` name for versions < 0.8.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.7.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.firefox, 'https://localhost/v0.7.0/wires-0.7.0-linux64.gz');
+      });
+
+      it('uses `geckodriver` name for versions >= 0.8.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.8.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.firefox, 'https://localhost/v0.8.0/geckodriver-0.8.0-linux64.gz');
+      });
+
+      it('uses correct directory for 0.3.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.3.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.firefox, 'https://localhost/0.3.0/wires-0.3.0-linux64.gz');
+      });
+
+      it('uses leading `v` in version string when >= 0.9.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.9.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.firefox, 'https://localhost/v0.9.0/geckodriver-v0.9.0-linux64.tar.gz');
+      });
+
+      it('uses plain version string when < 0.9.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.7.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.firefox, 'https://localhost/v0.7.0/wires-0.7.0-linux64.gz');
+      });
+
+      it('uses `.gz` file extension for versions < 0.9.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.8.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('.gz') > 0);
+        assert(actual.firefox.indexOf('.tar.gz') === -1);
+      });
+
+      it('uses `.tar.gz` file extension for versions >= 0.9.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.9.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('.tar.gz') > 0);
+      });
     });
 
     describe('mac', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'darwin'
+        });
+      });
 
+      it('uses `OSX` platform for versions < 0.9.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.8.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('OSX') > 0);
+      });
+
+      it('uses `mac` platform for versions == 0.9.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.9.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('mac') > 0);
+        assert(actual.firefox.indexOf('macos') === -1);
+      });
+
+      it('uses `macos` platform for versions >= 0.10.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.10.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('macos') > 0);
+      });
     });
 
     describe('win', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'win32'
+        });
+      });
 
+      it('uses leading `v` in version string when == 0.5.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.5.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.firefox, 'https://localhost/v0.5.0/wires-v0.5.0-win64.zip');
+      });
     });
   });
 
