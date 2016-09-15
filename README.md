@@ -130,6 +130,8 @@ as `selenium.install`.
 
 By default all drivers are loaded, you only control and change the versions or archs.
 
+`opts.classPath` Additional classpath(s) to pass to Selenium. By default, Selenium is started with '-jar /whatever/path/to/selenium/jar'. However, if classPath is provided, Selenium will be started with '-cp selenium/jar/classpath:extra/classpath org.openqa.grid.selenium.GridLauncher'. This is useful when you need to customize the Selenium Grid, such as when adding custom servlets, proxies, etc. For more information, see http://www.seleniumhq.org/docs/07_selenium_grid.jsp#customizing-the-grid
+
 `opts.spawnOptions` [spawn options](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for the selenium server. Defaults to `undefined`
 
 `opts.seleniumArgs` array of arguments for the selenium server, passed directly to [child_process.spawn](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options). Defaults to `[]`.
