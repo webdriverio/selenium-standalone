@@ -1,3 +1,7 @@
+# 5.6.4 (2016-09-15)
+
+  * Handle geckodriver/Marionette urls weirdness (#222)
+
 # 5.6.3 (2016-09-09)
   * Support geckodriver v0.9.0 and v0.8.0 (6ef046448db058845aac709e839894ac95c65053)
 # 5.6.2 (2016-08-29)
