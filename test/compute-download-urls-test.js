@@ -337,6 +337,12 @@ describe('compute-download-urls', function() {
   });
 
   describe('ie', function() {
+    before(function() {
+      Object.defineProperty(process, 'platform', {
+        value: 'win32'
+      });
+    });
+
     beforeEach(function() {
       opts = {
         seleniumVersion: '1.0',
@@ -345,6 +351,40 @@ describe('compute-download-urls', function() {
           ie: {}
         }
       };
+    });
+
+    it('uses `Win32` platform when arch == ia32', function() {
+      opts.drivers.ie = {
+        baseURL: 'https://localhost',
+        version: '2.20.0',
+        arch: 'ia32'
+      }
+
+      var actual = computeDownloadUrls(opts);
+      assert(actual.ie.indexOf('IEDriverServer_Win32') > 0);
+    });
+
+    it('uses `x64` platform when arch == x64', function() {
+      opts.drivers.ie = {
+        baseURL: 'https://localhost',
+        version: '2.20.0',
+        arch: 'x64'
+      }
+
+      var actual = computeDownloadUrls(opts);
+      assert(actual.ie.indexOf('IEDriverServer_x64') > 0);
+    });
+
+    it('uses `major.minor` folder for `major.minor.patch` version', function() {
+      opts.drivers.ie = {
+        baseURL: 'https://localhost',
+        version: '2.20.1',
+        arch: 'x64'
+      }
+
+      var actual = computeDownloadUrls(opts);
+      assert(actual.ie.indexOf('/2.20/') > 0);
+      assert(actual.ie.indexOf('2.20.1.zip') > 0);
     });
   });
 });
