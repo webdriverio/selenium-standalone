@@ -1,3 +1,5 @@
+# 5.7.1 (2016-09-16)
+
 # 5.7.0 (2016-09-16)
 
   * really fix selenium 3 install feature
