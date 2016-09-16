@@ -68,6 +68,15 @@ describe('programmatic use', function () {
     });
   });
 
+  it('should start with custom seleniumArgs', function(done) {
+    testStart(done, { seleniumArgs: ['-port', '12345'] }, function(cp) {
+      if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
+        done(new Error('Chrome driver should be loaded'));
+        return false;
+      }
+    });
+  });
+
   it('should start with the given drivers', function(done) {
     testStart(done, { drivers: {} }, function(cp) {
       if (cp.spawnargs && cp.spawnargs.some(containsChrome)) {
