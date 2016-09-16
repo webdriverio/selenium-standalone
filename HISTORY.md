@@ -1,3 +1,9 @@
+# 5.7.0 (2016-09-16)
+
+  * really fix selenium 3 install feature
+  * add tests around computing the download urls
+  * switch to new chromedriver 2.24
+
 # 5.6.4 (2016-09-15)
 
   * Handle geckodriver/Marionette urls weirdness (#222)
