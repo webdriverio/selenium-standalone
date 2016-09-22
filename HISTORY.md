@@ -1,3 +1,7 @@
+# 5.7.2 (2016-09-22)
+
+  * fix expectedRequest when less drivers given than usual
+
 # 5.7.1 (2016-09-16)
 
 # 5.7.0 (2016-09-16)
