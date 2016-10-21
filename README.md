@@ -132,6 +132,8 @@ By default all drivers are loaded, you only control and change the versions or a
 
 `opts.spawnOptions` [spawn options](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for the selenium server. Defaults to `undefined`
 
+`opts.javaArgs` array of arguments for the JVM, included between `java` and `-jar` in the command line invocation. Use this option to set properties like `-Xmx=512M` or `-Djava.util.logging.config.file=logging.properties`, for instance. Defaults to `[]`.
+
 `opts.seleniumArgs` array of arguments for the selenium server, passed directly to [child_process.spawn](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options). Defaults to `[]`.
 
 `opts.spawnCb` will be called if provided as soon as the selenium child process was spawned. It may be interesting if you want to do some more debug.
