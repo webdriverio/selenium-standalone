@@ -40,8 +40,35 @@ selenium-standalone start -- -role hub
 selenium-standalone start -- -role node -hub http://localhost:4444/grid/register
 selenium-standalone start -- -role node -hub http://localhost:4444/grid/register -port 5556
 
+# specify options in config file
+selenium-standalone install --config=/path/to/config.json
+selenium-standalone install --config=./config/seleniumConfig.js
 
 ```
+
+Config file can be a JSON file or a [module file](https://nodejs.org/api/modules.html#modules_file_modules) that exports options as an object.
+
+JSON example :
+```json
+{
+  basePath: "/tmp/"
+}
+```
+
+JS File module example :
+```js
+module.exports = {
+  drivers: {
+    chrome: {
+      version: '2.23',
+      arch: process.arch,
+      baseURL: 'https://chromedriver.storage.googleapis.com'
+    },
+  },
+}
+```
+
+If your config file includes dynamic values (like `process.arch`) or functions (eg `spawnCb: function() {...`), you must use the JS File module format.
 
 ## Application Programming Interface (API)
 
