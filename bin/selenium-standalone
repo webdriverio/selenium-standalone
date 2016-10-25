@@ -54,7 +54,7 @@ which('java', function javaFound(err, javaPath) {
   }
 
   // Merge default options, command line options and options from config file
-  options = merge({}, defaultConfig, options, configFromFile);
+  options = merge({}, defaultConfig, configFromFile, options);
 
   options.seleniumArgs = seleniumArgs;
   options.spawnOptions = {
