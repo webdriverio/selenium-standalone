@@ -3,7 +3,6 @@
 var minimist = require('minimist');
 var which = require('which');
 var merge = require('lodash').merge;
-var path = require('path');
 
 var selenium = require('../');
 var defaultConfig = require('../lib/default-config');
@@ -28,33 +27,17 @@ which('java', function javaFound(err, javaPath) {
   // everything after `selenium-standalone install [options] --` will be in argv._
   var seleniumArgs = argv._.slice(1);
 
-  // build a new map removing `_` and --config from argv
+  // build a new map removing `_` from argv
   var options = Object.keys(argv).reduce(function(prev, cur) {
-    if ((cur !== '_') && (cur !== 'config')) {
+    if (cur !== '_') {
       prev[cur] = argv[cur];
     }
 
     return prev;
   }, {});
 
-  // If a config file was specified, load it
-  var configFromFile = {};
-  if (argv.config) {
-    try {
-      configFromFile = require(
-        path.isAbsolute(argv.config) ? argv.config : path.resolve(process.cwd(), argv.config)
-      );
-      if (typeof configFromFile !== 'object') {
-        throw new Error('Config file does not exports an object');
-      }
-    } catch(err) {
-      console.log('Error parsing config file :', err);
-      return;
-    }
-  }
-
-  // Merge default options, command line options and options from config file
-  options = merge({}, defaultConfig, configFromFile, options);
+  // Merge in default options
+  options = merge({}, defaultConfig, options);
 
   options.seleniumArgs = seleniumArgs;
   options.spawnOptions = {
