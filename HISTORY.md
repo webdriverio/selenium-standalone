@@ -1,3 +1,8 @@
+# 5.8.0 (2016-10-26)
+
+* update chrome driver to 2.25 #240
+* add `opts.javaArgs` #234
+
 # 5.7.2 (2016-09-22)
 
   * fix expectedRequest when less drivers given than usual
