@@ -1,3 +1,7 @@
+# 5.9.0 (2016-12-04)
+
+* update geckodriver to v0.11.1
+
 # 5.8.0 (2016-10-26)
 
 * update chrome driver to 2.25 #240
