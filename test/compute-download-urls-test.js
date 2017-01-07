@@ -4,7 +4,7 @@ var computeDownloadUrls;
 
 /**
  * Tests for the `computeDownloadUrls` module.
- * 
+ *
  * NOTE: This does not verify that the module is returning valid URLs that will respond with
  * the desired binary files. Just that the logic contained in the module, specifically for
  * handling when paths formats differ between versions of the same driver.
@@ -27,7 +27,7 @@ describe('compute-download-urls', function() {
   });
 
   var opts;
-  
+
   describe('selenium-jar', function() {
     it('basic version', function() {
       var actual = computeDownloadUrls({
@@ -70,7 +70,7 @@ describe('compute-download-urls', function() {
         }
       };
     });
-    
+
     describe('linux', function() {
       before(function() {
         Object.defineProperty(process, 'platform', {
@@ -161,7 +161,7 @@ describe('compute-download-urls', function() {
         }
       };
     });
-    
+
     describe('linux', function() {
       before(function() {
         Object.defineProperty(process, 'platform', {
@@ -246,6 +246,57 @@ describe('compute-download-urls', function() {
         var actual = computeDownloadUrls(opts);
         assert(actual.firefox.indexOf('.tar.gz') > 0);
       });
+
+      it('throws if asking a < 0.11.0 version and an arch which is not x64', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.9.0',
+          arch: 'x86'
+        };
+
+        try {
+          computeDownloadUrls(opts);
+          throw new Error('Error not thrown');
+        } catch (err) {
+          if (err && err.message === 'Only x64 architecture is available for Firefox < 0.11.0') {
+            return;
+          }
+          throw err;
+        }
+      });
+
+      it('gets the right arch when arch is x86', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.11.0',
+          arch: 'x86'
+        };
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('-linux32.tar.gz') > 0);
+      });
+
+      it('gets the right arch when arch is x64', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.11.0',
+          arch: 'x64'
+        };
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('-linux64.tar.gz') > 0);
+      });
+
+      it('gets the right arch when arch is x32', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.11.0',
+          arch: 'x32'
+        };
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('-linux32.tar.gz') > 0);
+      });
     });
 
     describe('mac', function() {
@@ -288,6 +339,17 @@ describe('compute-download-urls', function() {
         var actual = computeDownloadUrls(opts);
         assert(actual.firefox.indexOf('macos') > 0);
       });
+
+      it('uses `osx` platform for versions <= 0.6.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.5.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('osx') > 0);
+      });
     });
 
     describe('win', function() {
@@ -305,8 +367,111 @@ describe('compute-download-urls', function() {
         }
 
         var actual = computeDownloadUrls(opts);
-        assert.equal(actual.firefox, 'https://localhost/v0.5.0/wires-v0.5.0-win64.zip');
+        assert.equal(actual.firefox, 'https://localhost/v0.5.0/wires-v0.5.0-win.zip');
       });
+
+      it('gets the right arch when arch is x32 and version >= 0.11.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.11.1',
+          arch: 'x32'
+        };
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('win32.zip') >= 0);
+      });
+
+      it('gets the right arch when arch is x64 and version >= 0.11.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.11.0',
+          arch: 'x64'
+        };
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('win64.zip') >= 0);
+      });
+
+      it('gets the 32 bits version when no arch specified version >= 0.11.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.11.0',
+          arch: ''
+        };
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('win32.zip') >= 0);
+      });
+
+      it('throws if asking the 32bit version for 0.9.0/0.10.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.10.0',
+          arch: 'x32'
+        };
+
+        try {
+          computeDownloadUrls(opts);
+          throw new Error('Error not thrown');
+        } catch (err) {
+          if (err && err.message === 'Only x64 architecture is available for Firefox 0.9.0 and 0.10.0') {
+            return;
+          }
+          throw err;
+        }
+      });
+
+      it('throws if asking the 64bit version for < 0.9.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.8.0',
+          arch: 'x64'
+        };
+
+        try {
+          computeDownloadUrls(opts);
+          throw new Error('Error not thrown');
+        } catch (err) {
+          if (err && err.message === 'Only 32 bits architectures are available for Firefox <= 0.8.0') {
+            return;
+          }
+          throw err;
+        }
+      });
+
+      it('uses `win32` name for versions 0.8.0 & 0.7.1', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.7.1',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('-win32.zip') > 0);
+      });
+
+      it('uses `windows` name for version 0.3.0', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.3.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('-windows.zip') > 0);
+      });
+
+      it('uses `win` name for versions other versions', function() {
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.5.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('-win.zip') > 0);
+      });
+
     });
   });
 
