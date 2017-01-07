@@ -1,3 +1,7 @@
+# 5.9.1 (2017-01-07)
+
+* Fix incorrect download urls for Firefox drivers (#251)
+
 # 5.9.0 (2016-12-04)
 
 * update geckodriver to v0.11.1
