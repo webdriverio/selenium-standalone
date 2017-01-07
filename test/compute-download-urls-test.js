@@ -340,7 +340,7 @@ describe('compute-download-urls', function() {
         assert(actual.firefox.indexOf('macos') > 0);
       });
 
-      it('uses `osx` platform for versions >= 0.6.0', function() {
+      it('uses `osx` platform for versions <= 0.6.0', function() {
         opts.drivers.firefox = {
           baseURL: 'https://localhost',
           version: '0.5.0',
