@@ -42,7 +42,7 @@ selenium-standalone start -- -role node -hub http://localhost:4444/grid/register
 
 # specify options in config file
 selenium-standalone install --config=/path/to/config.json
-selenium-standalone install --config=./config/seleniumConfig.js
+selenium-standalone start --config=./config/seleniumConfig.js
 
 ```
 
