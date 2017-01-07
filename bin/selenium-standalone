@@ -8,25 +8,6 @@ var path = require('path');
 var selenium = require('../');
 var defaultConfig = require('../lib/default-config');
 
-function isAbsolutePosix(path) {
-  return path.charAt(0) === '/';
-}
-
-function isAbsoluteWin32(path) {
-  // https://github.com/nodejs/node/blob/b3fcc245fb25539909ef1d5eaa01dbf92e168633/lib/path.js#L56
-  var splitDeviceRe = /^([a-zA-Z]:|[\\\/]{2}[^\\\/]+[\\\/]+[^\\\/]+)?([\\\/])?([\s\S]*?)$/;
-  var result = splitDeviceRe.exec(path);
-  var device = result[1] || '';
-  var isUnc = Boolean(device && device.charAt(1) !== ':');
-
-  // UNC paths are always absolute
-  return Boolean(result[2] || isUnc);
-}
-
-function isAbsolute(path) {
-  return (process.platform === 'win32') ? isAbsoluteWin32(path) : isAbsolutePosix(path);
-}
-
 function parseCommandAndOptions(javaPath) {
   var argv = minimist(process.argv.slice(2), {
     string: ['version', 'drivers.chrome.version', 'drivers.ie.version', 'drivers.firefox.version']
@@ -58,9 +39,7 @@ function parseCommandAndOptions(javaPath) {
 
   if (argv.config) {
     try {
-      configFromFile = require(
-        isAbsolute(argv.config) ? argv.config : path.resolve(process.cwd(), argv.config)
-      );
+      configFromFile = require(path.resolve(process.cwd(), argv.config));
       if (typeof configFromFile !== 'object') {
         throw new Error('Config file does not exports an object');
       }
