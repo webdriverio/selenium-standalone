@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var debug = require('debug')('selenium-standalone:cli');
+
 var minimist = require('minimist');
 var which = require('which');
 var merge = require('lodash').merge;
@@ -12,6 +14,8 @@ which('java', function javaFound(err, javaPath) {
     console.error('Could not find `java`, make sure it is installed in your $PATH');
     return;
   }
+
+  debug('Started via CLI with: ', process.argv);
 
   var argv = minimist(process.argv.slice(2), {
     string: ['version', 'drivers.chrome.version', 'drivers.ie.version', 'drivers.firefox.version']
