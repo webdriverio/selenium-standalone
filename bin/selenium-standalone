@@ -3,41 +3,53 @@
 var minimist = require('minimist');
 var which = require('which');
 var merge = require('lodash').merge;
+var path = require('path');
 
 var selenium = require('../');
 var defaultConfig = require('../lib/default-config');
 
-which('java', function javaFound(err, javaPath) {
-  if (err) {
-    console.error('Could not find `java`, make sure it is installed in your $PATH');
-    return;
-  }
-
+function parseCommandAndOptions(javaPath) {
   var argv = minimist(process.argv.slice(2), {
     string: ['version', 'drivers.chrome.version', 'drivers.ie.version', 'drivers.firefox.version']
   });
 
   var action = argv._[0];
 
+  if (!action) {
+    throw new Error('No action provided');
+  }
   if (action !== 'install' && action !== 'start') {
-    console.log('Usage: selenium-standalone install or selenium-standalone start');
-    return;
+    throw new Error('Invalid action "'+ action + ' (Valid actions are [' + Object.keys(actions).join(', ') + '])');
   }
 
   // everything after `selenium-standalone install [options] --` will be in argv._
   var seleniumArgs = argv._.slice(1);
 
-  // build a new map removing `_` from argv
+  // build a new map removing `_` and --config from argv
   var options = Object.keys(argv).reduce(function(prev, cur) {
-    if (cur !== '_') {
+    if ((cur !== '_') && (cur !== 'config')) {
       prev[cur] = argv[cur];
     }
 
     return prev;
   }, {});
 
-  // Merge in default options
-  options = merge({}, defaultConfig, options);
+  // If a config file was specified, load it
+  var configFromFile = {};
+
+  if (argv.config) {
+    try {
+      configFromFile = require(path.resolve(process.cwd(), argv.config));
+      if (typeof configFromFile !== 'object') {
+        throw new Error('Config file does not exports an object');
+      }
+    } catch(err) {
+      throw new Error('Error parsing config file : ' + (err.message || err));
+    }
+  }
+
+  // Merge default options, options from config file then command line options
+  options = merge({}, defaultConfig, configFromFile, options);
 
   options.seleniumArgs = seleniumArgs;
   options.spawnOptions = {
@@ -47,8 +59,8 @@ which('java', function javaFound(err, javaPath) {
   options.logger = options.silent ? null : console.log;
   options.javaPath = javaPath;
 
-  actions[action](options);
-});
+  return [action, options];
+}
 
 var actions = {
   start: function(options) {
@@ -113,3 +125,24 @@ var actions = {
     }
   }
 };
+
+// Export the command line parsing function for tests.
+module.exports = parseCommandAndOptions;
+
+if (!process.env || !process.env.NODE_ENV || (process.env.NODE_ENV !== 'test-cli-parameters')) {
+  which('java', function javaFound(err, javaPath) {
+    var params;
+
+    try {
+      if (err) {
+        throw err;
+      }
+      params = parseCommandAndOptions(javaPath);
+    } catch (err) {
+      process.stderr.write((err.message || err) + "\n");
+      process.stderr.write("Usage: selenium-standalone action [options]\n");
+      process.exit(255);
+    }
+    actions[params[0]](params[1]);
+  });
+}
