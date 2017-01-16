@@ -46,7 +46,7 @@ selenium-standalone start --config=./config/seleniumConfig.js
 
 ```
 
-Config file can be a JSON file or a [module file](https://nodejs.org/api/modules.html#modules_file_modules) that exports options as an object :
+Config file can be a JSON file or a [module file](https://nodejs.org/api/modules.html#modules_file_modules) that exports options as an object:
 
 ```js
 module.exports = {
