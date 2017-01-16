@@ -1,3 +1,8 @@
+# 5.10.0 (2017-01-16)
+
+* update chromedriver version to 2.27
+* --config file option
+
 # 5.9.1 (2017-01-07)
 
 * Fix incorrect download urls for Firefox drivers (#251)
