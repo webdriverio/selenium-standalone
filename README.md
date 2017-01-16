@@ -40,7 +40,8 @@ selenium-standalone start -- -role hub
 selenium-standalone start -- -role node -hub http://localhost:4444/grid/register
 selenium-standalone start -- -role node -hub http://localhost:4444/grid/register -port 5556
 
-# specify options in config file
+# If you have a complex configuration with numerous options or if you want to keep a clear configuration changes history,
+# you can specify the options in a configuration file :
 selenium-standalone install --config=/path/to/config.json
 selenium-standalone start --config=./config/seleniumConfig.js
 
