@@ -1,3 +1,7 @@
+# 5.11.0 (2017-01-17)
+
+* update geckodriver to v0.13.0
+
 # 5.10.0 (2017-01-16)
 
 * update chromedriver version to 2.27
