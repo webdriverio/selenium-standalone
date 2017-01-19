@@ -1,3 +1,7 @@
+# 5.11.1 (2017-01-17)
+
+* Update `request` and `mocha` dependencies.
+
 # 5.11.0 (2017-01-17)
 
 * update geckodriver to v0.13.0
