@@ -63,8 +63,6 @@ module.exports = {
 
 ## Application Programming Interface (API)
 
----
-
 ### Sample configuration object
 
 Here you can find an up-to-date example of the configuration object:
@@ -105,8 +103,6 @@ selenium.install({
   }
 }, cb);
 ```
-
----
 
 ### selenium.install([opts,] cb)
 
@@ -167,8 +163,6 @@ By default all drivers are loaded, you only control and change the versions or a
 
 So you can `child.kill()` when you are done.
 
----
-
 #### `Error: Another Selenium process is already running`
 
 If you're getting this error, it means that you didn't shut down the server successfully the last time you started it, so it's still running in the background. You can kill it by running:
@@ -179,14 +173,10 @@ pkill -f selenium-standalone
 
 ## Available browsers
 
----
-
 By default, google chrome, firefox and phantomjs are available
 when installed on the host system.
 
 ## Tips
-
----
 
 ### Start Selenium whenever your (ubuntu) machine starts!
 
@@ -198,8 +188,6 @@ update-rc.d selenium-standalone defaults
 ```
 
 For more information: https://stackoverflow.com/questions/3666794/selenium-server-on-startup/30392437#30392437
-
----
 
 ### Ensure you have the minimum required Java version
 
@@ -224,8 +212,6 @@ To run headlessly, you can use [xvfb](https://en.wikipedia.org/wiki/Xvfb):
 ```shell
 xvfb-run --server-args="-screen 0, 1366x768x24" selenium-standalone start
 ```
-
----
 
 ### Logging
 
@@ -257,13 +243,9 @@ selenium.start({
 });
 ```
 
----
-
 ### Examples of combining with other tools
 
 - [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
-
----
 
 ### `Error: unable to get local issuer certificate`
 
