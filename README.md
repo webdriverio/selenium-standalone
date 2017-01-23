@@ -63,7 +63,10 @@ module.exports = {
 
 ## Application Programming Interface (API)
 
+---
+
 ### Sample configuration object
+
 Here you can find an up-to-date example of the configuration object:
 [lib/default-config.js](lib/default-config.js)
 
@@ -102,6 +105,8 @@ selenium.install({
   }
 }, cb);
 ```
+
+---
 
 ### selenium.install([opts,] cb)
 
@@ -162,6 +167,8 @@ By default all drivers are loaded, you only control and change the versions or a
 
 So you can `child.kill()` when you are done.
 
+---
+
 #### `Error: Another Selenium process is already running`
 
 If you're getting this error, it means that you didn't shut down the server successfully the last time you started it, so it's still running in the background. You can kill it by running:
@@ -172,10 +179,14 @@ pkill -f selenium-standalone
 
 ## Available browsers
 
+---
+
 By default, google chrome, firefox and phantomjs are available
 when installed on the host system.
 
 ## Tips
+
+---
 
 ### Start Selenium whenever your (ubuntu) machine starts!
 
@@ -185,8 +196,24 @@ After installing selenium-standalone globally, execute the following commands to
 ln -s /usr/local/bin/selenium-standalone /etc/init.d/
 update-rc.d selenium-standalone defaults
 ```
+
 For more information: https://stackoverflow.com/questions/3666794/selenium-server-on-startup/30392437#30392437
 
+---
+
+### Ensure you have the minimum required Java version
+
+With the release of Selenium 3+, the minimum required version of Java is 8, as [as 7 has ceased public updates](https://java.com/en/download/faq/java_7.xml).
+
+If an older selenium version is needed, you can check the requirements on the [official Selenium changelog](https://raw.githubusercontent.com/SeleniumHQ/selenium/master/java/CHANGELOG).
+
+Here is a reference sheet for the more recent Selenium version:
+
+| Selenium version | Minimum Java Required |
+|   ---   |   ---   |
+| 3.0.0+  | Java 8  |
+| 2.47.0+ | Java 7  |
+| 2.22.0+ | Java 6  |
 
 ### Running headlessly
 
@@ -197,6 +224,8 @@ To run headlessly, you can use [xvfb](https://en.wikipedia.org/wiki/Xvfb):
 ```shell
 xvfb-run --server-args="-screen 0, 1366x768x24" selenium-standalone start
 ```
+
+---
 
 ### Logging
 
@@ -228,9 +257,13 @@ selenium.start({
 });
 ```
 
+---
+
 ### Examples of combining with other tools
 
 - [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
+
+---
 
 ### `Error: unable to get local issuer certificate`
 
