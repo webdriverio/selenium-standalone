@@ -1,6 +1,6 @@
 {
   "name": "selenium-standalone",
-  "version": "5.9.1",
+  "version": "5.11.1",
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
@@ -28,13 +28,14 @@
     "minimist": "1.1.0",
     "mkdirp": "0.5.0",
     "progress": "1.1.8",
-    "request": "2.51.0",
+    "request": "2.79.0",
     "tar-stream": "1.5.2",
     "urijs": "1.16.1",
     "which": "1.1.1",
     "yauzl": "^2.5.0"
   },
   "devDependencies": {
-    "mocha": "2.1.0"
+    "chai": "3.5.0",
+    "mocha": "3.2.0"
   }
 }
