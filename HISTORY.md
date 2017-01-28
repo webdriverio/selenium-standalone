@@ -1,3 +1,7 @@
+# 5.11.2 (2017-01-26)
+
+* Fix support for Node.JS v0.12
+
 # 5.11.1 (2017-01-17)
 
 * Update `request` and `mocha` dependencies.

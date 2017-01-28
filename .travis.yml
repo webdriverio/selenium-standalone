@@ -7,6 +7,10 @@ jdk:
 
 env:
   - NODE_VERSION="stable"
+  - NODE_VERSION=6
+  - NODE_VERSION=5
+  - NODE_VERSION=4
+  - NODE_VERSION=0.12
 
 before_install:
   - nvm install $NODE_VERSION
