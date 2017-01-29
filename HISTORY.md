@@ -1,3 +1,9 @@
+# 6.0.0 (2016-29-01)
+
+  * BREAKING CHANGE Using selenium 3.0.1 (Java 8 is needed)
+  * Using yarn as package manager
+  * Updated dependencies
+
 # 5.11.2 (2017-01-26)
 
 * Fix support for Node.JS v0.12
