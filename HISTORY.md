@@ -1,4 +1,8 @@
-# 6.0.0 (2016-29-01)
+# 6.0.1 (2017-02-01)
+
+* Fix default version for IEDriver to `3.0.0`.
+
+# 6.0.0 (2017-01-29)
 
   * BREAKING CHANGE Using selenium 3.0.1 (Java 8 is needed)
   * Using yarn as package manager
