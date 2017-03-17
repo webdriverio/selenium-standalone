@@ -1,3 +1,7 @@
+# 6.0.2 (2017-03-17)
+
+* Update chromedriver version to 2.28, support for chrome 57
+
 # 6.0.1 (2017-02-01)
 
 * Fix default version for IEDriver to `3.0.0`.
