@@ -1,3 +1,7 @@
+# 6.1.0 (2017-03-17)
+
+* Update default chromedriver to 2.28 (#267).
+
 # 6.0.1 (2017-02-01)
 
 * Fix default version for IEDriver to `3.0.0`.
