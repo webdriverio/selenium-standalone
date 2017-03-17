@@ -1,3 +1,21 @@
+# 6.1.0 (2017-03-17)
+
+* Update default chromedriver to 2.28 (#267).
+
+# 6.0.1 (2017-02-01)
+
+* Fix default version for IEDriver to `3.0.0`.
+
+# 6.0.0 (2017-01-29)
+
+  * BREAKING CHANGE Using selenium 3.0.1 (Java 8 is needed)
+  * Using yarn as package manager
+  * Updated dependencies
+
+# 5.11.2 (2017-01-26)
+
+* Fix support for Node.JS v0.12
+
 # 5.11.1 (2017-01-17)
 
 * Update `request` and `mocha` dependencies.

@@ -53,7 +53,7 @@ Config file can be a JSON file or a [module file](https://nodejs.org/api/modules
 module.exports = {
   drivers: {
     chrome: {
-      version: '2.23',
+      version: '2.27',
       arch: process.arch,
       baseURL: 'https://chromedriver.storage.googleapis.com'
     },
@@ -64,6 +64,7 @@ module.exports = {
 ## Application Programming Interface (API)
 
 ### Sample configuration object
+
 Here you can find an up-to-date example of the configuration object:
 [lib/default-config.js](lib/default-config.js)
 
@@ -75,20 +76,20 @@ var selenium = require('selenium-standalone');
 selenium.install({
   // check for more recent versions of selenium here:
   // https://selenium-release.storage.googleapis.com/index.html
-  version: '2.53.1',
+  version: '3.0.1',
   baseURL: 'https://selenium-release.storage.googleapis.com',
   drivers: {
     chrome: {
       // check for more recent versions of chrome driver here:
       // https://chromedriver.storage.googleapis.com/index.html
-      version: '2.23',
+      version: '2.27',
       arch: process.arch,
       baseURL: 'https://chromedriver.storage.googleapis.com'
     },
     ie: {
       // check for more recent versions of internet explorer driver here:
       // https://selenium-release.storage.googleapis.com/index.html
-      version: '2.53.1',
+      version: '3.0.1',
       arch: process.arch,
       baseURL: 'https://selenium-release.storage.googleapis.com'
     }
@@ -114,12 +115,12 @@ Here are the current defaults:
 ```js
 {
   chrome: {
-    version: '2.23',
+    version: '2.27',
     arch: process.arch,
     baseURL: 'https://chromedriver.storage.googleapis.com'
   },
   ie: {
-    version: '2.53.1',
+    version: '3.0.1',
     arch: process.arch,
     baseURL: 'https://selenium-release.storage.googleapis.com'
   }
@@ -185,8 +186,22 @@ After installing selenium-standalone globally, execute the following commands to
 ln -s /usr/local/bin/selenium-standalone /etc/init.d/
 update-rc.d selenium-standalone defaults
 ```
+
 For more information: https://stackoverflow.com/questions/3666794/selenium-server-on-startup/30392437#30392437
 
+### Ensure you have the minimum required Java version
+
+With the release of Selenium 3+, the minimum required version of Java is 8, as [7 has ceased public updates](https://java.com/en/download/faq/java_7.xml).
+
+If an older selenium version is needed, you can check the requirements on the [official Selenium changelog](https://raw.githubusercontent.com/SeleniumHQ/selenium/master/java/CHANGELOG).
+
+Here is a reference sheet for the more recent Selenium version:
+
+| Selenium version | Minimum Java Required |
+|   ---   |   ---   |
+| 3.0.0+  | Java 8  |
+| 2.47.0+ | Java 7  |
+| 2.22.0+ | Java 6  |
 
 ### Running headlessly
 
