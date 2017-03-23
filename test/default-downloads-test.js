@@ -196,21 +196,6 @@ describe('default-downloads', function() {
         });
       });
 
-      it('ia32 download exists', function(done) {
-        opts = merge(opts, {
-          drivers: {
-            firefox: {
-              arch: 'ia32'
-            }
-          }
-        });
-
-        computedUrls = computeDownloadUrls(opts);
-
-        assert(computedUrls.firefox.indexOf('linux32') > 0);
-        doesDownloadExist(computedUrls.firefox, done);
-      });
-
       it('x64 download exists', function(done) {
         opts = merge(opts, {
           drivers: {
