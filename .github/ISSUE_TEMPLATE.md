@@ -23,7 +23,7 @@ to enable debug log statements that will help us even more than the standard out
 If there are lots of logs, please link to [a public gist](https://gist.github.com/).
 
 ## Your Environment
-* Version of `selenium-standalone` that your are using:
+* Version of `selenium-standalone` that you are using:
 * Is there another tool calling `selenium-standalone` on your behalf:
 * System/platform:
 * Other details that might be important:
