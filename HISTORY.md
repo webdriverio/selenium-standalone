@@ -1,3 +1,9 @@
+# 6.2.0 (2017-04-05)
+
+* Update default Selenium Server to 3.3.1 (#273)
+* Update default Firefox driver to 0.15.0 (#273)
+* Ability to collect debug logs for bug reports (#271)
+
 # 6.1.0 (2017-03-17)
 
 * Update default chromedriver to 2.28 (#267).
