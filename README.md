@@ -215,6 +215,8 @@ xvfb-run --server-args="-screen 0, 1366x768x24" selenium-standalone start
 
 ### Logging
 
+#### Selenium Process
+
 By default, Selenium sends [logging messages to stderr](https://code.google.com/p/selenium/issues/detail?id=7957).
 
 The selenium-standalone cli tool (`selenium-standalone start`) will output the logging messages to your `process.stderr`. So you do see them in the console.
@@ -241,6 +243,23 @@ selenium.start({
 }, function(err, child) {
   // child.stderr now sent to your `process.stderr`
 });
+```
+
+#### Debug Logs for Selenium Standalone Process
+
+At times you may need to get debug logs for what `selenium-standalone` is doing. In your environment variables set `DEBUG=selenium-standalone:*`. This will enable extra log statements to be shown in stderr.
+
+**Example:**
+```text
+$ DEBUG=selenium-standalone:* selenium-standalone install --drivers.chrome.version=2.15
+  selenium-standalone:env-details Platform: darwin +0ms
+  selenium-standalone:env-details Architecture: x64 +3ms
+  selenium-standalone:env-details Node.js: v6.9.4 +2ms
+  selenium-standalone:cli Started via CLI with:  [ '/usr/local/bin/node',
+  '/tmp/selenium-standalone/bin/selenium-standalone',
+  'install',
+  '--drivers.chrome.version=2.15' ]
+  ...
 ```
 
 ### Examples of combining with other tools

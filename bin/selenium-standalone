@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var debug = require('debug')('selenium-standalone:cli');
+
 var minimist = require('minimist');
 var which = require('which');
 var merge = require('lodash').merge;
@@ -131,6 +133,8 @@ module.exports = parseCommandAndOptions;
 
 if (!process.env || !process.env.NODE_ENV || (process.env.NODE_ENV !== 'test-cli-parameters')) {
   which('java', function javaFound(err, javaPath) {
+    debug('Started via CLI with: ', process.argv);
+
     var params;
 
     try {

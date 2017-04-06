@@ -23,6 +23,7 @@
   "dependencies": {
     "async": "^2.1.4",
     "commander": "^2.9.0",
+    "debug": "^2.6.3",
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
