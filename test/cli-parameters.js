@@ -112,7 +112,7 @@ describe('`selenium-standalone` command parameters', function() {
         .to.be.equal(defaultValues.drivers.chrome.baseURL);
     });
 
-    it('correctly parses a JSON config file', function() {
+    it('are correctly parsed from a JSON config file', function() {
       process.argv = buildArgv([
         'install',
         '--config=' + path.join(__dirname, 'fixtures', 'config.valid.json'),
@@ -125,7 +125,7 @@ describe('`selenium-standalone` command parameters', function() {
       expect(parsed[1].seleniumArgs).to.be.deep.equal([]);
     });
 
-    it('correctly parses a JS module config file', function() {
+    it('are correctly parsed from a JS module config file', function() {
       process.argv = buildArgv([
         'install',
         '--config=' + path.join(__dirname, 'fixtures', 'config.valid.js'),
