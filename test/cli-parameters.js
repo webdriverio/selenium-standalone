@@ -112,7 +112,7 @@ describe('`selenium-standalone` command parameters', function() {
         .to.be.equal(defaultValues.drivers.chrome.baseURL);
     });
 
-    it('are correctly parsed from a JSON config file', function() {
+    it('correctly parses a JSON config file', function() {
       process.argv = buildArgv([
         'install',
         '--config=' + path.join(__dirname, 'fixtures', 'config.valid.json'),
@@ -122,9 +122,10 @@ describe('`selenium-standalone` command parameters', function() {
       expect(parsed[1].version).to.be.equal('42');
       expect(parsed[1].drivers.ie.version).to.be.equal(42);
       expect(parsed[1].drivers.ie.baseURL).to.be.equal('http://www.google.fr');
+      expect(parsed[1].seleniumArgs).to.be.deep.equal([]);
     });
 
-    it('are correctly parsed from a JS module config file', function() {
+    it('correctly parses a JS module config file', function() {
       process.argv = buildArgv([
         'install',
         '--config=' + path.join(__dirname, 'fixtures', 'config.valid.js'),
@@ -134,6 +135,7 @@ describe('`selenium-standalone` command parameters', function() {
       expect(parsed[1].version).to.be.equal('42');
       expect(parsed[1].drivers.ie.version).to.be.equal(42);
       expect(parsed[1].drivers.ie.baseURL).to.be.equal('http://www.google.fr');
+      expect(parsed[1].seleniumArgs).to.be.deep.equal(['--test=1', '-flag']);
     });
 
     it('throws if config file is invalid', function() {
@@ -161,6 +163,8 @@ describe('`selenium-standalone` command parameters', function() {
         'install',
         '--config=' + path.join(__dirname, 'fixtures', 'config.valid.js'),
         '--drivers.ie.version=43',
+        '--',
+        '--some=seleniumArgs'
       ]);
 
       var parsed = parseCommandAndOptions('/somewhere');
@@ -168,6 +172,8 @@ describe('`selenium-standalone` command parameters', function() {
       expect(parsed[1].version).to.be.equal('42');
       expect(parsed[1].drivers.ie.arch).to.be.equal(defaultValues.drivers.ie.arch);
       expect(parsed[1].drivers.ie.version).to.be.equal('43');
+      expect(parsed[1].seleniumArgs).to.be.deep.equal(['--some=seleniumArgs']);
     });
+
   });
 });
