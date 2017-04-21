@@ -1,3 +1,8 @@
+# 6.3.0 (2017-04-21)
+
+* Update default chromedriver to 2.29 (#274)
+* Update default IEDriver to 3.3.0 (#274)
+
 # 6.2.0 (2017-04-05)
 
 * Update default Selenium Server to 3.3.1 (#273)
