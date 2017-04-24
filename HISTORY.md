@@ -1,3 +1,9 @@
+# 6.4.0 (2017-04-24)
+
+* Update selenium to 3.4.0
+* Update IEDriver to 3.4.0
+* Update geckodriver to 0.16.0
+
 # 6.3.0 (2017-04-21)
 
 * Update default chromedriver to 2.29 (#274)
