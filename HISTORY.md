@@ -1,3 +1,7 @@
+# 6.4.1 (2017-04-24)
+
+* Fix seleniumArgs handling in config file
+
 # 6.4.0 (2017-04-24)
 
 * Update selenium to 3.4.0
