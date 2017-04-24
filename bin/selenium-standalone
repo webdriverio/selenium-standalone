@@ -53,7 +53,11 @@ function parseCommandAndOptions(javaPath) {
   // Merge default options, options from config file then command line options
   options = merge({}, defaultConfig, configFromFile, options);
 
-  options.seleniumArgs = seleniumArgs;
+  if (seleniumArgs.length) {
+    options.seleniumArgs = seleniumArgs;
+  } else if (!Array.isArray(options.seleniumArgs)) {
+    options.seleniumArgs = [];
+  }
   options.spawnOptions = {
     stdio: 'inherit'
   };
