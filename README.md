@@ -1,7 +1,7 @@
 # selenium-standalone [![Build Status](https://img.shields.io/travis/vvo/selenium-standalone/master.svg?style=flat-square)](https://travis-ci.org/vvo/selenium-standalone) [![Dependency Status](https://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](https://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
 Command line or programmatic install and launch of [selenium](http://www.seleniumhq.org/download/) standalone
-server, [chrome driver](https://code.google.com/p/selenium/wiki/ChromeDriver), [internet explorer driver](https://code.google.com/p/selenium/wiki/InternetExplorerDriver), [firefox driver](https://code.google.com/p/selenium/wiki/FirefoxDriver) and phantomjs
+server, [chrome driver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver), [internet explorer driver](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver), [firefox driver](https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver) and phantomjs
 
 It will install a `selenium-standalone` command line that will be able to `install` selenium server and `start` firefox, chrome, internet explorer or phantomjs for your tests.
 
