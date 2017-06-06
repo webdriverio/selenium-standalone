@@ -12,7 +12,7 @@ var defaultConfig = require('../lib/default-config');
 
 function parseCommandAndOptions(javaPath) {
   var argv = minimist(process.argv.slice(2), {
-    string: ['version', 'drivers.chrome.version', 'drivers.ie.version', 'drivers.firefox.version']
+    string: ['version', 'drivers.chrome.version', 'drivers.ie.version', 'drivers.firefox.version', 'drivers.edge.version']
   });
 
   var action = argv._[0];
