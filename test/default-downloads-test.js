@@ -93,6 +93,34 @@ describe('default-downloads', function() {
     });
   });
 
+  describe('edge', function() {
+    before(function(){
+      Object.defineProperty(process, 'platform', {
+        value: 'win32'
+      });
+
+    });
+
+    var releases = require('../lib/microsoft-edge-releases')
+
+    Object.keys(releases).forEach(function (version) {
+      it('version `' + version + '` download exists', function(done) {
+          opts = merge(opts, {
+            drivers: {
+              edge: {
+                version: version
+              }
+            }
+          });
+
+        computedUrls = computeDownloadUrls(opts);
+
+        assert.equal(computedUrls.edge, releases[version].url);
+        doesDownloadExist(computedUrls.edge, done);
+      });
+    });
+  });
+
   describe('chrome', function() {
     describe('linux', function() {
       before(function(){

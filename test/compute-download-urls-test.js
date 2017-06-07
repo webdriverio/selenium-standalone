@@ -526,4 +526,51 @@ describe('compute-download-urls', function() {
       assert(actual.ie.indexOf('2.20.1.zip') > 0);
     });
   });
+
+  describe('edge', function() {
+    before(function() {
+      Object.defineProperty(process, 'platform', {
+        value: 'win32'
+      });
+
+    });
+
+    beforeEach(function() {
+      opts = {
+        seleniumVersion: '1.0',
+        seleniumBaseURL: 'https://localhost',
+        drivers: {
+          edge: {}
+        }
+      };
+    });
+
+    var releases = require('../lib/microsoft-edge-releases');
+
+    Object.keys(releases).forEach(function (version) {
+      it('uses version `' + version + '` correct url', function() {
+        opts.drivers.edge = { version: version };
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.edge, releases[version].url);
+      })
+    });
+
+    Object.keys(releases).forEach(function (version) {
+      it('uses version `' + version + '` correct extension', function() {
+        opts.drivers.edge = { version: version };
+
+        var actual = computeDownloadUrls(opts);
+        assert(actual.edge.indexOf(releases[version].extension) > 0);
+      })
+    });
+
+    it('throws for unknown releases', function() {
+      ['1.0', '2.3', '10'].forEach(function (version) {
+        opts.drivers.edge = { version: version };
+
+        assert.throws(function () { computeDownloadUrls(opts) });
+      })
+    });
+  });
 });
