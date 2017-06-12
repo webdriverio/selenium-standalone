@@ -1,3 +1,7 @@
+# 6.5.0 (2017-06-08)
+
+* Update default chromedriver to 2.30
+
 # 6.4.1 (2017-04-24)
 
 * Fix seleniumArgs handling in config file
