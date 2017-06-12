@@ -1,6 +1,7 @@
 # 6.5.0 (2017-06-08)
 
-* Update default chromedriver to 2.30
+* Ability to install Microsoft Edge driver (#284)
+* Update default chromedriver to 2.30 (#285)
 
 # 6.4.1 (2017-04-24)
 
