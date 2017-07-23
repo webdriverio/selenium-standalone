@@ -53,7 +53,7 @@ Config file can be a JSON file or a [module file](https://nodejs.org/api/modules
 module.exports = {
   drivers: {
     chrome: {
-      version: '2.30',
+      version: '2.31',
       arch: process.arch,
       baseURL: 'https://chromedriver.storage.googleapis.com'
     },
@@ -82,7 +82,7 @@ selenium.install({
     chrome: {
       // check for more recent versions of chrome driver here:
       // https://chromedriver.storage.googleapis.com/index.html
-      version: '2.30',
+      version: '2.31',
       arch: process.arch,
       baseURL: 'https://chromedriver.storage.googleapis.com'
     },
@@ -115,7 +115,7 @@ Here are the current defaults:
 ```js
 {
   chrome: {
-    version: '2.30',
+    version: '2.31',
     arch: process.arch,
     baseURL: 'https://chromedriver.storage.googleapis.com'
   },
