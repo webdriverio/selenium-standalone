@@ -1,3 +1,8 @@
+# 6.7.0 (2017-08-15)
+* Update default selenium to 3.5.0 (#296)
+* Update default IEDriver to 3.5.0 (#296)
+* Update default geckodriver to 0.18.0 (#295)
+
 # 6.6.0 (2017-07-28)
 * Update default chromedriver to 2.31 (#290)
 
