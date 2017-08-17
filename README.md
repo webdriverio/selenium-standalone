@@ -127,6 +127,8 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 ### selenium.start([opts,] cb)
 
+`opts.version` [selenium version](https://selenium-release.storage.googleapis.com/index.html) to install.
+
 `opts.drivers` map of drivers to run along with selenium standalone server, same
 as `selenium.install`.
 
