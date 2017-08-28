@@ -9,13 +9,17 @@
     - [Example](#example)
     - [selenium.install([opts,] cb)](#seleniuminstallopts-cb)
     - [selenium.start([opts,] cb)](#seleniumstartopts-cb)
+      - [`Error: Another Selenium process is already running`](#error-another-selenium-process-is-already-running)
   - [Available browsers](#available-browsers)
   - [Tips](#tips)
     - [Start Selenium whenever your (ubuntu) machine starts!](#start-selenium-whenever-your-ubuntu-machine-starts)
     - [Ensure you have the minimum required Java version](#ensure-you-have-the-minimum-required-java-version)
     - [Running headlessly](#running-headlessly)
     - [Logging](#logging)
+      - [Selenium Process](#selenium-process)
+      - [Debug Logs for Selenium Standalone Process](#debug-logs-for-selenium-standalone-process)
     - [Examples of combining with other tools](#examples-of-combining-with-other-tools)
+    - [Release](#release)
     - [`Error: unable to get local issuer certificate`](#error-unable-to-get-local-issuer-certificate)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
