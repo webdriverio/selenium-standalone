@@ -1,3 +1,7 @@
+# 6.8.0 (2017-08-28)
+* Update default selenium to 3.5.2 (#301)
+* Update default IEDriver to 3.5.1 (#301)
+
 # 6.7.0 (2017-08-15)
 * Update default selenium to 3.5.0 (#296)
 * Update default IEDriver to 3.5.0 (#296)

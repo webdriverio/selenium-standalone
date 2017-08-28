@@ -1,3 +1,25 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [selenium-standalone * * *](#selenium-standalone---)
+  - [Command line interface](#command-line-interface)
+  - [Application Programming Interface (API)](#application-programming-interface-api)
+    - [Sample configuration object](#sample-configuration-object)
+    - [Example](#example)
+    - [selenium.install([opts,] cb)](#seleniuminstallopts-cb)
+    - [selenium.start([opts,] cb)](#seleniumstartopts-cb)
+  - [Available browsers](#available-browsers)
+  - [Tips](#tips)
+    - [Start Selenium whenever your (ubuntu) machine starts!](#start-selenium-whenever-your-ubuntu-machine-starts)
+    - [Ensure you have the minimum required Java version](#ensure-you-have-the-minimum-required-java-version)
+    - [Running headlessly](#running-headlessly)
+    - [Logging](#logging)
+    - [Examples of combining with other tools](#examples-of-combining-with-other-tools)
+    - [`Error: unable to get local issuer certificate`](#error-unable-to-get-local-issuer-certificate)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # selenium-standalone [![Build Status](https://img.shields.io/travis/vvo/selenium-standalone/master.svg?style=flat-square)](https://travis-ci.org/vvo/selenium-standalone) [![Dependency Status](https://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](https://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
 Command line or programmatic install and launch of [selenium](http://www.seleniumhq.org/download/) standalone
@@ -252,6 +274,12 @@ $ DEBUG=selenium-standalone:* selenium-standalone install --drivers.chrome.versi
 ### Examples of combining with other tools
 
 - [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
+
+### Release
+
+```sh
+npm run release [major|minor|patch|x.x.x]
+```
 
 ### `Error: unable to get local issuer certificate`
 
