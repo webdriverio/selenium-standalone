@@ -1,3 +1,7 @@
+# 6.9.0 (2017-09-04)
+* Update default selenium to 3.5.3 (#302)
+* Update default chromedriver to 2.32 (#302)
+
 # 6.8.0 (2017-08-28)
 * Update default selenium to 3.5.2 (#301)
 * Update default IEDriver to 3.5.1 (#301)
