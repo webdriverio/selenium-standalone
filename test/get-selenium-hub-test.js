@@ -1,9 +1,9 @@
+var path = require('path');
 var assert = require("assert");
 var statusUrl = require('../lib/get-selenium-status-url');
 
 var nodeStatusAPIPath = '/wd/hub/status';
 var hubStatusAPIPath = '/grid/api/hub';
-
 describe('getRunningProcessType', function () {
   var tests = [
     // Started as a standalone Selenium Server
@@ -47,7 +47,11 @@ describe('getSeleniumStatusUrl', function () {
               {args: ['-role', 'node', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath},
               {args: ['-role', 'node', '-host', 'alias', '-port', '7777'], expectedUrl: 'alias:7777' + nodeStatusAPIPath},
               {args: ['-role', 'node', '-hub', 'https://foo/wd/register'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath},
-              {args: ['-role', 'node', '-hub', 'https://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath}
+              {args: ['-role', 'node', '-hub', 'https://foo:6666/wd/register', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath},
+
+              {args: ['-role', 'node', '-nodeConfig', path.join(__dirname, 'fixtures', 'config.node.json')], expectedUrl: 'foo:123' + nodeStatusAPIPath},
+              {args: ['-role', 'node', '-host', 'alias', '-nodeConfig', path.join(__dirname, 'fixtures', 'config.node.json')], expectedUrl: 'alias:123' + nodeStatusAPIPath},
+              {args: ['-role', 'node', '-host', 'alias', '-port', '7777', '-nodeConfig', path.join(__dirname, 'fixtures', 'config.node.json')], expectedUrl: 'alias:7777' + nodeStatusAPIPath},
             ];
 
   var testWithData = function (dataItem) {
