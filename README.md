@@ -165,7 +165,7 @@ as `selenium.install`.
 
 `opts.basePath` sets the base directory used to load the selenium standalone `.jar` and drivers, same as `selenium.install`.
 
-By default all drivers are loaded, you only control and change the versions or archs.
+`opts.includeDefaultDrivers` By default all drivers are loaded. If set to `false`, you must specify every driver required at install time, including their versions and archs.
 
 `opts.spawnOptions` [spawn options](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) for the selenium server. Defaults to `undefined`
 
