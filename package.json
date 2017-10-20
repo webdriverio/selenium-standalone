@@ -29,7 +29,7 @@
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "progress": "1.1.8",
+    "progress": "2.0.0",
     "request": "2.79.0",
     "tar-stream": "1.5.2",
     "urijs": "^1.18.4",
