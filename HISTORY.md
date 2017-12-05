@@ -1,3 +1,6 @@
+# 6.10.0 (2017-12-05)
+* Update default Edge driver to 16299 (#330)
+
 # 6.9.0 (2017-09-04)
 * Update default selenium to 3.5.3 (#302)
 * Update default chromedriver to 2.32 (#302)
