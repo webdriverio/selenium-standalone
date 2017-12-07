@@ -1,3 +1,21 @@
+# 6.12.0 (2017-12-05)
+* Update default selenium to 3.7.1 (#327)
+* Update default IEDriver to 3.7.1 (#327)
+* Update default geckodriver to 0.19.1 (#327)
+* Update default Edge driver to 16299 (#330)
+* Update downstream dependencies
+
+# 6.11.0 (2017-10-20)
+* Update default selenium to 3.6.0 (#310)
+* Update default chromedriver to 2.33 (#310)
+* Update default geckodriver to 0.19.0 (#310)
+* Update default IEDriver to 3.6.0 (#310)
+* Ability to install only one driver from default list (#313)
+
+# 6.10.0 (2017-10-07)
+* Fix selenium server status check URL when passing node config file (#308)
+* Add timeout option to download request (#309)
+
 # 6.9.0 (2017-09-04)
 * Update default selenium to 3.5.3 (#302)
 * Update default chromedriver to 2.32 (#302)
