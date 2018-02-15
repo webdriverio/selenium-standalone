@@ -78,17 +78,6 @@ describe('compute-download-urls', function() {
         });
       });
 
-      it('x32', function() {
-        opts.drivers.chrome = {
-          baseURL: 'https://localhost',
-          version: '2.0',
-          arch: 'x32'
-        }
-
-        var actual = computeDownloadUrls(opts);
-        assert.equal(actual.chrome, 'https://localhost/2.0/chromedriver_linux32.zip');
-      });
-
       it('x64', function() {
         opts.drivers.chrome = {
           baseURL: 'https://localhost',
