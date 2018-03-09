@@ -78,7 +78,7 @@ describe('compute-download-urls', function() {
         });
       });
 
-      it('x32', function() {
+      it('x32 for versions < 2.34', function() {
         opts.drivers.chrome = {
           baseURL: 'https://localhost',
           version: '2.0',

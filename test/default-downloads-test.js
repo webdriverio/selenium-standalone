@@ -129,20 +129,7 @@ describe('default-downloads', function() {
         });
       });
 
-      it('ia32 download exists', function(done) {
-        opts = merge(opts, {
-          drivers: {
-            chrome: {
-              arch: 'ia32'
-            }
-          }
-        });
-
-        computedUrls = computeDownloadUrls(opts);
-
-        assert(computedUrls.chrome.indexOf('linux32') > 0);
-        doesDownloadExist(computedUrls.chrome, done);
-      });
+      // No x32 for latest chromedriver on linux
 
       it('x64 download exists', function(done) {
         opts = merge(opts, {
