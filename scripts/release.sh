@@ -2,7 +2,8 @@
 
 set -e # exit when error
 
-if [[ ! $(npm owner ls | grep `npm whoami`) ]]; then
+if ! npm owner ls | grep -q "$(npm whoami)"
+then
   printf "Release: Not an owner of the npm repo, ask for it\n"
   exit 1
 fi
