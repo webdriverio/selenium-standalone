@@ -46,10 +46,13 @@ RUN export DISPLAY=:99.0
 RUN Xvfb :99 -shmem -screen 0 1366x768x16 &
 
 WORKDIR /home/node
+# For development
+#ADD . ./selenium-standalone-local
+#RUN chown node:node -R .
 USER node
 RUN npm init -y
-RUN mkdir node_modules
+# RUN npm install -i ./selenium-standalone-local
 RUN npm install -i selenium-standalone
-RUN sudo chown node:node -R .
+
 
 CMD DEBUG=selenium-standalone:* ./node_modules/.bin/selenium-standalone install && DEBUG=selenium-standalone:* ./node_modules/.bin/selenium-standalone start
