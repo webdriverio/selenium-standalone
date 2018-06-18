@@ -24,7 +24,10 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# selenium-standalone [![Build Status](https://img.shields.io/travis/vvo/selenium-standalone/master.svg?style=flat-square)](https://travis-ci.org/vvo/selenium-standalone) [![Dependency Status](https://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone) [![devDependency Status](https://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
+# selenium-standalone 
+[![Build Status](https://travis-ci.org/vvo/selenium-standalone.svg?branch=master)](https://travis-ci.org/vvo/selenium-standalone) 
+[![Dependency Status](https://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone) 
+[![devDependency Status](https://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
 
 Command line or programmatic install and launch of [selenium](http://www.seleniumhq.org/download/) standalone
 server, [chrome driver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver), [internet explorer driver](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver), [firefox driver](https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver) and phantomjs
