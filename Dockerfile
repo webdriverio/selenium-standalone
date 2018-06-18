@@ -35,7 +35,6 @@ RUN apt-get -qqy --no-install-recommends install \
   firefox \
   google-chrome-stable \
   openjdk-8-jre-headless \
-  x11vnc \
   xvfb \
   xfonts-100dpi \
   xfonts-75dpi \
@@ -47,8 +46,8 @@ RUN Xvfb :99 -shmem -screen 0 1366x768x16 &
 
 WORKDIR /home/node
 # For development
-#ADD . ./selenium-standalone-local
-#RUN chown node:node -R .
+# ADD . ./selenium-standalone-local
+# RUN chown node:node -R .
 USER node
 RUN npm init -y
 # RUN npm install -i ./selenium-standalone-local
