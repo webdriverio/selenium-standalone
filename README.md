@@ -289,6 +289,13 @@ $ DEBUG=selenium-standalone:* selenium-standalone install --drivers.chrome.versi
 
 - [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
 
+### Docker
+
+1. `git clone git@github.com:vvo/selenium-standalone.git`
+1. `cd selenium-standalone`
+1. `docker build -f Dockerfile -t vvo/selenium-standalone . --rm`
+1. `docker run -p 4444:4444 vvo/selenium-standalone`
+
 ### Release
 
 ```sh
