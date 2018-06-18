@@ -2,8 +2,6 @@ var assign = require('lodash').assign;
 
 describe('programmatic use', function () {
 
-  this.timeout(120000);
-
   var containsChrome = function(string) {
     return /chrome/i.test(string);
   };
