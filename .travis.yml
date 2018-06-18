@@ -7,8 +7,8 @@ jdk:
 
 env:
   - TRAVIS_NODE_VERSION="stable"
-  - TRAVIS_NODE_VERSION=5
-  - TRAVIS_NODE_VERSION=4
+  - TRAVIS_NODE_VERSION=8
+  - TRAVIS_NODE_VERSION=6
 
 branches:
   only:
