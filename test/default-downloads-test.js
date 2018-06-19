@@ -42,6 +42,7 @@ describe('default-downloads', function() {
 
   // Ensure that any internal state of the module is clean for each test
   beforeEach(function() {
+    this.timeout(60000);
     computeDownloadUrls = require('../lib/compute-download-urls');
   });
   afterEach(function() {

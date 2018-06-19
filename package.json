@@ -4,7 +4,7 @@
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
-    "test": "./bin/selenium-standalone install && mocha -t 25000",
+    "test": "./bin/selenium-standalone install && mocha",
     "release": "./scripts/release.sh"
   },
   "bin": {
