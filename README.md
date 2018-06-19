@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [selenium-standalone * * *](#selenium-standalone---)
+- [selenium-standalone](#selenium-standalone)
   - [Command line interface](#command-line-interface)
   - [Application Programming Interface (API)](#application-programming-interface-api)
     - [Sample configuration object](#sample-configuration-object)
@@ -19,6 +19,7 @@
       - [Selenium Process](#selenium-process)
       - [Debug Logs for Selenium Standalone Process](#debug-logs-for-selenium-standalone-process)
     - [Examples of combining with other tools](#examples-of-combining-with-other-tools)
+    - [Docker](#docker)
     - [Release](#release)
     - [`Error: unable to get local issuer certificate`](#error-unable-to-get-local-issuer-certificate)
 
