@@ -1,9 +1,10 @@
 {
   "name": "selenium-standalone",
-  "version": "6.15.0",
+  "version": "6.15.1",
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
+    "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
     "test": "./bin/selenium-standalone install && mocha",
     "release": "./scripts/release.sh"
   },
