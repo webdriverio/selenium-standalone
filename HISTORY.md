@@ -1,3 +1,12 @@
+# 6.15.1 (2018-06-19)
+* Updated Selenium to 3.12.0
+* Updated ChromeDriver to 2.40
+* Updated IEDriver to 3.12.0
+* Updated GeckoDriver to 0.20.1
+* Updated EdgeDriver to 17134
+* Added Docker support for Linux
+* Fixed tests, live tests still failing on Travis CI (timeouts).
+
 # 6.12.0 (2017-12-05)
 * Update default selenium to 3.7.1 (#327)
 * Update default IEDriver to 3.7.1 (#327)
