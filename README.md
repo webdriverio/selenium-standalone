@@ -27,19 +27,41 @@
 
 # selenium-standalone 
 [![Build Status](https://travis-ci.org/vvo/selenium-standalone.svg?branch=master)](https://travis-ci.org/vvo/selenium-standalone) 
-[![Dependency Status](https://img.shields.io/david/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone) 
-[![devDependency Status](https://img.shields.io/david/dev/vvo/selenium-standalone.svg?style=flat-square)](https://david-dm.org/vvo/selenium-standalone#info=devDependencies)
+[![dependencies Status](https://david-dm.org/vvo/selenium-standalone/status.svg)](https://david-dm.org/vvo/selenium-standalone)
+[![devDependencies Status](https://david-dm.org/vvo/selenium-standalone/dev-status.svg)](https://david-dm.org/vvo/selenium-standalone?type=dev)
 
-Command line or programmatic install and launch of [selenium](http://www.seleniumhq.org/download/) standalone
-server, [chrome driver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver), [internet explorer driver](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver), [firefox driver](https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver) and phantomjs
+> A node based CLI library for launching [Selenium](http://www.seleniumhq.org/download/) with WebDrivers support.
 
-It will install a `selenium-standalone` command line that will be able to `install` selenium server and `start` firefox, chrome, internet explorer or phantomjs for your tests.
+Supported WebDrivers:
+
+ * [ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
+ * [FirefoxDriver](https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver)
+ * [IEDriver](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver)
+ * [Edge WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads)
+
+
+## Install & Run
+
+*As global npm package*
 
 ```shell
 npm install selenium-standalone@latest -g
-selenium-standalone install
-selenium-standalone start
+selenium-standalone install && selenium-standalone start
 ```
+
+*As a local npm package*
+
+```shell
+npm install selenium-standalone --save-dev
+./node_modules/.bin/selenium-standalone install && ./node_modules/.bin/selenium-standalone start
+```
+
+*As a Docker service*
+
+```shell
+docker run --rm -p 4444:4444 vvoyer/selenium-standalone
+```
+
 
 ![screencast](screencast.gif)
 
@@ -293,18 +315,20 @@ $ DEBUG=selenium-standalone:* selenium-standalone install --drivers.chrome.versi
 
 - [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
 
-### Docker
-
-1. `git clone git@github.com:vvo/selenium-standalone.git`
-1. `cd selenium-standalone`
-1. `docker build -f Dockerfile -t vvo/selenium-standalone . --rm`
-1. `docker run -p 4444:4444 vvo/selenium-standalone`
-
 ### Release
 
 ```sh
 npm run release [major|minor|patch|x.x.x]
 ```
+
+### Release Docker
+
+```sh
+docker build -f Dockerfile -t vvoyer/selenium-standalone . --rm
+docker tag vvoyer/selenium-standalone vvoyer/selenium-standalone:x.x
+docker push vvoyer/selenium-standalone
+```
+
 
 ### `Error: unable to get local issuer certificate`
 
