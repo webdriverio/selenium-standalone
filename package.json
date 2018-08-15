@@ -31,7 +31,7 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "progress": "2.0.0",
-    "request": "2.87.0",
+    "request": "2.88.0",
     "tar-stream": "1.6.1",
     "urijs": "^1.18.4",
     "which": "^1.2.12",
