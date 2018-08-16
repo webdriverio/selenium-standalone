@@ -5,18 +5,28 @@ language: java
 jdk:
   - oraclejdk8
 
-env:
-  - TRAVIS_NODE_VERSION="stable"
-  - TRAVIS_NODE_VERSION=8
-  - TRAVIS_NODE_VERSION=6
-
 branches:
   only:
     - "master"
 
-before_install:
-  - nvm install $TRAVIS_NODE_VERSION
 
-install: "npm install"
+jobs:
+  include:
 
-script: "npm test"
+    - stage: "Build and test application"
+
+      env:
+        - TRAVIS_NODE_VERSION="stable"
+        - TRAVIS_NODE_VERSION=8
+        - TRAVIS_NODE_VERSION=6
+      before_install:
+        - nvm install $TRAVIS_NODE_VERSION
+      install: "npm install"
+      script: "npm test"
+
+    - stage: "Build Docker image"
+
+      script: 
+        - "cd docker"
+        - "docker build -t vvoyer/selenium-standalone . --rm"
+
