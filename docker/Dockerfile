@@ -85,10 +85,10 @@ RUN npm install -g selenium-standalone
 RUN selenium-standalone install
 
 
-ADD ./scripts/ /home/root/scripts
+ADD ./scripts/ /home/seluser/scripts
 
 
 USER seluser
 
 
-ENTRYPOINT ["sh", "/home/root/scripts/start.sh"]
+ENTRYPOINT ["sh", "/home/seluser/scripts/start.sh"]
