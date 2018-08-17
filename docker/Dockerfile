@@ -1,7 +1,10 @@
 FROM ubuntu:latest@sha256:3f119dc0737f57f704ebecac8a6d8477b0f6ca1ca0332c7ee1395ed2c6a82be7
 
+
+# Contributors
 LABEL author="Vincent Voyer <vincent@zeroload.net>"
 LABEL maintainers="Serban Ghita <serbanghita@gmail.com>, David Catalan <catalan.david@gmail.com>"
+
 
 # Env variables
 ENV LC_ALL=C
