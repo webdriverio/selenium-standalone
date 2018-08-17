@@ -27,3 +27,17 @@ $ docker run -it -p 4444:4444 vvoyer/selenium-standalone
     ```
     $ docker run -it -p 4444:4444 -e SCREEN_GEOMETRY="1200x1200x8" vvoyer/selenium-standalone
     ```
+
+* `DEBUG` Enable selenium-standalone debug messages
+  * Value: `selenium-standalone:*`
+  * Default: `null`
+  * Usage example: 
+    * Enable debug when building the image
+    ```
+    $ docker build --build-arg DEBUG=selenium-standalone:* -t vvoyer/selenium-standalone . --rm
+    ```    
+
+    * Enable debug when running the image
+    ```
+    $ docker run -it -p 4444:4444 -e DEBUG="selenium-standalone:*" vvoyer/selenium-standalone
+    ```

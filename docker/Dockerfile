@@ -83,6 +83,7 @@ RUN useradd seluser \
 
 
 # Install selenium-standalone
+ARG DEBUG
 RUN npm install -g selenium-standalone
 RUN selenium-standalone install
 
