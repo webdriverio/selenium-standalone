@@ -35,8 +35,7 @@ $ docker run -it -p 4444:4444 vvoyer/selenium-standalone
     * Enable debug when building the image
     ```
     $ docker build --build-arg DEBUG=selenium-standalone:* -t vvoyer/selenium-standalone . --rm
-    ```    
-
+    ```
     * Enable debug when running the image
     ```
     $ docker run -it -p 4444:4444 -e DEBUG="selenium-standalone:*" vvoyer/selenium-standalone
