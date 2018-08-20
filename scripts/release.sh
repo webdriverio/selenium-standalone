@@ -24,12 +24,47 @@ if [[ $# -eq 0 ]] ; then
   exit 1
 fi
 
+
+# Bump project version
 mversion $1
+
+
+# Get new version from package.json
+NEW_VERSION=$(node -p -e "require('./package.json').version")
+
+
+# Update README ToC
 doctoc README.md
-git commit -am "$(json -f package.json version)"
-git tag v`json -f package.json version`
+
+
+# Update and tag Git project
+git commit -am "${NEW_VERSION}"
+git tag v${NEW_VERSION}
 git push
 git push --tags
 npm publish
 
-printf "Release: please update the CHANGELOG manually\n"
+
+# Docker
+printf "Release: build Docker image, tag it (latest and ${NEW_VERSION}) and push it to Docker hub\n"
+
+cd docker
+
+# Build image
+docker build -t vvoyer/selenium-standalone . --rm
+
+# Login to default Docker hub (https://hub.docker.com/)
+docker login
+
+# Tag image and push it to Docker hub
+for tag in ${NEW_VERSION} latest
+do
+    docker tag vvoyer/selenium-standalone vvoyer/selenium-standalone:${tag}
+    docker push vvoyer/selenium-standalone:${tag}
+done
+
+cd ..
+
+
+# Reminder to manually update project history file
+printf "Release: please update the HISTORY manually\n"
