@@ -1,5 +1,8 @@
+#!/bin/bash
 
-echo "SCREEN_GEOMETRY: ${SCREEN_GEOMETRY}"
+. /home/seluser/scripts/utils.sh && print_selenium_env
+
+echo "Screen Geometry: ${SCREEN_GEOMETRY}"
 
 sudo rm -f /tmp/.X*lock
 
