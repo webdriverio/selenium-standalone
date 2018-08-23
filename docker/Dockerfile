@@ -91,7 +91,12 @@ RUN selenium-standalone install
 ADD ./scripts/ /home/seluser/scripts
 
 
+# Force using non root user to execute the image
 USER seluser
+
+
+# Display Selenium environment
+RUN . /home/seluser/scripts/utils.sh && print_selenium_env
 
 
 ENTRYPOINT ["sh", "/home/seluser/scripts/start.sh"]
