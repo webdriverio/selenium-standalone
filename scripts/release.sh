@@ -2,9 +2,11 @@
 
 set -e # exit when error
 
+ROOT_DIR=$(pwd)
+
 if ! npm owner ls | grep -q "$(npm whoami)"
 then
-  printf "Release: Not an owner of the npm repo, ask for it\n"
+  printf "Release: Not an owner of the npm repo, ask for it.\n"
   exit 1
 fi
 
@@ -24,22 +26,33 @@ if [[ $# -eq 0 ]] ; then
   exit 1
 fi
 
-
 # Bump project version
 mversion $1
 
+NEW_VERSION=$(node -p -e "require('$ROOT_DIR/package.json').version")
+CHECK_NEW_TAG_REMOTE=$(git tag | grep "v$NEW_VERSION")
 
-# Get new version from package.json
-NEW_VERSION=$(node -p -e "require('./package.json').version")
+if [ "$CHECK_NEW_TAG_REMOTE" != "" ]; then
+    printf "The tag $NEW_VERSION is already released.\n"
+    exit 1
+fi
 
+REMOTE_TAGS=$(git tag --list 'v*[0-9.]')
+LATEST_TAG=$(printf "%s\n" "v$NEW_VERSION" "${REMOTE_TAGS}" | sort --version-sort | tail -1)
+
+if [ "$LATEST_TAG" != "$NEW_VERSION" ]; then
+    printf "You are trying to release an older version $NEW_VERSION than the one on remote $LATEST_TAG.\n"
+    exit 1
+fi
 
 # Update README ToC
 doctoc README.md
 
+exit 0
 
 # Update and tag Git project
 git commit -am "${NEW_VERSION}"
-git tag v${NEW_VERSION}
+git tag -a v${NEW_VERSION}
 git push
 git push --tags
 npm publish
@@ -64,7 +77,6 @@ do
 done
 
 cd ..
-
 
 # Reminder to manually update project history file
 printf "Release: please update the HISTORY manually\n"
