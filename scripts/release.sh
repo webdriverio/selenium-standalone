@@ -40,7 +40,7 @@ fi
 REMOTE_TAGS=$(git tag --list 'v*[0-9.]')
 LATEST_TAG=$(printf "%s\n" "v$NEW_VERSION" "${REMOTE_TAGS}" | sort --version-sort | tail -1)
 
-if [ "$LATEST_TAG" != "$NEW_VERSION" ]; then
+if [ "$LATEST_TAG" != "v$NEW_VERSION" ]; then
     printf "You are trying to release an older version $NEW_VERSION than the one on remote $LATEST_TAG.\n"
     exit 1
 fi
