@@ -48,8 +48,6 @@ fi
 # Update README ToC
 doctoc README.md
 
-exit 0
-
 # Update and tag Git project
 git commit -am "${NEW_VERSION}"
 git tag -a v${NEW_VERSION}
