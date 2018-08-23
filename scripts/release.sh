@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e # exit when error
+# set -e # exit when error
 
 ROOT_DIR=$(pwd)
 
