@@ -9,6 +9,7 @@ LABEL maintainers="Serban Ghita <serbanghita@gmail.com>, David Catalan <catalan.
 # Env variables
 ENV LC_ALL=C
 ENV DISPLAY=:99
+ENV SELENIUM_CONSOLE_URL=http://localhost:4444/wd/hub
 ENV SCREEN_GEOMETRY=1024x768x16
 
 
@@ -25,6 +26,7 @@ RUN apt-get -qqy install \
     apt-transport-https \
     ca-certificates \
     curl \
+    jq \
     software-properties-common \
     sudo \
     openjdk-8-jre-headless \
@@ -97,6 +99,11 @@ USER seluser
 
 # Display Selenium environment
 RUN . /home/seluser/scripts/utils.sh && print_selenium_env
+
+
+# Selenium server healthcheck
+HEALTHCHECK --start-period=5s --interval=3s --retries=8 \
+    CMD curl -qsf "$SELENIUM_CONSOLE_URL/status" | jq -r '.value.ready' | grep "true" || exit 1
 
 
 ENTRYPOINT ["sh", "/home/seluser/scripts/start.sh"]

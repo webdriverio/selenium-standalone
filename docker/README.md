@@ -40,3 +40,31 @@ $ docker run -it -p 4444:4444 vvoyer/selenium-standalone
     ```
     $ docker run -it -p 4444:4444 -e DEBUG="selenium-standalone:*" vvoyer/selenium-standalone
     ```
+
+### Healthcheck
+
+A Docker [healthcheck](https://docs.docker.com/engine/reference/builder/#healthcheck) is defined when the image is built. 
+
+This defines a _health_ status attached to the running container. It checks that Selenium server _ready_ status is true
+
+#### Use cases
+
+* Manually check the status of a running `vvoyer/selenium-standalone` container
+
+  ```
+  docker ps
+  ```
+
+  Check `STATUS` property, health status is displayed at the end (between parenthesis)
+
+* When running the image in [`detached`](https://docs.docker.com/engine/reference/run/#detached--d) mode you want to      ensure that the Selenium server is ready before using it.
+
+  Here is a way to poll check container health status until it's `healthy`:
+
+  ```
+  # Start container in detached mode, forcing its name to `sel-std`
+  docker run --rm --name=sel-std -d -p 4444:4444 vvoyer/selenium-standalone
+
+  # Will loop until container `sel-std` (you can also check via container id) health status is exactly `healthy`
+  while ! docker inspect --format='{{json .State.Health}}' sel-std | grep -sq '"healthy"'; do sleep 1; done
+  ```
