@@ -1,4 +1,4 @@
-FROM ubuntu:latest@sha256:72f832c6184b55569be1cd9043e4a80055d55873417ea792d989441f207dd2c7
+FROM ubuntu:latest@sha256:b5309340de7a9a540cf6c0cba3eabdfb9c9bc5153026d37991fd0028180fc725
 
 
 # Contributors
