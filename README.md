@@ -3,6 +3,7 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [selenium-standalone](#selenium-standalone)
+  - [Install & Run](#install--run)
   - [Command line interface](#command-line-interface)
   - [Application Programming Interface (API)](#application-programming-interface-api)
     - [Sample configuration object](#sample-configuration-object)
@@ -19,8 +20,8 @@
       - [Selenium Process](#selenium-process)
       - [Debug Logs for Selenium Standalone Process](#debug-logs-for-selenium-standalone-process)
     - [Examples of combining with other tools](#examples-of-combining-with-other-tools)
-    - [Docker](#docker)
     - [Release](#release)
+    - [Release Docker](#release-docker)
     - [`Error: unable to get local issuer certificate`](#error-unable-to-get-local-issuer-certificate)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -54,6 +55,7 @@ selenium-standalone install && selenium-standalone start
 ```shell
 npm install selenium-standalone --save-dev
 ./node_modules/.bin/selenium-standalone install && ./node_modules/.bin/selenium-standalone start
+<<<<<<< HEAD
 ```
 
 *As a Docker service*
@@ -62,6 +64,16 @@ npm install selenium-standalone --save-dev
 docker run --rm -p 4444:4444 vvoyer/selenium-standalone
 ```
 
+=======
+```
+
+*As a Docker service*
+
+```shell
+docker run -it -p 4444:4444 vvoyer/selenium-standalone
+```
+
+>>>>>>> 38163a6e768105cbb75a74f60881b809169d62a4
 
 ![screencast](screencast.gif)
 
@@ -323,13 +335,22 @@ npm run release [major|minor|patch|x.x.x]
 
 ### Release Docker
 
+<<<<<<< HEAD
 ```sh
 docker build -f Dockerfile -t vvoyer/selenium-standalone . --rm
+=======
+ ```sh
+cd docker
+docker build -t vvoyer/selenium-standalone . --rm
+>>>>>>> 38163a6e768105cbb75a74f60881b809169d62a4
 docker tag vvoyer/selenium-standalone vvoyer/selenium-standalone:x.x
 docker push vvoyer/selenium-standalone
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38163a6e768105cbb75a74f60881b809169d62a4
 ### `Error: unable to get local issuer certificate`
 
 This error might happen when you are behind a specific proxy. Then you need to set some environement variables:

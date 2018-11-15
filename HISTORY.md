@@ -1,3 +1,11 @@
+# 6.15.3 (2018-09-13)
+* Added Docker healthcheck
+* Updated ChromeDriver to 2.41
+
+# 6.15.2 (2018-08-23)
+* Improved Docker image
+* Improved release script
+
 # 6.15.1 (2018-06-19)
 * Updated Selenium to 3.12.0
 * Updated ChromeDriver to 2.40
