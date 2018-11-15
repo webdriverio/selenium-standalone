@@ -1,3 +1,10 @@
+# 6.15.4 (2018-11-15)
+* Updated Selenium Server to 3.141.0
+* Updated ChromeDriver to 2.43
+* Updated IEDriver to 3.14.0
+* Updated GeckoDriver to 0.23.0
+* Added back all Edge WebDriver combinations
+
 # 6.15.3 (2018-09-13)
 * Added Docker healthcheck
 * Updated ChromeDriver to 2.41
