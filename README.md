@@ -21,7 +21,6 @@
       - [Debug Logs for Selenium Standalone Process](#debug-logs-for-selenium-standalone-process)
     - [Examples of combining with other tools](#examples-of-combining-with-other-tools)
     - [Release](#release)
-    - [Release Docker](#release-docker)
     - [`Error: unable to get local issuer certificate`](#error-unable-to-get-local-issuer-certificate)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
