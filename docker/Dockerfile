@@ -93,6 +93,13 @@ RUN selenium-standalone install
 ADD ./scripts/ /home/seluser/scripts
 
 
+# Add Tini for graceful shutdown
+ENV TINI_VERSION v0.18.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "--"]
+
+
 # Force using non root user to execute the image
 USER seluser
 
@@ -106,4 +113,5 @@ HEALTHCHECK --start-period=5s --interval=3s --retries=8 \
     CMD curl -qsf "$SELENIUM_CONSOLE_URL/status" | jq -r '.value.ready' | grep "true" || exit 1
 
 
-ENTRYPOINT ["sh", "/home/seluser/scripts/start.sh"]
+# Run our start script under Tini
+CMD ["/home/seluser/scripts/start.sh"]

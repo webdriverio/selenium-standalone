@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 . /home/seluser/scripts/utils.sh && print_selenium_env
 
