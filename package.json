@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "async": "^2.6.2",
-    "commander": "^2.19.0",
+    "commander": "^3.0.0",
     "cross-spawn": "^6.0.5",
     "debug": "^4.1.1",
     "lodash": "^4.17.11",
