@@ -175,5 +175,22 @@ describe('`selenium-standalone` command parameters', function() {
       expect(parsed[1].seleniumArgs).to.be.deep.equal(['--some=seleniumArgs']);
     });
 
+    it('ignores extra drivers when specified', function () {
+      var defaultConfig = require('../lib/default-config');
+
+      process.argv = buildArgv([
+        'start',
+        '--config=' + path.join(__dirname, 'fixtures', 'config.ignoreExtraDrivers.js')
+      ]);
+
+      var parsed = parseCommandAndOptions('/somewhere');
+
+      expect(parsed[1].drivers.chrome.version).to.be.equal(999);
+      expect(parsed[1].drivers.chrome.baseURL).to.be.equal(defaultConfig.drivers.chrome.baseURL);
+      expect(parsed[1].drivers.ie).to.be.undefined;
+      expect(parsed[1].drivers.edge).to.be.undefined;
+      expect(parsed[1].drivers.firefox).to.be.undefined;
+    });
+
   });
 });
