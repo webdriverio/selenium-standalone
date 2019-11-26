@@ -5,6 +5,7 @@ var debug = require('debug')('selenium-standalone:cli');
 var minimist = require('minimist');
 var which = require('which');
 var merge = require('lodash').merge;
+var mapValues = require('lodash').mapValues;
 var path = require('path');
 
 var selenium = require('../');
@@ -52,6 +53,13 @@ function parseCommandAndOptions(javaPath) {
 
   // Merge default options, options from config file then command line options
   options = merge({}, defaultConfig, configFromFile, options);
+
+  // Ignore extra default drivers if specified in config file
+  if (configFromFile.drivers && options.ignoreExtraDrivers) {
+    options.drivers = mapValues(configFromFile.drivers, function (config, name) {
+      return merge({}, defaultConfig.drivers[name], config);
+    });
+  }
 
   if (seleniumArgs.length) {
     options.seleniumArgs = seleniumArgs;

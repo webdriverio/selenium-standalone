@@ -148,6 +148,7 @@ selenium.install({
       baseURL: 'https://selenium-release.storage.googleapis.com'
     }
   },
+  ignoreExtraDrivers: true,
   proxy: 'http://localproxy.com', // see https://github.com/request/request#proxies
   requestOpts: { // see https://github.com/request/request#requestoptions-callback
     timeout: 10000
@@ -174,6 +175,8 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `baseURL` is used to find the server having the selenium or drivers files.
 
+`opts.ignoreExtraDrivers` only downloads and installs drivers explicity specified.
+
 `opts.basePath` sets the base directory used to store the selenium standalone `.jar` and drivers. Defaults to current working directory + .selenium/
 
 `opts.progressCb(totalLength, progressLength, chunkLength)` will be called if provided with raw bytes length numbers about the current download process. It is used by the command line to show a progress bar.
@@ -190,6 +193,8 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `opts.drivers` map of drivers to run along with selenium standalone server, same
 as `selenium.install`.
+
+`opts.ignoreExtraDrivers` only loads and starts drivers explicity specified.
 
 `opts.basePath` sets the base directory used to load the selenium standalone `.jar` and drivers, same as `selenium.install`.
 
