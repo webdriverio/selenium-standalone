@@ -1,3 +1,7 @@
+# 6.17.0 (2019-11-26)
+* add opts.ignoreExtraDrivers #448
+* fix prefer user config rather than default #365
+
 # 6.15.4 (2018-11-15)
 * Updated Selenium Server to 3.141.0
 * Updated ChromeDriver to 2.43
