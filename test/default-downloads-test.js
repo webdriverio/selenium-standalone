@@ -184,27 +184,6 @@ describe('default-downloads', function() {
   });
 
   describe('firefox', function() {
-    describe('arm', function() {
-      before(function(){
-        this.originalArch = Object.getOwnPropertyDescriptor(process, 'arch');
-
-        Object.defineProperty(process, 'arch', {
-          value: 'arm'
-        });
-      });
-
-      after(function() {
-        Object.defineProperty(process, 'arch', this.originalArch);
-      });
-
-      it('arm download exists', function(done) {
-        computedUrls = computeDownloadUrls(opts);
-
-        assert(computedUrls.firefox.indexOf('arm') > 0);
-        doesDownloadExist(computedUrls.firefox, done);
-      });
-    });
-
     describe('linux', function() {
       before(function(){
         Object.defineProperty(process, 'platform', {
