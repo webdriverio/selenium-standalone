@@ -29,7 +29,7 @@
     "debug": "^4.1.1",
     "lodash": "^4.17.11",
     "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.0",
     "progress": "2.0.3",
     "request": "2.88.0",
     "tar-stream": "2.0.0",
