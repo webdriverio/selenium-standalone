@@ -38,6 +38,7 @@ Supported WebDrivers:
  * [FirefoxDriver](https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver)
  * [IEDriver](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver)
  * [Edge WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads)
+ * [Chromium Edge WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads)
 
 
 ## Install & Run
@@ -86,7 +87,7 @@ selenium-standalone install --drivers.chrome.version=2.15 --drivers.chrome.baseU
 # choose ie driver architecture
 selenium-standalone start --drivers.ie.arch=ia32 --drivers.ie.baseURL=https://selenium-release.storage.googleapis.com
 
-# install a single driver within the default list (chrome, ie, edge, firefox)
+# install a single driver within the default list (chrome, ie, edge, firefox, chromiumedge)
 selenium-standalone install --singleDriverInstall=chrome
 
 # specify hub and nodes to setup your own selenium grid
