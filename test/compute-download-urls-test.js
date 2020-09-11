@@ -573,4 +573,104 @@ describe('compute-download-urls', function() {
       })
     });
   });
+
+  describe('chromiumedge', function() {
+    beforeEach(function() {
+      opts = {
+        seleniumVersion: '1.0',
+        seleniumBaseURL: 'https://localhost',
+        drivers: {
+          chromiumedge: {}
+        }
+      };
+    });
+
+    describe('linux', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'linux'
+        });
+      });
+
+      it('throws for x32 arch', function() {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '86.0.600.0',
+          arch: 'x32'
+        }
+
+        assert.throws(() => computeDownloadUrls(opts), 'Only x64 is supported for linux');
+      });
+
+      it('x64', function() {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '86.0.600.0',
+          arch: 'x64'
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_linux64.zip');
+      });
+    });
+
+    describe('mac', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'darwin'
+        });
+      });
+
+      it('throws for x32 arch', function() {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '86.0.600.0',
+          arch: 'x32'
+        }
+
+        assert.throws(() => computeDownloadUrls(opts), 'Only x64 is supported for mac');
+      })
+
+      it('x64', function() {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '86.0.600.0',
+          arch: 'x64'
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_mac64.zip');
+      })
+    });
+
+    describe('win', function() {
+      before(function() {
+        Object.defineProperty(process, 'platform', {
+          value: 'win32'
+        });
+      });
+
+      it('x32', function() {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '86.0.600.0',
+          arch: 'x32'
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_win32.zip');
+      });
+
+      it('x64', function() {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '86.0.600.0',
+          arch: ''
+        }
+
+        var actual = computeDownloadUrls(opts);
+        assert.equal(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_win64.zip');
+      });
+    });
+  });
 });
