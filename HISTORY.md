@@ -1,3 +1,12 @@
+# 6.20.0 (2020-09-11)
+* add support for chrome edge driver
+
+# 6.19.0 (2020-08-31)
+* feat(chrome): update to latest
+
+# 6.18.0 (2020-07-20)
+* chore: Update binaries versions #463
+
 # 6.17.0 (2019-11-26)
 * add opts.ignoreExtraDrivers #448
 * fix prefer user config rather than default #365
