@@ -27,7 +27,6 @@
     "commander": "^2.19.0",
     "cross-spawn": "^6.0.5",
     "debug": "^4.1.1",
-    "extract-zip": "^2.0.1",
     "lodash": "^4.17.11",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
@@ -41,6 +40,8 @@
   "devDependencies": {
     "chai": "4.2.0",
     "doctoc": "1.4.0",
+    "edge-paths": "^2.1.0",
+    "extract-zip": "^2.0.1",
     "json": "9.0.6",
     "mocha": "6.2.3",
     "mversion": "1.13.0"
