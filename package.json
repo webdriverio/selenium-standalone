@@ -23,7 +23,7 @@
   "author": "Vincent Voyer <vincent@zeroload.net>",
   "license": "MIT",
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^3.0.0",
     "commander": "^2.19.0",
     "cross-spawn": "^6.0.5",
     "debug": "^4.1.1",
