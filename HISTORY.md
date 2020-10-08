@@ -1,3 +1,6 @@
+# 6.20.1 (2020-10-09)
+* Fix chromiumedge privileges
+  
 # 6.20.0 (2020-09-11)
 * add support for chrome edge driver
 
