@@ -6,6 +6,7 @@
   "scripts": {
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
     "test": "./bin/selenium-standalone install && mocha",
+    "lint": "eslint bin/** lib/**",
     "release": "./scripts/release.sh"
   },
   "bin": {
@@ -27,6 +28,7 @@
     "commander": "^2.19.0",
     "cross-spawn": "^7.0.0",
     "debug": "^4.1.1",
+    "eslint": "7.2.0",
     "lodash": "^4.17.11",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
@@ -40,6 +42,8 @@
   "devDependencies": {
     "chai": "4.2.0",
     "doctoc": "1.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
     "json": "10.0.0",
     "mocha": "6.2.3",
     "mversion": "2.0.1"
