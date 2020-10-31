@@ -6,7 +6,7 @@
   "scripts": {
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
     "test": "./bin/selenium-standalone install && mocha",
-    "lint": "eslint bin/** lib/**",
+    "lint": "eslint lib/*.js",
     "release": "./scripts/release.sh"
   },
   "bin": {
