@@ -9,6 +9,11 @@
     "lint": "eslint lib/*.js",
     "release": "./scripts/release.sh"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "bin": {
     "selenium-standalone": "./bin/selenium-standalone",
     "start-selenium": "./bin/start-selenium"
@@ -44,6 +49,7 @@
     "doctoc": "1.4.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
+    "husky": "^4.3.0",
     "json": "10.0.0",
     "mocha": "6.2.3",
     "mversion": "2.0.1"
