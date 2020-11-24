@@ -13,18 +13,17 @@ var opts = {
 };
 
 function doesDownloadExist(url, cb) {
-  var req = request.get(url);
-  req.on('response', function(res) {
-    req.abort();
-
-    if (res.statusCode >= 400) {
-      return cb('Error response code got from ' + url + ': ' + res.statusCode);
+  (async () => {
+    try {
+      const res = await got(url,{retry:0});
+      if (res.statusCode >= 400) {
+        return cb(new Error(`Error response code got from ${url}: ${res.statusCode} ${res.statusMessage}`));
+      }      
+      return cb(null);
+    } catch (error) {
+      return cb(new Error(`Error requesting ${url}. Error: ${error}`));
     }
-
-    cb();
-  }).once('error', function (err) {
-    cb(new Error('Error requesting ' + url + ': ' + err));
-  });
+  })();
 }
 
 /**
