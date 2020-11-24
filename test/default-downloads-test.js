@@ -1,6 +1,6 @@
 var assert = require('assert');
 var merge = require('lodash').merge;
-var request = require('request');
+const got = require('got')
 
 var defaultConfig = require('../lib/default-config');
 
