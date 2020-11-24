@@ -183,6 +183,7 @@ describe('default-downloads', function() {
   });
 
   describe('firefox', function() {
+    this.timeout(10000)
     describe('linux', function() {
       before(function(){
         Object.defineProperty(process, 'platform', {
