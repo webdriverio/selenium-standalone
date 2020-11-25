@@ -30,7 +30,7 @@ RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 RUN echo 'node ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get -qqy --no-install-recommends install \
   nodejs \
   firefox \
