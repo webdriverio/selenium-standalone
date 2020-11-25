@@ -1,21 +1,21 @@
-var assert = require('assert');
-var merge = require('lodash').merge;
-var request = require('request');
+const assert = require('assert');
+const merge = require('lodash').merge;
+const request = require('request');
 
-var defaultConfig = require('../lib/default-config');
+const defaultConfig = require('../lib/default-config');
 
-var computeDownloadUrls;
-var computedUrls;
-var opts = {
+let computeDownloadUrls;
+let computedUrls;
+let opts = {
   seleniumVersion: defaultConfig.version,
   seleniumBaseURL: defaultConfig.baseURL,
   drivers: defaultConfig.drivers,
 };
 
 function doesDownloadExist(url, cb) {
-  var req = request.get(url);
+  const req = request.get(url);
   req
-    .on('response', function (res) {
+    .on('response', (res) => {
       req.abort();
 
       if (res.statusCode >= 400) {
@@ -24,7 +24,7 @@ function doesDownloadExist(url, cb) {
 
       cb();
     })
-    .once('error', function (err) {
+    .once('error', (err) => {
       cb(new Error('Error requesting ' + url + ': ' + err));
     });
 }
@@ -33,7 +33,7 @@ function doesDownloadExist(url, cb) {
  * Tests to ensure that all the values listed in `default-config.js`
  * are actually downloadable.
  */
-describe('default-downloads', function () {
+describe('default-downloads', () => {
   // Allow tests to mock `process.platform`
   before(function () {
     this.originalPlatform = Object.getOwnPropertyDescriptor(process, 'platform');
@@ -47,25 +47,25 @@ describe('default-downloads', function () {
     this.timeout(60000);
     computeDownloadUrls = require('../lib/compute-download-urls');
   });
-  afterEach(function () {
+  afterEach(() => {
     delete require.cache[require.resolve('../lib/compute-download-urls')];
   });
 
-  describe('selenium-jar', function () {
-    it('selenium-jar download exists', function (done) {
+  describe('selenium-jar', () => {
+    it('selenium-jar download exists', (done) => {
       computedUrls = computeDownloadUrls(opts);
       doesDownloadExist(computedUrls.selenium, done);
     });
   });
 
-  describe('ie', function () {
-    before(function () {
+  describe('ie', () => {
+    before(() => {
       Object.defineProperty(process, 'platform', {
         value: 'win32',
       });
     });
 
-    it('ia32 download exists', function (done) {
+    it('ia32 download exists', (done) => {
       opts = merge(opts, {
         drivers: {
           ie: {
@@ -80,7 +80,7 @@ describe('default-downloads', function () {
       doesDownloadExist(computedUrls.ie, done);
     });
 
-    it('x64 download exists', function (done) {
+    it('x64 download exists', (done) => {
       opts = merge(opts, {
         drivers: {
           ie: {
@@ -96,17 +96,17 @@ describe('default-downloads', function () {
     });
   });
 
-  describe('edge', function () {
-    before(function () {
+  describe('edge', () => {
+    before(() => {
       Object.defineProperty(process, 'platform', {
         value: 'win32',
       });
     });
 
-    var releases = require('../lib/microsoft-edge-releases');
+    const releases = require('../lib/microsoft-edge-releases');
 
-    Object.keys(releases).forEach(function (version) {
-      it('version `' + version + '` download exists', function (done) {
+    Object.keys(releases).forEach((version) => {
+      it('version `' + version + '` download exists', (done) => {
         opts = merge(opts, {
           drivers: {
             edge: {
@@ -123,9 +123,9 @@ describe('default-downloads', function () {
     });
   });
 
-  describe('chrome', function () {
-    describe('linux', function () {
-      before(function () {
+  describe('chrome', () => {
+    describe('linux', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'linux',
         });
@@ -133,7 +133,7 @@ describe('default-downloads', function () {
 
       // No x32 for latest chromedriver on linux
 
-      it('x64 download exists', function (done) {
+      it('x64 download exists', (done) => {
         opts = merge(opts, {
           drivers: {
             chrome: {
@@ -149,8 +149,8 @@ describe('default-downloads', function () {
       });
     });
 
-    describe('mac', function () {
-      before(function () {
+    describe('mac', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'darwin',
         });
@@ -158,7 +158,7 @@ describe('default-downloads', function () {
 
       // No x32 for latest chromedriver on mac
 
-      it('x64 download exists', function (done) {
+      it('x64 download exists', (done) => {
         computedUrls = computeDownloadUrls(opts);
 
         assert(computedUrls.chrome.indexOf('mac64') > 0);
@@ -166,8 +166,8 @@ describe('default-downloads', function () {
       });
     });
 
-    describe('win', function () {
-      before(function () {
+    describe('win', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'win32',
         });
@@ -175,7 +175,7 @@ describe('default-downloads', function () {
 
       // No x64 for latest chromedriver on win
 
-      it('x32 download exists', function (done) {
+      it('x32 download exists', (done) => {
         computedUrls = computeDownloadUrls(opts);
 
         assert(computedUrls.chrome.indexOf('win32') > 0);
@@ -184,15 +184,15 @@ describe('default-downloads', function () {
     });
   });
 
-  describe('firefox', function () {
-    describe('linux', function () {
-      before(function () {
+  describe('firefox', () => {
+    describe('linux', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'linux',
         });
       });
 
-      it('x64 download exists', function (done) {
+      it('x64 download exists', (done) => {
         opts = merge(opts, {
           drivers: {
             firefox: {
@@ -208,15 +208,15 @@ describe('default-downloads', function () {
       });
     });
 
-    describe('mac', function () {
-      before(function () {
+    describe('mac', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'darwin',
         });
       });
 
       // No difference between arch for latest firefox driver on mac
-      it('download exists', function (done) {
+      it('download exists', (done) => {
         computedUrls = computeDownloadUrls(opts);
 
         assert(computedUrls.firefox.indexOf('mac') > 0);
@@ -224,14 +224,14 @@ describe('default-downloads', function () {
       });
     });
 
-    describe('win', function () {
-      before(function () {
+    describe('win', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'win32',
         });
       });
 
-      it('ia32 download exists', function (done) {
+      it('ia32 download exists', (done) => {
         opts = merge(opts, {
           drivers: {
             firefox: {
@@ -246,7 +246,7 @@ describe('default-downloads', function () {
         doesDownloadExist(computedUrls.firefox, done);
       });
 
-      it('x64 download exists', function (done) {
+      it('x64 download exists', (done) => {
         opts = merge(opts, {
           drivers: {
             firefox: {

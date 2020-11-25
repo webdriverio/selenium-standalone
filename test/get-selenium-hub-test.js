@@ -1,11 +1,11 @@
-var path = require('path');
-var assert = require('assert');
-var statusUrl = require('../lib/get-selenium-status-url');
+const path = require('path');
+const assert = require('assert');
+const statusUrl = require('../lib/get-selenium-status-url');
 
-var nodeStatusAPIPath = '/wd/hub/status';
-var hubStatusAPIPath = '/grid/api/hub';
-describe('getRunningProcessType', function () {
-  var tests = [
+const nodeStatusAPIPath = '/wd/hub/status';
+const hubStatusAPIPath = '/grid/api/hub';
+describe('getRunningProcessType', () => {
+  const tests = [
     // Started as a standalone Selenium Server
     { args: [], expected: statusUrl.PROCESS_TYPES.STANDALONE },
     { args: ['-port', '5555'], expected: statusUrl.PROCESS_TYPES.STANDALONE },
@@ -19,16 +19,16 @@ describe('getRunningProcessType', function () {
     { args: ['-role', 'node', '-hub', 'https://foo/wd/register'], expected: statusUrl.PROCESS_TYPES.GRID_NODE },
   ];
 
-  tests.forEach(function (test) {
-    it('getRunningProcessType with seleniumArgs: ' + test.args.join(' '), function () {
-      var actual = statusUrl.getRunningProcessType(test.args);
+  tests.forEach((test) => {
+    it('getRunningProcessType with seleniumArgs: ' + test.args.join(' '), () => {
+      const actual = statusUrl.getRunningProcessType(test.args);
       assert.equal(actual, test.expected);
     });
   });
 });
 
-describe('getSeleniumStatusUrl', function () {
-  var data = [
+describe('getSeleniumStatusUrl', () => {
+  const data = [
     // Started as a standalone Selenium Server
     { args: [], expectedUrl: 'localhost:4444' + nodeStatusAPIPath },
     { args: ['-port', '5678'], expectedUrl: 'localhost:5678' + nodeStatusAPIPath },
@@ -80,17 +80,16 @@ describe('getSeleniumStatusUrl', function () {
       expectedUrl: 'alias:7777' + nodeStatusAPIPath,
     },
   ];
-
-  var testWithData = function (dataItem) {
+  const testWithData = function (dataItem) {
     return function () {
-      var actual = statusUrl.getSeleniumStatusUrl(dataItem.args);
-      var expected = 'http://' + dataItem.expectedUrl;
+      const actual = statusUrl.getSeleniumStatusUrl(dataItem.args);
+      const expected = 'http://' + dataItem.expectedUrl;
 
       assert.equal(actual, expected);
     };
   };
 
-  data.forEach(function (dataItem) {
+  data.forEach((dataItem) => {
     it('getSeleniumStatusUrl with seleniumArgs: ' + dataItem.args.join(' '), testWithData(dataItem));
   });
 });

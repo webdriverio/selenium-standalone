@@ -59,5 +59,6 @@ module.exports = {
       },
     ],
     'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
+    'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
   },
 };
