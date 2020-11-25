@@ -1,5 +1,5 @@
 describe('when files are missing', function () {
-  it('should fail', function(done) {
+  it('should fail', function (done) {
     var fs = require('fs');
     var path = require('path');
     var from = path.join(__dirname, '..', '.selenium');
@@ -8,7 +8,7 @@ describe('when files are missing', function () {
     fs.renameSync(from, to);
 
     var selenium = require('../');
-    selenium.start(function(err) {
+    selenium.start(function (err) {
       fs.renameSync(to, from);
       if (err) {
         done();
