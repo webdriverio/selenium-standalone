@@ -6,7 +6,8 @@
   "scripts": {
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
     "test": "./bin/selenium-standalone install && mocha",
-    "release": "./scripts/release.sh"
+    "release": "./scripts/release.sh",
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "bin": {
     "selenium-standalone": "./bin/selenium-standalone",
@@ -40,8 +41,12 @@
   "devDependencies": {
     "chai": "4.2.0",
     "doctoc": "1.4.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "json": "10.0.0",
     "mocha": "6.2.3",
-    "mversion": "2.0.1"
+    "mversion": "2.0.1",
+    "prettier": "^2.2.0"
   }
 }
