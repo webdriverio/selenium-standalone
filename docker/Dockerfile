@@ -70,10 +70,8 @@ RUN /opt/bin/wrap_chrome_binary
 
 
 # Install Node.js LTS
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get -qqy --no-install-recommends install \
-  nodejs
-
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get -qqy install -y nodejs
 
 # Add non-root user
 RUN useradd seluser \
