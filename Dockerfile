@@ -1,4 +1,4 @@
-FROM ubuntu:latest@sha256:2e70e9c81838224b5311970dbf7ed16802fbfe19e7a70b3cbfa3d7522aa285b4
+FROM ubuntu:latest@sha256:1d7b639619bdca2d008eca2d5293e3c43ff84cbee597ff76de3b7a7de3e84956
 
 ENV NODE_VERSION 8.11.2
 
@@ -30,7 +30,7 @@ RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 RUN echo 'node ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get -qqy --no-install-recommends install \
   nodejs \
   firefox \

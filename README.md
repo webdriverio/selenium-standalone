@@ -79,10 +79,10 @@ selenium-standalone install --silent
 selenium-standalone start -- -debug
 
 # choose selenium version
-selenium-standalone install --version=2.45.0 --baseURL=https://selenium-release.storage.googleapis.com
+selenium-standalone install --version=3.141.59 --baseURL=https://selenium-release.storage.googleapis.com
 
 # choose chrome driver version
-selenium-standalone install --drivers.chrome.version=2.15 --drivers.chrome.baseURL=https://chromedriver.storage.googleapis.com
+selenium-standalone install --drivers.chrome.version=87.0.4280.20 --drivers.chrome.baseURL=https://chromedriver.storage.googleapis.com
 
 # choose ie driver architecture
 selenium-standalone start --drivers.ie.arch=ia32 --drivers.ie.baseURL=https://selenium-release.storage.googleapis.com
@@ -108,7 +108,7 @@ Config file can be a JSON file or a [module file](https://nodejs.org/api/modules
 module.exports = {
   drivers: {
     chrome: {
-      version: '2.39',
+      version: '87.0.4280.20',
       arch: process.arch,
       baseURL: 'https://chromedriver.storage.googleapis.com'
     },
@@ -126,25 +126,25 @@ Here you can find an up-to-date example of the configuration object:
 ### Example
 
 ```js
-var selenium = require('selenium-standalone');
+const selenium = require('selenium-standalone');
 
 selenium.install({
   // check for more recent versions of selenium here:
   // https://selenium-release.storage.googleapis.com/index.html
-  version: '3.8.1',
+  version: '3.141.59',
   baseURL: 'https://selenium-release.storage.googleapis.com',
   drivers: {
     chrome: {
       // check for more recent versions of chrome driver here:
       // https://chromedriver.storage.googleapis.com/index.html
-      version: '2.39',
+      version: '87.0.4280.20',
       arch: process.arch,
       baseURL: 'https://chromedriver.storage.googleapis.com'
     },
     ie: {
       // check for more recent versions of internet explorer driver here:
       // https://selenium-release.storage.googleapis.com/index.html
-      version: '3.9.0',
+      version: '3.150.0',
       arch: process.arch,
       baseURL: 'https://selenium-release.storage.googleapis.com'
     }
@@ -227,7 +227,7 @@ pkill -f selenium-standalone
 
 ## Available browsers
 
-By default, google chrome, firefox and phantomjs are available
+By default, Google Chrome and Firefox are available
 when installed on the host system.
 
 ## Tips
@@ -278,7 +278,7 @@ The selenium-standalone cli tool (`selenium-standalone start`) will output the l
 If you are using the programmatic API, you can retrieve the `stderr` messages by doing this:
 
 ```js
-var selenium = require('selenium-standalone');
+const selenium = require('selenium-standalone');
 selenium.start(function(err, child) {
   child.stderr.on('data', function(data){
     console.log(data.toString());
@@ -289,7 +289,7 @@ selenium.start(function(err, child) {
 You can also forward the `stderr` to your `process.stderr` like the cli does:
 
 ```js
-var selenium = require('selenium-standalone');
+const selenium = require('selenium-standalone');
 selenium.start({
   spawnOptions: {
       stdio: 'inherit'
@@ -305,20 +305,22 @@ At times you may need to get debug logs for what `selenium-standalone` is doing.
 
 **Example:**
 ```text
-$ DEBUG=selenium-standalone:* selenium-standalone install --drivers.chrome.version=2.15
-  selenium-standalone:env-details Platform: darwin +0ms
-  selenium-standalone:env-details Architecture: x64 +3ms
-  selenium-standalone:env-details Node.js: v6.9.4 +2ms
+$ DEBUG=selenium-standalone:* selenium-standalone install --drivers.chrome.version=87.0.4280.20
+  selenium-standalone:env-details Platform: darwin 19.6.0 +0ms
+  selenium-standalone:env-details Architecture: x64 +1ms
+  selenium-standalone:env-details Node.js: v12.18.4 +0ms
+  selenium-standalone:env-details Package Version: 6.21.0 +0ms
   selenium-standalone:cli Started via CLI with:  [ '/usr/local/bin/node',
   '/tmp/selenium-standalone/bin/selenium-standalone',
   'install',
-  '--drivers.chrome.version=2.15' ]
+  '--drivers.chrome.version=87.0.4280.20' ]
   ...
 ```
 
 ### Examples of combining with other tools
 
-- [Gulp + WebdriverIO + Mocha](https://twin.github.io/selenium-testing-workflow-with-webdriverio/)
+- [WebdriverIO + Jasmine](https://github.com/mgrybyk/wdio-jasmine-boilerplate) in CircleCI
+- [WebdriverIO + Cucumber](https://gitlab.com/bar_foo/wdio-cucumber-typescript) in GitLab
 
 ### Release
 

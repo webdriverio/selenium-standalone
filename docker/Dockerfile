@@ -1,4 +1,4 @@
-FROM ubuntu:latest@sha256:2e70e9c81838224b5311970dbf7ed16802fbfe19e7a70b3cbfa3d7522aa285b4
+FROM ubuntu:latest@sha256:1d7b639619bdca2d008eca2d5293e3c43ff84cbee597ff76de3b7a7de3e84956
 
 
 # Contributors
@@ -70,10 +70,8 @@ RUN /opt/bin/wrap_chrome_binary
 
 
 # Install Node.js LTS
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get -qqy --no-install-recommends install \
-  nodejs
-
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get -qqy install -y nodejs
 
 # Add non-root user
 RUN useradd seluser \
