@@ -23,7 +23,7 @@
 Supported WebDrivers:
 
  * [ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
- * [FirefoxDriver](https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver)
+ * [geckodriver](https://github.com/mozilla/geckodriver/releases) (Firefox)
  * [IEDriver](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver)
  * [Edge WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads)
  * [Chromium Edge WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads)
