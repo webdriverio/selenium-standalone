@@ -44,8 +44,8 @@ selenium.install({
     }
   },
   ignoreExtraDrivers: true,
-  proxy: 'http://localproxy.com', // see https://github.com/request/request#proxies
-  requestOpts: { // see https://github.com/request/request#requestoptions-callback
+  proxy: 'http://localproxy.com', // see https://www.npmjs.com/package/got#proxies
+  requestOpts: { // see https://www.npmjs.com/package/got
     timeout: 10000
   },
   logger: function(message) {
@@ -78,7 +78,7 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `opts.logger` will be called if provided with some debugging information about the installation process.
 
-`opts.requestOpts` can be any valid [`request` options object](https://github.com/request/request#requestoptions-callback). You can use this for example to set a timeout.
+`opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.
 
 `cb(err)` called when install finished or errored.
 
@@ -105,7 +105,7 @@ By default all drivers are loaded, you only control and change the versions or a
 
 `opts.javaPath` set the javaPath manually, otherwise we use `[which](https://github.com/isaacs/node-which).sync('java')`.
 
-`opts.requestOpts` can be any valid [`request` options object](https://github.com/request/request#requestoptions-callback). You can use this for example to set a timeout.
+`opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.
 
 `cb(err, child)` called when the server is running and listening, child is the [ChildProcess](https://nodejs.org/api/child_process.html#child_process_class_childprocess) instance created.
 
