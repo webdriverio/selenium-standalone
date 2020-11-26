@@ -65,6 +65,8 @@ See [API](./docs/API.md) docs
 
 By default, Google Chrome, Firefox and Microsoft Edge are available when installed on the host system.
 
+Starting from `v6.22` chrome, edgechromium, and geckodriver support `latest` as version.
+
 ## Tips
 
 - [Start Selenium whenever your (ubuntu) machine starts!](./docs/run-when-system-starts.md)
