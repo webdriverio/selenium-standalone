@@ -1,22 +1,20 @@
-var assign = require('lodash').assign;
+const assign = require('lodash').assign;
 
 describe('programmatic use', function () {
-
   this.timeout(120000);
 
-  var containsChrome = function(string) {
+  const containsChrome = function (string) {
     return /chrome/i.test(string);
   };
-
-  var testInstall = function(done, rawOptions, callback) {
-    var selenium = require('../');
+  const testInstall = function (done, rawOptions, callback) {
+    const selenium = require('../');
     // Capture the log output
-    var log = '';
-    var logger = function(message) {
+    let log = '';
+    const logger = function (message) {
       log += message;
     };
-    var options = assign({ logger: logger }, rawOptions);
-    selenium.install(options, function(err) {
+    const options = assign({ logger: logger }, rawOptions);
+    selenium.install(options, (err) => {
       if (err) {
         done(err);
         return;
@@ -26,10 +24,9 @@ describe('programmatic use', function () {
       }
     });
   };
-
-  var testStart = function(done, options, callback) {
-    var selenium = require('../');
-    selenium.start(options, function(err, cp) {
+  const testStart = function (done, options, callback) {
+    const selenium = require('../');
+    selenium.start(options, (err, cp) => {
       if (err) {
         done(err);
         return;
@@ -41,8 +38,8 @@ describe('programmatic use', function () {
     });
   };
 
-  it('should install', function(done) {
-    testInstall(done, {}, function(log) {
+  it('should install', (done) => {
+    testInstall(done, {}, (log) => {
       if (!containsChrome(log)) {
         done(new Error('Chrome driver should be installed'));
         return false;
@@ -50,8 +47,8 @@ describe('programmatic use', function () {
     });
   });
 
-  it('should install with the given drivers', function(done) {
-    testInstall(done, { drivers: {} }, function(log) {
+  it('should install with the given drivers', (done) => {
+    testInstall(done, { drivers: {} }, (log) => {
       if (containsChrome(log)) {
         done(new Error('Chrome driver should not be installed'));
         return false;
@@ -59,8 +56,8 @@ describe('programmatic use', function () {
     });
   });
 
-  it('should start', function(done) {
-    testStart(done, {}, function(cp) {
+  it('should start', (done) => {
+    testStart(done, {}, (cp) => {
       if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
         done(new Error('Chrome driver should be loaded'));
         return false;
@@ -68,8 +65,8 @@ describe('programmatic use', function () {
     });
   });
 
-  it('should start with custom seleniumArgs', function(done) {
-    testStart(done, { seleniumArgs: ['-port', '12345'] }, function(cp) {
+  it('should start with custom seleniumArgs', (done) => {
+    testStart(done, { seleniumArgs: ['-port', '12345'] }, (cp) => {
       if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
         done(new Error('Chrome driver should be loaded'));
         return false;
@@ -77,18 +74,18 @@ describe('programmatic use', function () {
     });
   });
 
-  it('should start with the given drivers', function(done) {
-    testStart(done, { drivers: {} }, function(cp) {
+  it('should start with the given drivers', (done) => {
+    testStart(done, { drivers: {} }, (cp) => {
       if (cp.spawnargs && cp.spawnargs.some(containsChrome)) {
-       done(new Error('Chrome driver should not be loaded'));
+        done(new Error('Chrome driver should not be loaded'));
         return false;
       }
     });
   });
 
-  it('should start and merge drivers', function(done) {
-    var options = { drivers: { chrome: {} } };
-    testStart(done, options, function(cp) {
+  it('should start and merge drivers', (done) => {
+    const options = { drivers: { chrome: {} } };
+    testStart(done, options, (cp) => {
       if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
         done(new Error('Chrome driver should be loaded'));
         return false;
@@ -96,15 +93,15 @@ describe('programmatic use', function () {
     });
   });
 
-  it('can listen to stderr', function(done) {
-    var selenium = require('../');
-    selenium.start(function(err, cp) {
+  it('can listen to stderr', (done) => {
+    const selenium = require('../');
+    selenium.start((err, cp) => {
       if (err) {
         done(err);
         return;
       }
 
-      cp.stderr.once('data', function() {
+      cp.stderr.once('data', () => {
         cp.kill();
         done();
       });

@@ -1,8 +1,8 @@
 module.exports = {
   drivers: {
     chrome: {
-      version: 999
-    }
+      version: 999,
+    },
   },
-  ignoreExtraDrivers: true
-}
+  ignoreExtraDrivers: true,
+};
