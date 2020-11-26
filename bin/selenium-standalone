@@ -59,21 +59,21 @@ const actions = {
       }
     }
 
-    function progressCb(total, progress, chunk) {
+    function progressCb(total, progress, chunk, url, reset) {
       if (firstProgress) {
-        console.log('');
         console.log('');
         firstProgress = false;
       }
 
-      bar =
-        bar ||
-        new ProgressBar('selenium-standalone installation [:bar] :percent :etas', {
+      if (reset || !bar) {
+        bar = new ProgressBar('[:bar] :percent      ' + url, {
+          curr: progress,
           total: total,
           complete: '=',
           incomplete: ' ',
           width: 20,
         });
+      }
 
       bar.tick(chunk);
     }
