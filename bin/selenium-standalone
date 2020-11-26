@@ -19,6 +19,9 @@ const actions = {
 
     function started(err, cp) {
       if (err) {
+        if (cp) {
+          cp.kill('SIGINT');
+        }
         throw err;
       }
 

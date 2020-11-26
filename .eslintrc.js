@@ -6,6 +6,7 @@ module.exports = {
   plugins: ['prettier'],
   extends: ['eslint:recommended', 'prettier', 'plugin:prettier/recommended'],
   env: {
+    es6: true,
     node: true,
     mocha: true,
   },
