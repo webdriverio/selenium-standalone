@@ -55,7 +55,8 @@ describe('default-downloads', () => {
   });
 
   describe('ie', () => {
-    before(() => {
+    before(function () {
+      this.timeout(10000);
       Object.defineProperty(process, 'platform', {
         value: 'win32',
       });
