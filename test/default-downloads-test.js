@@ -1,6 +1,6 @@
 const assert = require('assert');
 const merge = require('lodash').merge;
-const request = require('request');
+const got = require('got');
 
 const defaultConfig = require('../lib/default-config');
 
@@ -13,19 +13,15 @@ let opts = {
 };
 
 function doesDownloadExist(url, cb) {
-  const req = request.get(url);
-  req
-    .on('response', (res) => {
-      req.abort();
-
-      if (res.statusCode >= 400) {
-        return cb('Error response code got from ' + url + ': ' + res.statusCode);
-      }
-
-      cb();
+  const downloadStream = got
+    .stream(url, { timeout: 5000, retry: 0 })
+    .once('response', () => cb())
+    .once('downloadProgress', () => {
+      downloadStream.destroy();
     })
     .once('error', (err) => {
-      cb(new Error('Error requesting ' + url + ': ' + err));
+      console.error(err);
+      cb(new Error('Error requesting ' + url + ' - ' + err.message));
     });
 }
 
