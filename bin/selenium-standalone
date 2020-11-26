@@ -101,7 +101,7 @@ function parseCommandAndOptions(javaPath) {
   const seleniumArgs = argv._.slice(1);
 
   // build a new map removing `_` and --config from argv
-  let options = Object.keys(argv).reduce(function (acc, cur) {
+  let options = Object.keys(argv).reduce((acc, cur) => {
     if (cur !== '_' && cur !== 'config') {
       acc[cur] = argv[cur];
     }
@@ -128,7 +128,7 @@ function parseCommandAndOptions(javaPath) {
 
   // Ignore extra default drivers if specified in config file
   if (configFromFile.drivers && options.ignoreExtraDrivers) {
-    options.drivers = mapValues(configFromFile.drivers, function (config, name) {
+    options.drivers = mapValues(configFromFile.drivers, (config, name) => {
       return merge({}, defaultConfig.drivers[name], config);
     });
   }
