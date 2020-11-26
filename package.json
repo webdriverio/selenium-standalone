@@ -29,7 +29,6 @@
     }
   },
   "dependencies": {
-    "async": "^3.2.0",
     "commander": "^2.20.3",
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.1",
@@ -37,7 +36,7 @@
     "lodash.mapvalues": "^4.6.0",
     "lodash.merge": "^4.6.2",
     "minimist": "^1.2.5",
-    "mkdirp": "^0.5.5",
+    "mkdirp": "^1.0.4",
     "progress": "2.0.3",
     "tar-stream": "2.1.4",
     "which": "^2.0.2",
