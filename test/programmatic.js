@@ -1,5 +1,3 @@
-const assign = require('lodash').assign;
-
 describe('programmatic use', function () {
   this.timeout(120000);
 
@@ -13,7 +11,7 @@ describe('programmatic use', function () {
     const logger = function (message) {
       log += message;
     };
-    const options = assign({ logger: logger }, rawOptions);
+    const options = Object.assign({ logger: logger }, rawOptions);
     selenium.install(options, (err) => {
       if (err) {
         done(err);

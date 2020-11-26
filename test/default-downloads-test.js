@@ -1,5 +1,5 @@
 const assert = require('assert');
-const merge = require('lodash').merge;
+const merge = require('lodash.merge');
 const got = require('got');
 
 const defaultConfig = require('../lib/default-config');
@@ -55,7 +55,8 @@ describe('default-downloads', () => {
   });
 
   describe('ie', () => {
-    before(() => {
+    before(function () {
+      this.timeout(10000);
       Object.defineProperty(process, 'platform', {
         value: 'win32',
       });

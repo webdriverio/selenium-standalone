@@ -4,8 +4,8 @@ const debug = require('debug')('selenium-standalone:cli');
 
 const minimist = require('minimist');
 const which = require('which');
-const merge = require('lodash').merge;
-const mapValues = require('lodash').mapValues;
+const merge = require('lodash.merge');
+const mapValues = require('lodash.mapvalues');
 const path = require('path');
 
 const selenium = require('../');
