@@ -36,7 +36,7 @@ describe('compute-download-urls', () => {
         drivers: {},
       });
 
-      assert.equal(actual.selenium, 'https://localhost/1.0/selenium-server-standalone-1.0.jar');
+      assert.strictEqual(actual.selenium, 'https://localhost/1.0/selenium-server-standalone-1.0.jar');
     });
 
     it('version with patch', () => {
@@ -46,7 +46,7 @@ describe('compute-download-urls', () => {
         drivers: {},
       });
 
-      assert.equal(actual.selenium, 'https://localhost/1.0/selenium-server-standalone-1.0.1.jar');
+      assert.strictEqual(actual.selenium, 'https://localhost/1.0/selenium-server-standalone-1.0.1.jar');
     });
 
     it('version with beta string', () => {
@@ -56,7 +56,7 @@ describe('compute-download-urls', () => {
         drivers: {},
       });
 
-      assert.equal(actual.selenium, 'https://localhost/3.0-beta2/selenium-server-standalone-3.0.0-beta2.jar');
+      assert.strictEqual(actual.selenium, 'https://localhost/3.0-beta2/selenium-server-standalone-3.0.0-beta2.jar');
     });
   });
 
@@ -86,7 +86,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chrome, 'https://localhost/2.0/chromedriver_linux32.zip');
+        assert.strictEqual(actual.chrome, 'https://localhost/2.0/chromedriver_linux32.zip');
       });
 
       it('x64', () => {
@@ -97,7 +97,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chrome, 'https://localhost/2.0/chromedriver_linux64.zip');
+        assert.strictEqual(actual.chrome, 'https://localhost/2.0/chromedriver_linux64.zip');
       });
     });
 
@@ -116,7 +116,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chrome, 'https://localhost/2.22/chromedriver_mac32.zip');
+        assert.strictEqual(actual.chrome, 'https://localhost/2.22/chromedriver_mac32.zip');
       });
 
       it('Use `mac64` for versions >= 2.23', () => {
@@ -127,7 +127,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chrome, 'https://localhost/2.23/chromedriver_mac64.zip');
+        assert.strictEqual(actual.chrome, 'https://localhost/2.23/chromedriver_mac64.zip');
       });
     });
 
@@ -146,7 +146,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chrome, 'https://localhost/2.0/chromedriver_win32.zip');
+        assert.strictEqual(actual.chrome, 'https://localhost/2.0/chromedriver_win32.zip');
       });
     });
   });
@@ -177,7 +177,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.firefox, 'https://localhost/v0.7.0/wires-0.7.0-linux64.gz');
+        assert.strictEqual(actual.firefox, 'https://localhost/v0.7.0/wires-0.7.0-linux64.gz');
       });
 
       it('uses `geckodriver` name for versions >= 0.8.0', () => {
@@ -188,7 +188,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.firefox, 'https://localhost/v0.8.0/geckodriver-0.8.0-linux64.gz');
+        assert.strictEqual(actual.firefox, 'https://localhost/v0.8.0/geckodriver-0.8.0-linux64.gz');
       });
 
       it('uses correct directory for 0.3.0', () => {
@@ -199,7 +199,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.firefox, 'https://localhost/0.3.0/wires-0.3.0-linux64.gz');
+        assert.strictEqual(actual.firefox, 'https://localhost/0.3.0/wires-0.3.0-linux64.gz');
       });
 
       it('uses leading `v` in version string when >= 0.9.0', () => {
@@ -210,7 +210,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.firefox, 'https://localhost/v0.9.0/geckodriver-v0.9.0-linux64.tar.gz');
+        assert.strictEqual(actual.firefox, 'https://localhost/v0.9.0/geckodriver-v0.9.0-linux64.tar.gz');
       });
 
       it('uses plain version string when < 0.9.0', () => {
@@ -221,7 +221,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.firefox, 'https://localhost/v0.7.0/wires-0.7.0-linux64.gz');
+        assert.strictEqual(actual.firefox, 'https://localhost/v0.7.0/wires-0.7.0-linux64.gz');
       });
 
       it('uses `.gz` file extension for versions < 0.9.0', () => {
@@ -367,7 +367,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.firefox, 'https://localhost/v0.5.0/wires-v0.5.0-win.zip');
+        assert.strictEqual(actual.firefox, 'https://localhost/v0.5.0/wires-v0.5.0-win.zip');
       });
 
       it('gets the right arch when arch is x32 and version >= 0.11.0', () => {
@@ -550,7 +550,7 @@ describe('compute-download-urls', () => {
         opts.drivers.edge = { version: version };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.edge, releases[version].url);
+        assert.strictEqual(actual.edge, releases[version].url);
       });
     });
 
@@ -610,7 +610,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_linux64.zip');
+        assert.strictEqual(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_linux64.zip');
       });
     });
 
@@ -639,7 +639,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_mac64.zip');
+        assert.strictEqual(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_mac64.zip');
       });
     });
 
@@ -658,7 +658,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_win32.zip');
+        assert.strictEqual(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_win32.zip');
       });
 
       it('x64', () => {
@@ -669,7 +669,7 @@ describe('compute-download-urls', () => {
         };
 
         const actual = computeDownloadUrls(opts);
-        assert.equal(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_win64.zip');
+        assert.strictEqual(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_win64.zip');
       });
     });
   });

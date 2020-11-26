@@ -117,7 +117,7 @@ describe('default-downloads', () => {
 
         computedUrls = computeDownloadUrls(opts);
 
-        assert.equal(computedUrls.edge, releases[version].url);
+        assert.strictEqual(computedUrls.edge, releases[version].url);
         doesDownloadExist(computedUrls.edge, done);
       });
     });

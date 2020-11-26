@@ -22,7 +22,7 @@ describe('getRunningProcessType', () => {
   tests.forEach((test) => {
     it('getRunningProcessType with seleniumArgs: ' + test.args.join(' '), () => {
       const actual = statusUrl.getRunningProcessType(test.args);
-      assert.equal(actual, test.expected);
+      assert.strictEqual(actual, test.expected);
     });
   });
 });
@@ -85,7 +85,7 @@ describe('getSeleniumStatusUrl', () => {
       const actual = statusUrl.getSeleniumStatusUrl(dataItem.args);
       const expected = 'http://' + dataItem.expectedUrl;
 
-      assert.equal(actual, expected);
+      assert.strictEqual(actual, expected);
     };
   };
 
