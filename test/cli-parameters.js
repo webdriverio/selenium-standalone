@@ -86,7 +86,7 @@ describe('`selenium-standalone` command parameters', () => {
     it('takes default values when not specified', () => {
       process.argv = buildArgv(['install']);
       const parsed1 = parseCommandAndOptions('/somewhere');
-      const defaultValues = require('../lib/default-config');
+      const defaultValues = require('../lib/default-config')();
 
       Object.keys(defaultValues).forEach((key) => {
         expect(parsed1[1][key]).to.deep.equal(defaultValues[key]);
@@ -132,7 +132,7 @@ describe('`selenium-standalone` command parameters', () => {
     });
 
     it('respects the precedence order : command line > config file > default', () => {
-      const defaultValues = require('../lib/default-config');
+      const defaultValues = require('../lib/default-config')();
 
       process.argv = buildArgv([
         'install',
@@ -151,7 +151,7 @@ describe('`selenium-standalone` command parameters', () => {
     });
 
     it('ignores extra drivers when specified', () => {
-      const defaultConfig = require('../lib/default-config');
+      const defaultConfig = require('../lib/default-config')();
 
       process.argv = buildArgv([
         'start',
