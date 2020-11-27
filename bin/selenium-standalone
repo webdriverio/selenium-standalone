@@ -9,7 +9,7 @@ const mapValues = require('lodash.mapvalues');
 const path = require('path');
 
 const selenium = require('../');
-const defaultConfig = require('../lib/default-config');
+const defaultConfig = require('../lib/default-config')();
 
 const actions = {
   start: function (options) {
