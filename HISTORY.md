@@ -1,3 +1,6 @@
+# 6.22.1 (2020-11-27)
+* avoid mutating the default config
+
 # 6.22.0 (2020-11-27)
 * chrome, edgechromium, and geckodriver support `latest` as version
 * replaced `async` package with native promises
