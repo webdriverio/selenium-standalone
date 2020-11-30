@@ -1,3 +1,6 @@
+# 6.22.2 (2020-11-27)
+* edgechromium disabled for linux platform
+
 # 6.22.1 (2020-11-27)
 * avoid mutating the default config
 
