@@ -1,89 +1,27 @@
 #!/usr/bin/env node
 
-var debug = require('debug')('selenium-standalone:cli');
+const debug = require('debug')('selenium-standalone:cli');
 
-var minimist = require('minimist');
-var which = require('which');
-var merge = require('lodash').merge;
-var mapValues = require('lodash').mapValues;
-var path = require('path');
+const minimist = require('minimist');
+const which = require('which');
+const merge = require('lodash.merge');
+const mapValues = require('lodash.mapvalues');
+const path = require('path');
 
-var selenium = require('../');
-var defaultConfig = require('../lib/default-config');
+const selenium = require('../');
+const defaultConfig = require('../lib/default-config')();
 
-function parseCommandAndOptions(javaPath) {
-  var argv = minimist(process.argv.slice(2), {
-    string: ['version', 'drivers.chrome.version', 'drivers.ie.version', 'drivers.firefox.version', 'drivers.edge.version']
-  });
-
-  var action = argv._[0];
-
-  if (!action) {
-    throw new Error('No action provided');
-  }
-  if (action !== 'install' && action !== 'start') {
-    throw new Error('Invalid action "'+ action + ' (Valid actions are [' + Object.keys(actions).join(', ') + '])');
-  }
-
-  // everything after `selenium-standalone install [options] --` will be in argv._
-  var seleniumArgs = argv._.slice(1);
-
-  // build a new map removing `_` and --config from argv
-  var options = Object.keys(argv).reduce(function(prev, cur) {
-    if ((cur !== '_') && (cur !== 'config')) {
-      prev[cur] = argv[cur];
-    }
-
-    return prev;
-  }, {});
-
-  // If a config file was specified, load it
-  var configFromFile = {};
-
-  if (argv.config) {
-    try {
-      configFromFile = require(path.resolve(process.cwd(), argv.config));
-      if (typeof configFromFile !== 'object') {
-        throw new Error('Config file does not exports an object');
-      }
-    } catch(err) {
-      throw new Error('Error parsing config file : ' + (err.message || err));
-    }
-  }
-
-  // Merge default options, options from config file then command line options
-  options = merge({}, defaultConfig, configFromFile, options);
-
-  // Ignore extra default drivers if specified in config file
-  if (configFromFile.drivers && options.ignoreExtraDrivers) {
-    options.drivers = mapValues(configFromFile.drivers, function (config, name) {
-      return merge({}, defaultConfig.drivers[name], config);
-    });
-  }
-
-  if (seleniumArgs.length) {
-    options.seleniumArgs = seleniumArgs;
-  } else if (!Array.isArray(options.seleniumArgs)) {
-    options.seleniumArgs = [];
-  }
-  options.spawnOptions = {
-    stdio: 'inherit'
-  };
-
-  options.logger = options.silent ? null : console.log;
-  options.javaPath = javaPath;
-
-  return [action, options];
-}
-
-var actions = {
-  start: function(options) {
-    var killEvents = ['exit', 'SIGTERM', 'SIGINT'];
+const actions = {
+  start: function (options) {
+    const killEvents = ['exit', 'SIGTERM', 'SIGINT'];
 
     selenium.start(options, started);
 
     function started(err, cp) {
       if (err) {
+        if (cp) {
+          cp.kill('SIGINT');
+        }
         throw err;
       }
 
@@ -105,11 +43,12 @@ var actions = {
       }
     }
   },
-  install: function(options) {
-    var ProgressBar = require('progress');
-    var bar;
-    var firstProgress = true;
+  install: function (options) {
+    const ProgressBar = require('progress');
+    let bar;
+    let firstProgress = true;
 
+    // eslint-disable-next-line no-param-reassign
     options.progressCb = options.silent ? null : progressCb;
 
     selenium.install(options, installed);
@@ -120,43 +59,115 @@ var actions = {
       }
     }
 
-    function progressCb(total, progress, chunk) {
+    function progressCb(total, progress, chunk, url, reset) {
       if (firstProgress) {
-        console.log('');
         console.log('');
         firstProgress = false;
       }
 
-      bar = bar || new ProgressBar(
-        'selenium-standalone installation [:bar] :percent :etas', {
-        total: total,
-        complete: '=',
-        incomplete: ' ',
-        width: 20
-      });
+      if (reset || !bar) {
+        bar = new ProgressBar('[:bar] :percent      ' + url, {
+          curr: progress,
+          total: total,
+          complete: '=',
+          incomplete: ' ',
+          width: 20,
+        });
+      }
 
       bar.tick(chunk);
     }
-  }
+  },
 };
+
+function parseCommandAndOptions(javaPath) {
+  const argv = minimist(process.argv.slice(2), {
+    string: [
+      'version',
+      'drivers.chrome.version',
+      'drivers.ie.version',
+      'drivers.firefox.version',
+      'drivers.edge.version',
+    ],
+  });
+
+  const action = argv._[0];
+
+  if (!action) {
+    throw new Error('No action provided');
+  }
+  if (action !== 'install' && action !== 'start') {
+    throw new Error('Invalid action "' + action + ' (Valid actions are [' + Object.keys(actions).join(', ') + '])');
+  }
+
+  // everything after `selenium-standalone install [options] --` will be in argv._
+  const seleniumArgs = argv._.slice(1);
+
+  // build a new map removing `_` and --config from argv
+  let options = Object.keys(argv).reduce((acc, cur) => {
+    if (cur !== '_' && cur !== 'config') {
+      acc[cur] = argv[cur];
+    }
+
+    return acc;
+  }, {});
+
+  // If a config file was specified, load it
+  let configFromFile = {};
+
+  if (argv.config) {
+    try {
+      configFromFile = require(path.resolve(process.cwd(), argv.config));
+      if (typeof configFromFile !== 'object') {
+        throw new Error('Config file does not exports an object');
+      }
+    } catch (err) {
+      throw new Error('Error parsing config file : ' + (err.message || err));
+    }
+  }
+
+  // Merge default options, options from config file then command line options
+  options = merge({}, defaultConfig, configFromFile, options);
+
+  // Ignore extra default drivers if specified in config file
+  if (configFromFile.drivers && options.ignoreExtraDrivers) {
+    options.drivers = mapValues(configFromFile.drivers, (config, name) => {
+      return merge({}, defaultConfig.drivers[name], config);
+    });
+  }
+
+  if (seleniumArgs.length) {
+    options.seleniumArgs = seleniumArgs;
+  } else if (!Array.isArray(options.seleniumArgs)) {
+    options.seleniumArgs = [];
+  }
+  options.spawnOptions = {
+    stdio: 'inherit',
+  };
+
+  options.logger = options.silent ? null : console.log;
+  options.javaPath = javaPath;
+
+  return [action, options];
+}
 
 // Export the command line parsing function for tests.
 module.exports = parseCommandAndOptions;
 
-if (!process.env || !process.env.NODE_ENV || (process.env.NODE_ENV !== 'test-cli-parameters')) {
-  which('java', function javaFound(err, javaPath) {
+if (!process.env || !process.env.NODE_ENV || process.env.NODE_ENV !== 'test-cli-parameters') {
+  which('java', function javaFound(errWhich, javaPath) {
     debug('Started via CLI with: ', process.argv);
 
-    var params;
+    let params;
 
     try {
-      if (err) {
-        throw err;
+      if (errWhich) {
+        throw errWhich;
       }
       params = parseCommandAndOptions(javaPath);
     } catch (err) {
-      process.stderr.write((err.message || err) + "\n");
-      process.stderr.write("Usage: selenium-standalone action [options]\n");
+      process.stderr.write((err.message || err) + '\n');
+      process.stderr.write('Usage: selenium-standalone action [options]\n');
       process.exit(255);
     }
     actions[params[0]](params[1]);

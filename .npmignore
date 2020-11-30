@@ -1,2 +1,7 @@
+.github
+.vscode
+.travis.yml
 screencast.gif
 .selenium/
+test
+scripts

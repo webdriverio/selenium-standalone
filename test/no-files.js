@@ -1,15 +1,13 @@
-describe('when files are missing', function () {
-  it('should fail', function(done) {
-    var fs = require('fs');
-    var path = require('path');
-    var from = path.join(__dirname, '..', '.selenium');
-    var to = path.join(__dirname, '..', '.selenium-tmp');
+const fs = require('fs');
+const path = require('path');
 
-    fs.renameSync(from, to);
+describe('when files are missing', () => {
+  const from = path.join(__dirname, '..', '.selenium');
+  const to = path.join(__dirname, '..', '.selenium-tmp');
 
-    var selenium = require('../');
-    selenium.start(function(err) {
-      fs.renameSync(to, from);
+  it('should fail', (done) => {
+    const selenium = require('../');
+    selenium.start((err) => {
       if (err) {
         done();
         return;
@@ -17,5 +15,12 @@ describe('when files are missing', function () {
 
       done(new Error('We should have got an error'));
     });
+  });
+
+  before(() => {
+    fs.renameSync(from, to);
+  });
+  after(() => {
+    fs.renameSync(to, from);
   });
 });

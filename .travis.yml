@@ -8,12 +8,10 @@ jdk:
   - oraclejdk8
 
 env:
-  - TRAVIS_NODE_VERSION="stable"
+  - TRAVIS_NODE_VERSION=15
   - TRAVIS_NODE_VERSION=14
   - TRAVIS_NODE_VERSION=12
   - TRAVIS_NODE_VERSION=10
-  - TRAVIS_NODE_VERSION=8
-  - TRAVIS_NODE_VERSION=6
 
 branches:
   only:
@@ -24,4 +22,4 @@ before_install:
 
 install: "npm install"
 
-script: "npm test"
+script: "npm run lint && npm test"

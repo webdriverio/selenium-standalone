@@ -1,3 +1,25 @@
+# 6.22.2 (2020-11-27)
+* edgechromium disabled for linux platform
+
+# 6.22.1 (2020-11-27)
+* avoid mutating the default config
+
+# 6.22.0 (2020-11-27)
+* chrome, edgechromium, and geckodriver support `latest` as version
+* replaced `async` package with native promises
+* resolved issues #468 #502 #511
+
+# 6.21.0 (2020-11-26)
+* resolved issues #357 #457 #376 #488 #489
+* replaced `request` with `got`
+* update diedriver version to `3.150.1`
+* updated chromiumedge version to `87.0.637.0`
+* updated geckodriver version to `87.0.637.0`
+* decreased package size by 60% (8.6Mb)
+* nodejs version in docker updated to 12
+* added eslint + prettier
+* minor bug fixes
+
 # 6.20.1 (2020-10-09)
 * Fix chromiumedge privileges
   

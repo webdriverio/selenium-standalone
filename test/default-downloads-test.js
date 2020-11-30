@@ -1,29 +1,29 @@
-var assert = require('assert');
-var merge = require('lodash').merge;
-var request = require('request');
+const assert = require('assert');
+const merge = require('lodash.merge');
+const got = require('got');
 
-var defaultConfig = require('../lib/default-config');
+const defaultConfig = require('../lib/default-config')();
 
-var computeDownloadUrls;
-var computedUrls;
-var opts = {
+let computeDownloadUrls;
+let computedUrls;
+let opts = {
   seleniumVersion: defaultConfig.version,
   seleniumBaseURL: defaultConfig.baseURL,
-  drivers: defaultConfig.drivers
+  drivers: defaultConfig.drivers,
 };
 
-function doesDownloadExist(url, cb) {
-  var req = request.get(url);
-  req.on('response', function(res) {
-    req.abort();
-
-    if (res.statusCode >= 400) {
-      return cb('Error response code got from ' + url + ': ' + res.statusCode);
-    }
-
-    cb();
-  }).once('error', function (err) {
-    cb(new Error('Error requesting ' + url + ': ' + err));
+async function doesDownloadExist(url) {
+  const downloadStream = got.stream(url, { timeout: 10000, retry: 0 });
+  return new Promise((resolve, reject) => {
+    downloadStream
+      .once('response', () => resolve())
+      .once('downloadProgress', () => {
+        downloadStream.destroy();
+      })
+      .once('error', (err) => {
+        console.error(err);
+        reject(new Error('Error requesting ' + url + ' - ' + err.message));
+      });
   });
 }
 
@@ -31,233 +31,232 @@ function doesDownloadExist(url, cb) {
  * Tests to ensure that all the values listed in `default-config.js`
  * are actually downloadable.
  */
-describe('default-downloads', function() {
+describe('default-downloads', function () {
+  this.timeout(60000);
   // Allow tests to mock `process.platform`
-  before(function() {
+  before(function () {
     this.originalPlatform = Object.getOwnPropertyDescriptor(process, 'platform');
   });
-  after(function() {
+  after(function () {
     Object.defineProperty(process, 'platform', this.originalPlatform);
   });
 
   // Ensure that any internal state of the module is clean for each test
-  beforeEach(function() {
-    this.timeout(60000);
+  beforeEach(() => {
     computeDownloadUrls = require('../lib/compute-download-urls');
   });
-  afterEach(function() {
+  afterEach(() => {
     delete require.cache[require.resolve('../lib/compute-download-urls')];
   });
 
-  describe('selenium-jar', function() {
-    it('selenium-jar download exists', function(done) {
-      computedUrls = computeDownloadUrls(opts);
-      doesDownloadExist(computedUrls.selenium, done);
+  describe('selenium-jar', () => {
+    it('selenium-jar download exists', async () => {
+      computedUrls = await computeDownloadUrls(opts);
+      await doesDownloadExist(computedUrls.selenium);
     });
   });
 
-  describe('ie', function() {
-    before(function(){
+  describe('ie', () => {
+    before(() => {
       Object.defineProperty(process, 'platform', {
-        value: 'win32'
+        value: 'win32',
       });
     });
 
-    it('ia32 download exists', function(done) {
+    it('ia32 download exists', async () => {
       opts = merge(opts, {
         drivers: {
           ie: {
-            arch: 'ia32'
-          }
-        }
+            arch: 'ia32',
+          },
+        },
       });
 
-      computedUrls = computeDownloadUrls(opts);
+      computedUrls = await computeDownloadUrls(opts);
 
       assert(computedUrls.ie.indexOf('Win32') > 0);
-      doesDownloadExist(computedUrls.ie, done);
+      await doesDownloadExist(computedUrls.ie);
     });
 
-    it('x64 download exists', function(done) {
+    it('x64 download exists', async () => {
       opts = merge(opts, {
         drivers: {
           ie: {
-            arch: 'x64'
-          }
-        }
+            arch: 'x64',
+          },
+        },
       });
 
-      computedUrls = computeDownloadUrls(opts);
+      computedUrls = await computeDownloadUrls(opts);
 
       assert(computedUrls.ie.indexOf('x64') > 0);
-      doesDownloadExist(computedUrls.ie, done);
+      await doesDownloadExist(computedUrls.ie);
     });
   });
 
-  describe('edge', function() {
-    before(function(){
+  describe('edge', () => {
+    before(() => {
       Object.defineProperty(process, 'platform', {
-        value: 'win32'
+        value: 'win32',
       });
-
     });
 
-    var releases = require('../lib/microsoft-edge-releases')
+    const releases = require('../lib/microsoft-edge-releases');
 
-    Object.keys(releases).forEach(function (version) {
-      it('version `' + version + '` download exists', function(done) {
-          opts = merge(opts, {
-            drivers: {
-              edge: {
-                version: version
-              }
-            }
-          });
+    Object.keys(releases).forEach((version) => {
+      it('version `' + version + '` download exists', async () => {
+        opts = merge(opts, {
+          drivers: {
+            edge: {
+              version: version,
+            },
+          },
+        });
 
-        computedUrls = computeDownloadUrls(opts);
+        computedUrls = await computeDownloadUrls(opts);
 
-        assert.equal(computedUrls.edge, releases[version].url);
-        doesDownloadExist(computedUrls.edge, done);
+        assert.strictEqual(computedUrls.edge, releases[version].url);
+        await doesDownloadExist(computedUrls.edge);
       });
     });
   });
 
-  describe('chrome', function() {
-    describe('linux', function() {
-      before(function(){
+  describe('chrome', () => {
+    describe('linux', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
-          value: 'linux'
+          value: 'linux',
         });
       });
 
       // No x32 for latest chromedriver on linux
 
-      it('x64 download exists', function(done) {
+      it('x64 download exists', async () => {
         opts = merge(opts, {
           drivers: {
             chrome: {
-              arch: 'x64'
-            }
-          }
+              arch: 'x64',
+            },
+          },
         });
 
-        computedUrls = computeDownloadUrls(opts);
+        computedUrls = await computeDownloadUrls(opts);
 
         assert(computedUrls.chrome.indexOf('linux64') > 0);
-        doesDownloadExist(computedUrls.chrome, done);
+        await doesDownloadExist(computedUrls.chrome);
       });
     });
 
-    describe('mac', function() {
-      before(function(){
+    describe('mac', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
-          value: 'darwin'
+          value: 'darwin',
         });
       });
 
       // No x32 for latest chromedriver on mac
 
-      it('x64 download exists', function(done) {
-        computedUrls = computeDownloadUrls(opts);
+      it('x64 download exists', async () => {
+        computedUrls = await computeDownloadUrls(opts);
 
         assert(computedUrls.chrome.indexOf('mac64') > 0);
-        doesDownloadExist(computedUrls.chrome, done);
+        await doesDownloadExist(computedUrls.chrome);
       });
     });
 
-    describe('win', function() {
-      before(function(){
+    describe('win', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
-          value: 'win32'
+          value: 'win32',
         });
       });
 
       // No x64 for latest chromedriver on win
 
-      it('x32 download exists', function(done) {
-        computedUrls = computeDownloadUrls(opts);
+      it('x32 download exists', async () => {
+        computedUrls = await computeDownloadUrls(opts);
 
         assert(computedUrls.chrome.indexOf('win32') > 0);
-        doesDownloadExist(computedUrls.chrome, done);
+        await doesDownloadExist(computedUrls.chrome);
       });
     });
   });
 
-  describe('firefox', function() {
-    describe('linux', function() {
-      before(function(){
+  describe('firefox', () => {
+    describe('linux', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
-          value: 'linux'
+          value: 'linux',
         });
       });
 
-      it('x64 download exists', function(done) {
+      it('x64 download exists', async () => {
         opts = merge(opts, {
           drivers: {
             firefox: {
-              arch: 'x64'
-            }
-          }
+              arch: 'x64',
+            },
+          },
         });
 
-        computedUrls = computeDownloadUrls(opts);
+        computedUrls = await computeDownloadUrls(opts);
 
         assert(computedUrls.firefox.indexOf('linux64') > 0);
-        doesDownloadExist(computedUrls.firefox, done);
+        await doesDownloadExist(computedUrls.firefox);
       });
     });
 
-    describe('mac', function() {
-      before(function(){
+    describe('mac', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
-          value: 'darwin'
+          value: 'darwin',
         });
       });
 
       // No difference between arch for latest firefox driver on mac
-      it('download exists', function(done) {
-        computedUrls = computeDownloadUrls(opts);
+      it('download exists', async () => {
+        computedUrls = await computeDownloadUrls(opts);
 
         assert(computedUrls.firefox.indexOf('mac') > 0);
-        doesDownloadExist(computedUrls.firefox, done);
+        await doesDownloadExist(computedUrls.firefox);
       });
     });
 
-    describe('win', function() {
-      before(function(){
+    describe('win', () => {
+      before(() => {
         Object.defineProperty(process, 'platform', {
-          value: 'win32'
+          value: 'win32',
         });
       });
 
-      it('ia32 download exists', function(done) {
+      it('ia32 download exists', async () => {
         opts = merge(opts, {
           drivers: {
             firefox: {
-              arch: 'ia32'
-            }
-          }
+              arch: 'ia32',
+            },
+          },
         });
 
-        computedUrls = computeDownloadUrls(opts);
+        computedUrls = await computeDownloadUrls(opts);
 
         assert(computedUrls.firefox.indexOf('win32') > 0);
-        doesDownloadExist(computedUrls.firefox, done);
+        await doesDownloadExist(computedUrls.firefox);
       });
 
-      it('x64 download exists', function(done) {
+      it('x64 download exists', async () => {
         opts = merge(opts, {
           drivers: {
             firefox: {
-              arch: 'x64'
-            }
-          }
+              arch: 'x64',
+            },
+          },
         });
 
-        computedUrls = computeDownloadUrls(opts);
+        computedUrls = await computeDownloadUrls(opts);
 
         assert(computedUrls.firefox.indexOf('win64') > 0);
-        doesDownloadExist(computedUrls.firefox, done);
+        await doesDownloadExist(computedUrls.firefox);
       });
     });
   });

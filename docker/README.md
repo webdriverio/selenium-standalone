@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [selenium-standalone server](#selenium-standalone-server)
+  - [Dockerfile](#dockerfile)
+  - [Build image](#build-image)
+  - [Use image](#use-image)
+    - [Parameters](#parameters)
+    - [Healthcheck](#healthcheck)
+      - [Use cases](#use-cases)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # selenium-standalone server
 
 selenium-standalone Server with Chrome and Firefox

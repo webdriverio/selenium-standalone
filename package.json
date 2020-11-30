@@ -1,12 +1,13 @@
 {
   "name": "selenium-standalone",
-  "version": "6.20.1",
+  "version": "6.22.2",
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
     "test": "./bin/selenium-standalone install && mocha",
-    "release": "./scripts/release.sh"
+    "release": "./scripts/release.sh",
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "bin": {
     "selenium-standalone": "./bin/selenium-standalone",
@@ -22,26 +23,35 @@
   "homepage": "https://github.com/vvo/selenium-standalone",
   "author": "Vincent Voyer <vincent@zeroload.net>",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "dependencies": {
-    "async": "^3.0.0",
-    "commander": "^2.19.0",
-    "cross-spawn": "^7.0.0",
-    "debug": "^4.1.1",
-    "lodash": "^4.17.11",
-    "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
+    "commander": "^2.20.3",
+    "cross-spawn": "^7.0.3",
+    "debug": "^4.3.1",
+    "got": "^11.8.0",
+    "lodash.mapvalues": "^4.6.0",
+    "lodash.merge": "^4.6.2",
+    "minimist": "^1.2.5",
+    "mkdirp": "^1.0.4",
     "progress": "2.0.3",
-    "request": "2.88.2",
     "tar-stream": "2.1.4",
-    "urijs": "^1.19.1",
-    "which": "^2.0.0",
+    "which": "^2.0.2",
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
     "doctoc": "1.4.0",
+    "eslint": "7.14.0",
+    "eslint-config-prettier": "6.15.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "husky": "4.3.0",
     "json": "10.0.0",
     "mocha": "6.2.3",
-    "mversion": "2.0.1"
+    "mversion": "2.0.1",
+    "prettier": "2.2.1"
   }
 }

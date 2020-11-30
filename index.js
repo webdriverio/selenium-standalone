@@ -1,6 +1,6 @@
-var debugEnvDetails = require('./lib/debug-environment-details');
+require('./lib/debug-environment-details');
 
 module.exports = {
   install: require('./lib/install'),
-  start: require('./lib/start')
+  start: require('./lib/start'),
 };
