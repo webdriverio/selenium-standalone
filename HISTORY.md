@@ -1,4 +1,9 @@
-# 6.22.2 (2020-11-27)
+# 6.23.0 (2020-12-02)
+* allow specifying `fullURL` to download selenium or browser driver #520
+* add selenium 4 support #518
+* increased download and startup timeouts, and added more logging #519
+
+# 6.22.2 (2020-11-30)
 * edgechromium disabled for linux platform
 
 # 6.22.1 (2020-11-27)
