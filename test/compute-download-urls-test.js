@@ -58,6 +58,20 @@ describe('compute-download-urls', () => {
 
       assert.strictEqual(actual.selenium, 'https://localhost/3.0-beta2/selenium-server-standalone-3.0.0-beta2.jar');
     });
+
+    it('fullURL', async () => {
+      const actual = await computeDownloadUrls({
+        seleniumVersion: '4.0.0-alpha-7',
+        seleniumFullURL:
+          'https://selenium-release.storage.googleapis.com/4.0-alpha-7/selenium-server-4.0.0-alpha-7.jar',
+        drivers: {},
+      });
+
+      assert.strictEqual(
+        actual.selenium,
+        'https://selenium-release.storage.googleapis.com/4.0-alpha-7/selenium-server-4.0.0-alpha-7.jar'
+      );
+    });
   });
 
   describe('chrome', () => {
@@ -98,6 +112,19 @@ describe('compute-download-urls', () => {
 
         const actual = await computeDownloadUrls(opts);
         assert.strictEqual(actual.chrome, 'https://localhost/2.0/chromedriver_linux64.zip');
+      });
+
+      it('fullURL', async () => {
+        opts.drivers.chrome = {
+          fullURL: 'https://chromedriver.storage.googleapis.com/87.0.4280.20/chromedriver_linux64.zip',
+          version: 'custom',
+        };
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(
+          actual.chrome,
+          'https://chromedriver.storage.googleapis.com/87.0.4280.20/chromedriver_linux64.zip'
+        );
       });
     });
 

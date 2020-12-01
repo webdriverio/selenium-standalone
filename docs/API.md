@@ -70,6 +70,8 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `baseURL` is used to find the server having the selenium or drivers files.
 
+`fullURL` as an alternative to baseURL it's possible specify full url, ex `https://selenium-release.storage.googleapis.com/4.0-alpha-7/selenium-server-4.0.0-alpha-7.jar`.
+
 `opts.ignoreExtraDrivers` only downloads and installs drivers explicity specified.
 
 `opts.basePath` sets the base directory used to store the selenium standalone `.jar` and drivers. Defaults to current working directory + .selenium/
