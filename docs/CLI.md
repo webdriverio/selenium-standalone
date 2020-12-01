@@ -21,6 +21,9 @@ selenium-standalone start -- -debug
 # choose selenium version
 selenium-standalone install --version=3.141.59 --baseURL=https://selenium-release.storage.googleapis.com
 
+# exact selenium download url
+selenium-standalone install --version=4.0.0-alpha-7 --fullURL=https://selenium-release.storage.googleapis.com/4.0-alpha-7/selenium-server-4.0.0-alpha-7.jar
+
 # choose chrome driver version
 selenium-standalone install --drivers.chrome.version=87.0.4280.20 --drivers.chrome.baseURL=https://chromedriver.storage.googleapis.com
 
@@ -34,6 +37,9 @@ selenium-standalone install --singleDriverInstall=chrome
 selenium-standalone start -- -role hub
 selenium-standalone start -- -role node -hub http://localhost:4444/grid/register
 selenium-standalone start -- -role node -hub http://localhost:4444/grid/register -port 5556
+
+# don't forget to specify downloaded version for v4 alpha
+./bin/selenium-standalone start --version=4.0.0-alpha-7
 
 # If you have a complex configuration with numerous options or if you want to keep a clear configuration changes history,
 # you can specify the options in a configuration file :
