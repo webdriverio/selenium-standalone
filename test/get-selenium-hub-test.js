@@ -2,7 +2,7 @@ const path = require('path');
 const assert = require('assert');
 const statusUrl = require('../lib/get-selenium-status-url');
 
-const nodeStatusAPIPath = '/wd/hub/status';
+const nodeStatusAPIPath = (isV4) => (isV4 ? '/status' : '/wd/hub/status');
 const hubStatusAPIPath = '/grid/api/hub';
 describe('getRunningProcessType', () => {
   const tests = [
@@ -30,12 +30,13 @@ describe('getRunningProcessType', () => {
 describe('getSeleniumStatusUrl', () => {
   const data = [
     // Started as a standalone Selenium Server
-    { args: [], expectedUrl: 'localhost:4444' + nodeStatusAPIPath },
-    { args: ['-port', '5678'], expectedUrl: 'localhost:5678' + nodeStatusAPIPath },
-    { args: ['-hub', 'https://foo/wd/register'], expectedUrl: 'localhost:4444' + nodeStatusAPIPath },
+    { args: [], expectedUrl: 'localhost:4444' + nodeStatusAPIPath(false) },
+    { args: [], expectedUrl: 'localhost:4444' + nodeStatusAPIPath(true), seleniumVersion: '4.0.0-alpha-7' },
+    { args: ['-port', '5678'], expectedUrl: 'localhost:5678' + nodeStatusAPIPath(false) },
+    { args: ['-hub', 'https://foo/wd/register'], expectedUrl: 'localhost:4444' + nodeStatusAPIPath(false) },
     {
       args: ['-hub', 'https://foo:6666/wd/register', '-port', '7777'],
-      expectedUrl: 'localhost:7777' + nodeStatusAPIPath,
+      expectedUrl: 'localhost:7777' + nodeStatusAPIPath(false),
     },
 
     // Started as a Selenium Grid hub
@@ -49,22 +50,28 @@ describe('getSeleniumStatusUrl', () => {
     },
 
     // Started as a Selenium Grid node
-    { args: ['-role', 'node'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath },
-    { args: ['-role', 'node', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath },
-    { args: ['-role', 'node', '-host', 'alias', '-port', '7777'], expectedUrl: 'alias:7777' + nodeStatusAPIPath },
-    { args: ['-role', 'node', '-hub', 'https://foo/wd/register'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath },
+    { args: ['-role', 'node'], expectedUrl: 'localhost:5555' + nodeStatusAPIPath(false) },
+    { args: ['-role', 'node', '-port', '7777'], expectedUrl: 'localhost:7777' + nodeStatusAPIPath(false) },
+    {
+      args: ['-role', 'node', '-host', 'alias', '-port', '7777'],
+      expectedUrl: 'alias:7777' + nodeStatusAPIPath(false),
+    },
+    {
+      args: ['-role', 'node', '-hub', 'https://foo/wd/register'],
+      expectedUrl: 'localhost:5555' + nodeStatusAPIPath(false),
+    },
     {
       args: ['-role', 'node', '-hub', 'https://foo:6666/wd/register', '-port', '7777'],
-      expectedUrl: 'localhost:7777' + nodeStatusAPIPath,
+      expectedUrl: 'localhost:7777' + nodeStatusAPIPath(false),
     },
 
     {
       args: ['-role', 'node', '-nodeConfig', path.join(__dirname, 'fixtures', 'config.node.json')],
-      expectedUrl: 'foo:123' + nodeStatusAPIPath,
+      expectedUrl: 'foo:123' + nodeStatusAPIPath(false),
     },
     {
       args: ['-role', 'node', '-host', 'alias', '-nodeConfig', path.join(__dirname, 'fixtures', 'config.node.json')],
-      expectedUrl: 'alias:123' + nodeStatusAPIPath,
+      expectedUrl: 'alias:123' + nodeStatusAPIPath(false),
     },
     {
       args: [
@@ -77,12 +84,12 @@ describe('getSeleniumStatusUrl', () => {
         '-nodeConfig',
         path.join(__dirname, 'fixtures', 'config.node.json'),
       ],
-      expectedUrl: 'alias:7777' + nodeStatusAPIPath,
+      expectedUrl: 'alias:7777' + nodeStatusAPIPath(false),
     },
   ];
   const testWithData = function (dataItem) {
     return function () {
-      const actual = statusUrl.getSeleniumStatusUrl(dataItem.args);
+      const actual = statusUrl.getSeleniumStatusUrl(dataItem.args, { version: dataItem.seleniumVersion || '3.141.59' });
       const expected = 'http://' + dataItem.expectedUrl;
 
       assert.strictEqual(actual, expected);
