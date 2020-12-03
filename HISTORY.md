@@ -1,5 +1,10 @@
-# 6.22.2 (2020-11-27)
-* edgechromium disabled for linux platform
+# 6.23.0 (2020-12-02)
+* allow specifying `fullURL` to download selenium or browser driver #520
+* increased download and startup timeouts, and added more logging #519
+* edgechromium startup disabled for linux platform
+
+# 6.22.2 (2020-11-30)
+* edgechromium install disabled for linux platform
 
 # 6.22.1 (2020-11-27)
 * avoid mutating the default config
