@@ -38,7 +38,7 @@
     "minimist": "^1.2.5",
     "mkdirp": "^1.0.4",
     "progress": "2.0.3",
-    "tar-stream": "2.1.4",
+    "tar-stream": "2.2.0",
     "which": "^2.0.2",
     "yauzl": "^2.10.0"
   },
