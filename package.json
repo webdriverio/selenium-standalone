@@ -52,6 +52,6 @@
     "json": "10.0.0",
     "mocha": "6.2.3",
     "mversion": "2.0.1",
-    "prettier": "2.2.1"
+    "prettier": "2.3.1"
   }
 }
