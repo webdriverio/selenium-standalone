@@ -49,6 +49,8 @@ fi
 doctoc README.md
 
 # Update and tag Git project
+echo "Press enter to proceed"
+read proceed
 git commit -am "${NEW_VERSION}"
 git tag -a v${NEW_VERSION}
 git push
