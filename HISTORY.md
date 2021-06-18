@@ -1,3 +1,8 @@
+# 6.24.0 (2021-06-16)
+* selenium 4 support
+* update default versions
+* package updates
+
 # 6.23.0 (2020-12-02)
 * allow specifying `fullURL` to download selenium or browser driver #520
 * increased download and startup timeouts, and added more logging #519
