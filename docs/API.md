@@ -103,8 +103,6 @@ By default all drivers are loaded, you only control and change the versions or a
 
 `opts.seleniumArgs` array of arguments for the selenium server, passed directly to [child_process.spawn](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options). Defaults to `[]`.
 
-`opts.spawnCb` will be called if provided as soon as the selenium child process was spawned. It may be interesting if you want to do some more debug.
-
 `opts.javaPath` set the javaPath manually, otherwise we use `[which](https://github.com/isaacs/node-which).sync('java')`.
 
 `opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.

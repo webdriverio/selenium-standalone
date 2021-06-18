@@ -1,3 +1,6 @@
+# 7.0.1 (2021-07-01)
+* removed `spawnCb`
+
 # 7.0.0 (2021-06-18)
 * BREAKING CHANGE drop nodejs 10, minimum version is 12
 * BREAKING CHANGE removed callbacks for `install` and `start` commands
@@ -5,6 +8,7 @@
 * BREAKING CHANGE docker images are built with `jdk11`
 * BREAKING CHANGE dropped support of old browser drivers and platforms
 * BREAKING CHANGE change folder structure #491
+* BREAKING CHANGE removed `spawnCb`
 * check port before starting selenium #553
 
 # 6.24.0 (2021-06-16)
