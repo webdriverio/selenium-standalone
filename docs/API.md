@@ -6,7 +6,7 @@
   - [Example](#example)
   - [selenium.install([opts])](#seleniuminstallopts)
   - [selenium.start([opts])](#seleniumstartopts)
-      - [`Error: Port 4444 is already in use.`](#error-port-4444-is-already-in-use)
+  - [Error: Port 4444 is already in use.](#error-port-4444-is-already-in-use)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -22,39 +22,43 @@ Here you can find an up-to-date example of the configuration object:
 ```js
 const selenium = require('selenium-standalone');
 
-selenium.install({
-  // check for more recent versions of selenium here:
-  // https://selenium-release.storage.googleapis.com/index.html
-  version: '3.141.59',
-  baseURL: 'https://selenium-release.storage.googleapis.com',
-  drivers: {
-    chrome: {
-      // check for more recent versions of chrome driver here:
-      // https://chromedriver.storage.googleapis.com/index.html
-      version: '87.0.4280.20',
-      arch: process.arch,
-      baseURL: 'https://chromedriver.storage.googleapis.com'
-    },
-    ie: {
-      // check for more recent versions of internet explorer driver here:
-      // https://selenium-release.storage.googleapis.com/index.html
-      version: '3.150.0',
-      arch: process.arch,
-      baseURL: 'https://selenium-release.storage.googleapis.com'
+async function myFn() {
+  await selenium.install({
+    // check for more recent versions of selenium here:
+    // https://selenium-release.storage.googleapis.com/index.html
+    version: '3.141.59',
+    baseURL: 'https://selenium-release.storage.googleapis.com',
+    drivers: {
+      chrome: {
+        // check for more recent versions of chrome driver here:
+        // https://chromedriver.storage.googleapis.com/index.html
+        version: 'latest',
+        arch: process.arch,
+        baseURL: 'https://chromedriver.storage.googleapis.com'
+      },
+      ie: {
+        // check for more recent versions of internet explorer driver here:
+        // https://selenium-release.storage.googleapis.com/index.html
+        version: '3.150.1',
+        arch: process.arch,
+        baseURL: 'https://selenium-release.storage.googleapis.com'
+      }
     }
-  },
-  ignoreExtraDrivers: true,
-  proxy: 'http://localproxy.com', // see https://www.npmjs.com/package/got#proxies
-  requestOpts: { // see https://www.npmjs.com/package/got
-    timeout: 10000
-  },
-  logger: function(message) {
+  });
 
-  },
-  progressCb: function(totalLength, progressLength, chunkLength) {
+  const seleniumChildProcess = await selenium.start({
+    drivers: {
+      chrome: {
+        version: 'latest',
+      },
+    }
+  });
 
-  }
-}, cb);
+  // run tests
+
+  // finally kill selenium process!
+  seleniumChildProcess.kill();
+}
 ```
 
 ## selenium.install([opts])
@@ -65,14 +69,14 @@ selenium.install({
 
 The current defaults can be found in [lib/default-config.js](lib/default-config.js).
 
-`arch` is either `ia32` or `x64`, it's here because you might want to switch to a particular
+`opts.arch` is either `ia32` or `x64`, it's here because you might want to switch to a particular
 arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
-`baseURL` is used to find the server having the selenium or drivers files.
+`opts.baseURL` is used to find the server having the selenium or drivers files.
 
-`fullURL` as an alternative to baseURL it's possible specify full url, ex `https://selenium-release.storage.googleapis.com/4.0-alpha-7/selenium-server-4.0.0-alpha-7.jar`.
+`opts.fullURL` as an alternative to baseURL it's possible specify full url, ex `https://selenium-release.storage.googleapis.com/4.0-alpha-7/selenium-server-4.0.0-alpha-7.jar`.
 
-`opts.ignoreExtraDrivers` only downloads and installs drivers explicity specified.
+`opts.ignoreExtraDrivers` only downloads and installs drivers explicity specified. Broken https://github.com/vvo/selenium-standalone/issues/421
 
 `opts.basePath` sets the base directory used to store the selenium standalone `.jar` and drivers. Defaults to current working directory + .selenium/
 
@@ -109,9 +113,7 @@ By default all drivers are loaded, you only control and change the versions or a
 
 returns `Promise<ChildProcess>`
 
-So you can `const child = await start(); child.kill()` when you are done.
-
-#### `Error: Port 4444 is already in use.`
+## Error: Port 4444 is already in use.
 
 If you're getting this error, it means that you didn't shut down the server successfully the last time you started it, so it's still running in the background. You can kill it by running:
 
