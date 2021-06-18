@@ -7,7 +7,10 @@
     {
       "name": "install",
       "program": "${workspaceFolder}/bin/selenium-standalone",
-      "args": ["install"],
+      "args": [
+        "install",
+        // "--version=4.0.0-alpha-7"
+      ],
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
       "type": "node",
