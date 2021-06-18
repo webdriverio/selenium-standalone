@@ -92,7 +92,7 @@ describe('getSeleniumStatusUrl', () => {
       const actual = statusUrl.getSeleniumStatusUrl(dataItem.args, { version: dataItem.seleniumVersion || '3.141.59' });
       const expected = 'http://' + dataItem.expectedUrl;
 
-      assert.strictEqual(actual, expected);
+      assert.strictEqual(actual.toString(), expected);
     };
   };
 

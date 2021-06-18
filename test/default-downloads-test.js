@@ -129,8 +129,6 @@ describe('default-downloads', function () {
         });
       });
 
-      // No x32 for latest chromedriver on linux
-
       it('x64 download exists', async () => {
         opts = merge(opts, {
           drivers: {
@@ -153,8 +151,6 @@ describe('default-downloads', function () {
           value: 'darwin',
         });
       });
-
-      // No x32 for latest chromedriver on mac
 
       it('x64 download exists', async () => {
         computedUrls = await computeDownloadUrls(opts);
