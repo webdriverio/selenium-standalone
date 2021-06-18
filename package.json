@@ -14,8 +14,7 @@
     "lint": "eslint --ignore-path .gitignore ."
   },
   "bin": {
-    "selenium-standalone": "./bin/selenium-standalone",
-    "start-selenium": "./bin/start-selenium"
+    "selenium-standalone": "./bin/selenium-standalone"
   },
   "repository": {
     "type": "git",
