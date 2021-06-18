@@ -11,53 +11,32 @@ const path = require('path');
 const selenium = require('../');
 const defaultConfig = require('../lib/default-config')();
 
+if (!process.listeners('unhandledRejection').length === 0) {
+  process.on('unhandledRejection', (reason) => {
+    console.error(reason);
+  });
+}
+
 const actions = {
-  start: function (options) {
+  start: async function (options) {
     const killEvents = ['exit', 'SIGTERM', 'SIGINT'];
+    const cp = await selenium.start(options);
 
-    selenium.start(options, started);
+    console.log('Selenium started');
 
-    function started(err, cp) {
-      if (err) {
-        if (cp) {
-          cp.kill('SIGINT');
-        }
-        throw err;
-      }
+    killEvents.forEach((evName) => {
+      process.once(evName, () => cp.kill('SIGTERM'));
+    });
 
-      console.log('Selenium started');
-
-      killEvents.forEach(register);
-
-      function register(evName) {
-        process.on(evName, kill);
-      }
-
-      function unregister(evName) {
-        process.removeListener(evName, kill);
-      }
-
-      function kill() {
-        killEvents.forEach(unregister);
-        cp.kill('SIGTERM');
-      }
-    }
+    return cp;
   },
-  install: function (options) {
+  install: async function (options) {
     const ProgressBar = require('progress');
     let bar;
     let firstProgress = true;
 
     // eslint-disable-next-line no-param-reassign
     options.progressCb = options.silent ? null : progressCb;
-
-    selenium.install(options, installed);
-
-    function installed(err) {
-      if (err) {
-        throw err;
-      }
-    }
 
     function progressCb(total, progress, chunk, url, reset) {
       if (firstProgress) {
@@ -77,6 +56,8 @@ const actions = {
 
       bar.tick(chunk);
     }
+
+    await selenium.install(options);
   },
 };
 

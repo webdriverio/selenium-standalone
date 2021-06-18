@@ -1,5 +1,7 @@
+const assert = require('assert');
+
 describe('when files are installed', () => {
-  it('should not reinstall them', function (done) {
+  it('should not reinstall them', async function () {
     this.timeout(120000);
 
     const fs = require('fs');
@@ -10,15 +12,10 @@ describe('when files are installed', () => {
 
     // Compare last modified time of files after running the installation
     // again. It shouldn't download any files, otherwise it fails.
-    selenium.install(() => {
-      const currentDirModifTime = fs.statSync(targetDir).mtime.getTime();
-      const isModified = currentDirModifTime > origDirModifTime;
+    await selenium.install();
+    const currentDirModifTime = fs.statSync(targetDir).mtime.getTime();
+    const isModified = currentDirModifTime > origDirModifTime;
 
-      if (isModified) {
-        done(new Error('It should not have reinstalled files'));
-      } else {
-        done();
-      }
-    });
+    assert.strictEqual(isModified, false, 'It should not have reinstalled files');
   });
 });

@@ -12,28 +12,26 @@ describe('programmatic use', function () {
       log += message;
     };
     const options = Object.assign({ logger: logger }, rawOptions);
-    selenium.install(options, (err) => {
-      if (err) {
-        done(err);
-        return;
-      }
-      if (callback(log) !== false) {
-        done();
-      }
-    });
+    selenium
+      .install(options)
+      .catch(done)
+      .then(() => {
+        if (callback(log) !== false) {
+          done();
+        }
+      });
   };
   const testStart = function (done, options, callback) {
     const selenium = require('../');
-    selenium.start(options, (err, cp) => {
-      if (err) {
-        done(err);
-        return;
-      }
-      cp.kill();
-      if (callback(cp) !== false) {
-        done();
-      }
-    });
+    selenium
+      .start(options)
+      .catch(done)
+      .then((cp) => {
+        cp.kill();
+        if (callback(cp) !== false) {
+          done();
+        }
+      });
   };
 
   it('should install', (done) => {
@@ -82,27 +80,12 @@ describe('programmatic use', function () {
   });
 
   it('should start and merge drivers', (done) => {
-    const options = { drivers: { chrome: {} } };
+    const options = { seleniumArgs: ['-port', '4445'], drivers: { chrome: {} } };
     testStart(done, options, (cp) => {
       if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
         done(new Error('Chrome driver should be loaded'));
         return false;
       }
-    });
-  });
-
-  it('can listen to stderr', (done) => {
-    const selenium = require('../');
-    selenium.start((err, cp) => {
-      if (err) {
-        done(err);
-        return;
-      }
-
-      cp.stderr.once('data', () => {
-        cp.kill();
-        done();
-      });
     });
   });
 });

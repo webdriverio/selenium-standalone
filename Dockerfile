@@ -1,7 +1,5 @@
 FROM ubuntu:latest@sha256:aba80b77e27148d99c034a987e7da3a287ed455390352663418c0f2ed40417fe
 
-ENV NODE_VERSION 8.11.2
-
 LABEL author="Vincent Voyer <vincent@zeroload.net>"
 LABEL maintainer="Serban Ghita <serbanghita@gmail.com>"
 
@@ -35,7 +33,7 @@ RUN apt-get -qqy --no-install-recommends install \
   nodejs \
   firefox \
   google-chrome-stable \
-  openjdk-8-jre-headless \
+  openjdk-11-jre-headless \
   xvfb \
   xfonts-100dpi \
   xfonts-75dpi \

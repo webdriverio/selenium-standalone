@@ -1,3 +1,12 @@
+# 7.0.0 (2021-06-18)
+* BREAKING CHANGE drop nodejs 10, minimum version is 12
+* BREAKING CHANGE removed callbacks for `install` and `start` commands
+* BREAKING CHANGE `install` and `start` commands are Promises now!
+* BREAKING CHANGE docker images are built with `jdk11`
+* BREAKING CHANGE dropped support of old browser drivers and platforms
+* BREAKING CHANGE change folder structure #491
+* check port before starting selenium #553
+
 # 6.24.0 (2021-06-16)
 * selenium 4 support
 * update default versions

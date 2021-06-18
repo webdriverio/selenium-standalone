@@ -92,17 +92,6 @@ describe('compute-download-urls', () => {
         });
       });
 
-      it('x32 for versions < 2.34', async () => {
-        opts.drivers.chrome = {
-          baseURL: 'https://localhost',
-          version: '2.0',
-          arch: 'x32',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.chrome, 'https://localhost/2.0/chromedriver_linux32.zip');
-      });
-
       it('x64', async () => {
         opts.drivers.chrome = {
           baseURL: 'https://localhost',
@@ -135,22 +124,10 @@ describe('compute-download-urls', () => {
         });
       });
 
-      it('Use `mac32` for versions < 2.23', async () => {
-        opts.drivers.chrome = {
-          baseURL: 'https://localhost',
-          version: '2.22',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.chrome, 'https://localhost/2.22/chromedriver_mac32.zip');
-      });
-
       it('Use `mac64` for versions >= 2.23', async () => {
         opts.drivers.chrome = {
           baseURL: 'https://localhost',
           version: '2.23',
-          arch: '',
         };
 
         const actual = await computeDownloadUrls(opts);
@@ -169,7 +146,6 @@ describe('compute-download-urls', () => {
         opts.drivers.chrome = {
           baseURL: 'https://localhost',
           version: '2.0',
-          arch: '',
         };
 
         const actual = await computeDownloadUrls(opts);
@@ -196,100 +172,24 @@ describe('compute-download-urls', () => {
         });
       });
 
-      it('uses `wires` name for versions < 0.8.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.7.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.firefox, 'https://localhost/v0.7.0/wires-0.7.0-linux64.gz');
-      });
-
-      it('uses `geckodriver` name for versions >= 0.8.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.8.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.firefox, 'https://localhost/v0.8.0/geckodriver-0.8.0-linux64.gz');
-      });
-
-      it('uses correct directory for 0.3.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.3.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.firefox, 'https://localhost/0.3.0/wires-0.3.0-linux64.gz');
-      });
-
       it('uses leading `v` in version string when >= 0.9.0', async () => {
         opts.drivers.firefox = {
           baseURL: 'https://localhost',
           version: '0.9.0',
-          arch: '',
         };
 
         const actual = await computeDownloadUrls(opts);
         assert.strictEqual(actual.firefox, 'https://localhost/v0.9.0/geckodriver-v0.9.0-linux64.tar.gz');
       });
 
-      it('uses plain version string when < 0.9.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.7.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.firefox, 'https://localhost/v0.7.0/wires-0.7.0-linux64.gz');
-      });
-
-      it('uses `.gz` file extension for versions < 0.9.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.8.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('.gz') > 0);
-        assert(actual.firefox.indexOf('.tar.gz') === -1);
-      });
-
       it('uses `.tar.gz` file extension for versions >= 0.9.0', async () => {
         opts.drivers.firefox = {
           baseURL: 'https://localhost',
           version: '0.9.0',
-          arch: '',
         };
 
         const actual = await computeDownloadUrls(opts);
         assert(actual.firefox.indexOf('.tar.gz') > 0);
-      });
-
-      it('throws if asking a < 0.11.0 version and an arch which is not x64', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.9.0',
-          arch: 'x86',
-        };
-
-        try {
-          await computeDownloadUrls(opts);
-          throw new Error('Error not thrown');
-        } catch (err) {
-          if (err && err.message === 'Only x64 architecture is available for Firefox < 0.11.0') {
-            return;
-          }
-          throw err;
-        }
       });
 
       it('gets the right arch when arch is x86', async () => {
@@ -333,49 +233,14 @@ describe('compute-download-urls', () => {
         });
       });
 
-      it('uses `OSX` platform for versions < 0.9.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.8.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('OSX') > 0);
-      });
-
-      it('uses `mac` platform for versions == 0.9.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.9.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('mac') > 0);
-        assert(actual.firefox.indexOf('macos') === -1);
-      });
-
       it('uses `macos` platform for versions >= 0.10.0', async () => {
         opts.drivers.firefox = {
           baseURL: 'https://localhost',
           version: '0.10.0',
-          arch: '',
         };
 
         const actual = await computeDownloadUrls(opts);
         assert(actual.firefox.indexOf('macos') > 0);
-      });
-
-      it('uses `osx` platform for versions <= 0.6.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.5.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('osx') > 0);
       });
     });
 
@@ -384,17 +249,6 @@ describe('compute-download-urls', () => {
         Object.defineProperty(process, 'platform', {
           value: 'win32',
         });
-      });
-
-      it('uses leading `v` in version string when == 0.5.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.5.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.firefox, 'https://localhost/v0.5.0/wires-v0.5.0-win.zip');
       });
 
       it('gets the right arch when arch is x32 and version >= 0.11.0', async () => {
@@ -419,84 +273,14 @@ describe('compute-download-urls', () => {
         assert(actual.firefox.indexOf('win64.zip') >= 0);
       });
 
-      it('gets the 32 bits version when no arch specified version >= 0.11.0', async () => {
+      it('gets the 64 bits version when no arch specified version >= 0.11.0', async () => {
         opts.drivers.firefox = {
           baseURL: 'https://localhost',
           version: '0.11.0',
-          arch: '',
         };
 
         const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('win32.zip') >= 0);
-      });
-
-      it('throws if asking the 32bit version for 0.9.0/0.10.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.10.0',
-          arch: 'x32',
-        };
-
-        try {
-          await computeDownloadUrls(opts);
-          throw new Error('Error not thrown');
-        } catch (err) {
-          if (err && err.message === 'Only x64 architecture is available for Firefox 0.9.0 and 0.10.0') {
-            return;
-          }
-          throw err;
-        }
-      });
-
-      it('throws if asking the 64bit version for < 0.9.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.8.0',
-          arch: 'x64',
-        };
-
-        try {
-          await computeDownloadUrls(opts);
-          throw new Error('Error not thrown');
-        } catch (err) {
-          if (err && err.message === 'Only 32 bits architectures are available for Firefox <= 0.8.0') {
-            return;
-          }
-          throw err;
-        }
-      });
-
-      it('uses `win32` name for versions 0.8.0 & 0.7.1', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.7.1',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('-win32.zip') > 0);
-      });
-
-      it('uses `windows` name for version 0.3.0', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.3.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('-windows.zip') > 0);
-      });
-
-      it('uses `win` name for versions other versions', async () => {
-        opts.drivers.firefox = {
-          baseURL: 'https://localhost',
-          version: '0.5.0',
-          arch: '',
-        };
-
-        const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('-win.zip') > 0);
+        assert(actual.firefox.indexOf('win64.zip') >= 0);
       });
     });
   });
@@ -615,16 +399,6 @@ describe('compute-download-urls', () => {
         });
       });
 
-      it('throws for x32 arch', (done) => {
-        opts.drivers.chromiumedge = {
-          baseURL: 'https://localhost',
-          version: '86.0.600.0',
-          arch: 'x32',
-        };
-
-        computeDownloadUrls(opts).catch(() => done());
-      });
-
       it('x64', async () => {
         opts.drivers.chromiumedge = {
           baseURL: 'https://localhost',
@@ -642,16 +416,6 @@ describe('compute-download-urls', () => {
         Object.defineProperty(process, 'platform', {
           value: 'darwin',
         });
-      });
-
-      it('throws for x32 arch', (done) => {
-        opts.drivers.chromiumedge = {
-          baseURL: 'https://localhost',
-          version: '86.0.600.0',
-          arch: 'x32',
-        };
-
-        computeDownloadUrls(opts).catch(() => done());
       });
 
       it('x64', async () => {
@@ -688,7 +452,6 @@ describe('compute-download-urls', () => {
         opts.drivers.chromiumedge = {
           baseURL: 'https://localhost',
           version: '86.0.600.0',
-          arch: '',
         };
 
         const actual = await computeDownloadUrls(opts);

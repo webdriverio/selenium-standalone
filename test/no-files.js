@@ -7,14 +7,7 @@ describe('when files are missing', () => {
 
   it('should fail', (done) => {
     const selenium = require('../');
-    selenium.start((err) => {
-      if (err) {
-        done();
-        return;
-      }
-
-      done(new Error('We should have got an error'));
-    });
+    selenium.start().catch(() => done());
   });
 
   before(() => {

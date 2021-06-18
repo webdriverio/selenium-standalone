@@ -35,7 +35,7 @@ $ docker run -it -p 4444:4444 vvoyer/selenium-standalone
 
 * `SCREEN_GEOMETRY` Set browser window size
   * Format: `<WIDTH>x<HEIGHT>x<DEPTH>`
-  * Default: `1024x768x16`
+  * Default: `1920x1080x16`
   * Usage example: set screen size to 1200x1200 with 8bits depth
     ```
     $ docker run -it -p 4444:4444 -e SCREEN_GEOMETRY="1200x1200x8" vvoyer/selenium-standalone

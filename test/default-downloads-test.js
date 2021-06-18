@@ -13,7 +13,7 @@ let opts = {
 };
 
 async function doesDownloadExist(url) {
-  const downloadStream = got.stream(url, { timeout: 10000, retry: 0 });
+  const downloadStream = got.stream(url, { timeout: 15000, retry: 0 });
   return new Promise((resolve, reject) => {
     downloadStream
       .once('response', () => resolve())
@@ -56,70 +56,72 @@ describe('default-downloads', function () {
     });
   });
 
-  describe('ie', () => {
-    before(() => {
-      Object.defineProperty(process, 'platform', {
-        value: 'win32',
-      });
-    });
-
-    it('ia32 download exists', async () => {
-      opts = merge(opts, {
-        drivers: {
-          ie: {
-            arch: 'ia32',
-          },
-        },
+  if (process.version.startsWith('v14.')) {
+    describe('ie', () => {
+      before(() => {
+        Object.defineProperty(process, 'platform', {
+          value: 'win32',
+        });
       });
 
-      computedUrls = await computeDownloadUrls(opts);
-
-      assert(computedUrls.ie.indexOf('Win32') > 0);
-      await doesDownloadExist(computedUrls.ie);
-    });
-
-    it('x64 download exists', async () => {
-      opts = merge(opts, {
-        drivers: {
-          ie: {
-            arch: 'x64',
-          },
-        },
-      });
-
-      computedUrls = await computeDownloadUrls(opts);
-
-      assert(computedUrls.ie.indexOf('x64') > 0);
-      await doesDownloadExist(computedUrls.ie);
-    });
-  });
-
-  describe('edge', () => {
-    before(() => {
-      Object.defineProperty(process, 'platform', {
-        value: 'win32',
-      });
-    });
-
-    const releases = require('../lib/microsoft-edge-releases');
-
-    Object.keys(releases).forEach((version) => {
-      it('version `' + version + '` download exists', async () => {
+      it('ia32 download exists', async () => {
         opts = merge(opts, {
           drivers: {
-            edge: {
-              version: version,
+            ie: {
+              arch: 'ia32',
             },
           },
         });
 
         computedUrls = await computeDownloadUrls(opts);
 
-        assert.strictEqual(computedUrls.edge, releases[version].url);
-        await doesDownloadExist(computedUrls.edge);
+        assert(computedUrls.ie.indexOf('Win32') > 0);
+        await doesDownloadExist(computedUrls.ie);
+      });
+
+      it('x64 download exists', async () => {
+        opts = merge(opts, {
+          drivers: {
+            ie: {
+              arch: 'x64',
+            },
+          },
+        });
+
+        computedUrls = await computeDownloadUrls(opts);
+
+        assert(computedUrls.ie.indexOf('x64') > 0);
+        await doesDownloadExist(computedUrls.ie);
       });
     });
-  });
+
+    describe('edge', () => {
+      before(() => {
+        Object.defineProperty(process, 'platform', {
+          value: 'win32',
+        });
+      });
+
+      const releases = require('../lib/microsoft-edge-releases');
+
+      Object.keys(releases).forEach((version) => {
+        it('version `' + version + '` download exists', async () => {
+          opts = merge(opts, {
+            drivers: {
+              edge: {
+                version: version,
+              },
+            },
+          });
+
+          computedUrls = await computeDownloadUrls(opts);
+
+          assert.strictEqual(computedUrls.edge, releases[version].url);
+          await doesDownloadExist(computedUrls.edge);
+        });
+      });
+    });
+  }
 
   describe('chrome', () => {
     describe('linux', () => {
@@ -128,8 +130,6 @@ describe('default-downloads', function () {
           value: 'linux',
         });
       });
-
-      // No x32 for latest chromedriver on linux
 
       it('x64 download exists', async () => {
         opts = merge(opts, {
@@ -153,8 +153,6 @@ describe('default-downloads', function () {
           value: 'darwin',
         });
       });
-
-      // No x32 for latest chromedriver on mac
 
       it('x64 download exists', async () => {
         computedUrls = await computeDownloadUrls(opts);

@@ -4,9 +4,9 @@
 - [Application Programming Interface (API)](#application-programming-interface-api)
   - [Sample configuration object](#sample-configuration-object)
   - [Example](#example)
-  - [selenium.install([opts,] cb)](#seleniuminstallopts-cb)
-  - [selenium.start([opts,] cb)](#seleniumstartopts-cb)
-      - [`Error: Another Selenium process is already running`](#error-another-selenium-process-is-already-running)
+  - [selenium.install([opts])](#seleniuminstallopts)
+  - [selenium.start([opts])](#seleniumstartopts)
+      - [`Error: Port 4444 is already in use.`](#error-port-4444-is-already-in-use)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -57,7 +57,7 @@ selenium.install({
 }, cb);
 ```
 
-## selenium.install([opts,] cb)
+## selenium.install([opts])
 
 `opts.version` [selenium version](https://selenium-release.storage.googleapis.com/index.html) to install.
 
@@ -82,9 +82,9 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.
 
-`cb(err)` called when install finished or errored.
+returns `Promise<void>`
 
-## selenium.start([opts,] cb)
+## selenium.start([opts])
 
 `opts.version` [selenium version](https://selenium-release.storage.googleapis.com/index.html) to install.
 
@@ -109,11 +109,11 @@ By default all drivers are loaded, you only control and change the versions or a
 
 `opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.
 
-`cb(err, child)` called when the server is running and listening, child is the [ChildProcess](https://nodejs.org/api/child_process.html#child_process_class_childprocess) instance created.
+returns `Promise<ChildProcess>`
 
-So you can `child.kill()` when you are done.
+So you can `const child = await start(); child.kill()` when you are done.
 
-#### `Error: Another Selenium process is already running`
+#### `Error: Port 4444 is already in use.`
 
 If you're getting this error, it means that you didn't shut down the server successfully the last time you started it, so it's still running in the background. You can kill it by running:
 
