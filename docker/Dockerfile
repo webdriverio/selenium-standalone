@@ -10,7 +10,7 @@ LABEL maintainers="Serban Ghita <serbanghita@gmail.com>, David Catalan <catalan.
 ENV LC_ALL=C
 ENV DISPLAY=:99
 ENV SELENIUM_CONSOLE_URL=http://localhost:4444/wd/hub
-ENV SCREEN_GEOMETRY=1024x768x16
+ENV SCREEN_GEOMETRY=1920x1080x16
 
 
 # Expose Selenium web console port

@@ -1,3 +1,10 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Ensure you have the minimum required Java version](#ensure-you-have-the-minimum-required-java-version)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ### Ensure you have the minimum required Java version
 
 With the release of Selenium 3+, the minimum required version of Java is 8.

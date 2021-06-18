@@ -11,9 +11,11 @@ const path = require('path');
 const selenium = require('../');
 const defaultConfig = require('../lib/default-config')();
 
-process.on('unhandledRejection', (reason) => {
-  console.error(reason);
-});
+if (!process.listeners('unhandledRejection').length === 0) {
+  process.on('unhandledRejection', (reason) => {
+    console.error(reason);
+  });
+}
 
 const actions = {
   start: async function (options) {

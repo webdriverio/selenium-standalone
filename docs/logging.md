@@ -1,3 +1,12 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Logging](#logging)
+  - [Selenium Process](#selenium-process)
+  - [Debug Logs for Selenium Standalone Process](#debug-logs-for-selenium-standalone-process)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ### Logging
 
 #### Selenium Process
