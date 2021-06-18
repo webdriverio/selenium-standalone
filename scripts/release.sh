@@ -49,6 +49,7 @@ fi
 doctoc README.md
 
 # Update and tag Git project
+read Before add and commit
 git commit -am "${NEW_VERSION}"
 git tag -a v${NEW_VERSION}
 git push
