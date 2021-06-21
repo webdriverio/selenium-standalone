@@ -122,16 +122,34 @@ describe('compute-download-urls', () => {
         Object.defineProperty(process, 'platform', {
           value: 'darwin',
         });
+
+        Object.defineProperty(process, 'arch', {
+          value: 'x64',
+        });
       });
 
-      it('Use `mac64` for versions >= 2.23', async () => {
+      it('Use `mac64` before m1', async () => {
         opts.drivers.chrome = {
           baseURL: 'https://localhost',
-          version: '2.23',
+          version: '91.0.864.53',
         };
 
         const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.chrome, 'https://localhost/2.23/chromedriver_mac64.zip');
+        assert.strictEqual(actual.chrome, 'https://localhost/91.0.864.53/chromedriver_mac64.zip');
+      });
+
+      it('Use `mac64_m1` starting from m1', async () => {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '91.0.864.53',
+        };
+
+        Object.defineProperty(process, 'arch', {
+          value: 'arm64',
+        });
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chrome, 'https://localhost/91.0.864.53/chromedriver_mac64_m1.zip');
       });
     });
 
@@ -231,16 +249,34 @@ describe('compute-download-urls', () => {
         Object.defineProperty(process, 'platform', {
           value: 'darwin',
         });
+        Object.defineProperty(process, 'arch', {
+          value: 'x64',
+        });
       });
 
-      it('uses `macos` platform for versions >= 0.10.0', async () => {
+      it('uses `macos` before m1', async () => {
         opts.drivers.firefox = {
           baseURL: 'https://localhost',
           version: '0.10.0',
         };
 
         const actual = await computeDownloadUrls(opts);
-        assert(actual.firefox.indexOf('macos') > 0);
+        console.log(actual.firefox);
+        assert(actual.firefox.indexOf('macos.') > 0);
+      });
+
+      it('uses `macos-aarch64` starting from m1', async () => {
+        Object.defineProperty(process, 'arch', {
+          value: 'arm64',
+        });
+
+        opts.drivers.firefox = {
+          baseURL: 'https://localhost',
+          version: '0.10.0',
+        };
+
+        const actual = await computeDownloadUrls(opts);
+        assert(actual.firefox.indexOf('macos-aarch64.') > 0);
       });
     });
 
