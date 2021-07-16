@@ -10,7 +10,11 @@
   "scripts": {
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
     "test": "./bin/selenium-standalone install && mocha",
-    "release": "./scripts/release.sh",
+    "release": "release-it --github.release",
+    "release:ci": "npm run release -- --ci --npm.skipChecks --no-git.requireCleanWorkingDir",
+    "release:patch": "npm run release -- patch",
+    "release:minor": "npm run release -- minor",
+    "release:major": "npm run release -- major",
     "lint": "eslint --ignore-path .gitignore ."
   },
   "bin": {
@@ -57,6 +61,7 @@
     "json": "11.0.0",
     "mocha": "9.0.1",
     "mversion": "2.0.1",
-    "prettier": "2.3.1"
+    "prettier": "2.3.1",
+    "release-it": "^14.10.0"
   }
 }
