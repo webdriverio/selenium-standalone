@@ -22,13 +22,13 @@ selenium-standalone Server with Chrome and Firefox
 ## Build image
 
 ```
-docker build -t vvoyer/selenium-standalone . --rm
+docker build -t webdriverio/selenium-standalone . --rm
 ```
 
 ## Use image
 
 ```
-$ docker run -it -p 4444:4444 vvoyer/selenium-standalone
+$ docker run -it -p 4444:4444 webdriverio/selenium-standalone
 ```
 
 ### Parameters
@@ -38,7 +38,7 @@ $ docker run -it -p 4444:4444 vvoyer/selenium-standalone
   * Default: `1920x1080x16`
   * Usage example: set screen size to 1200x1200 with 8bits depth
     ```
-    $ docker run -it -p 4444:4444 -e SCREEN_GEOMETRY="1200x1200x8" vvoyer/selenium-standalone
+    $ docker run -it -p 4444:4444 -e SCREEN_GEOMETRY="1200x1200x8" webdriverio/selenium-standalone
     ```
 
 * `DEBUG` Enable selenium-standalone debug messages
@@ -47,11 +47,11 @@ $ docker run -it -p 4444:4444 vvoyer/selenium-standalone
   * Usage example: 
     * Enable debug when building the image
     ```
-    $ docker build --build-arg DEBUG=selenium-standalone:* -t vvoyer/selenium-standalone . --rm
+    $ docker build --build-arg DEBUG=selenium-standalone:* -t webdriverio/selenium-standalone . --rm
     ```
     * Enable debug when running the image
     ```
-    $ docker run -it -p 4444:4444 -e DEBUG="selenium-standalone:*" vvoyer/selenium-standalone
+    $ docker run -it -p 4444:4444 -e DEBUG="selenium-standalone:*" webdriverio/selenium-standalone
     ```
 
 ### Healthcheck
@@ -62,7 +62,7 @@ This defines a _health_ status attached to the running container. It checks that
 
 #### Use cases
 
-* Manually check the status of a running `vvoyer/selenium-standalone` container
+* Manually check the status of a running `webdriverio/selenium-standalone` container
 
   ```
   docker ps
@@ -76,7 +76,7 @@ This defines a _health_ status attached to the running container. It checks that
 
   ```
   # Start container in detached mode, forcing its name to `sel-std`
-  docker run --rm --name=sel-std -d -p 4444:4444 vvoyer/selenium-standalone
+  docker run --rm --name=sel-std -d -p 4444:4444 webdriverio/selenium-standalone
 
   # Will loop until container `sel-std` (you can also check via container id) health status is exactly `healthy`
   while ! docker inspect --format='{{json .State.Health}}' sel-std | grep -sq '"healthy"'; do sleep 1; done

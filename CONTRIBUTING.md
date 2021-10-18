@@ -1,6 +1,6 @@
 # Contributing
 
-Feel free to work on any issue with [pr welcome](https://github.com/vvo/selenium-standalone/issues?q=is%3Aissue+is%3Aopen+label%3A%22pr+welcome%22) label or suggest your changes/improvements!
+Feel free to work on any issue with [pr welcome](https://github.com/webdriverio/selenium-standalone/issues?q=is%3Aissue+is%3Aopen+label%3A%22pr+welcome%22) label or suggest your changes/improvements!
 
 Any help is appreciated!
 

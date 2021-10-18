@@ -17,7 +17,7 @@ in the shell, or snippets of how you are using the JavaScript API.
 
 ## Logs
 It is helpful to include any logs that selenium-standalone outputs to help diagnose issues.
-Take a look at the [README](https://github.com/vvo/selenium-standalone/blob/main/README.md#debug-logs-for-selenium-standalone-process) for how
+Take a look at the [README](https://github.com/webdriverio/selenium-standalone/blob/main/README.md#debug-logs-for-selenium-standalone-process) for how
 to enable debug log statements that will help us even more than the standard output logs.
 
 If there are lots of logs, please link to [a public gist](https://gist.github.com/).

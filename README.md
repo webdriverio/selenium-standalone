@@ -13,8 +13,8 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # selenium-standalone 
-[![dependencies Status](https://david-dm.org/vvo/selenium-standalone/status.svg)](https://david-dm.org/vvo/selenium-standalone)
-[![devDependencies Status](https://david-dm.org/vvo/selenium-standalone/dev-status.svg)](https://david-dm.org/vvo/selenium-standalone?type=dev)
+[![dependencies Status](https://david-dm.org/webdriverio/selenium-standalone/status.svg)](https://david-dm.org/webdriverio/selenium-standalone)
+[![devDependencies Status](https://david-dm.org/webdriverio/selenium-standalone/dev-status.svg)](https://david-dm.org/webdriverio/selenium-standalone?type=dev)
 
 > A node based CLI library for launching [Selenium](http://www.seleniumhq.org/download/) with WebDrivers support.
 
@@ -46,7 +46,7 @@ npx selenium-standalone install && npx selenium-standalone start
 *As a Docker service*
 
 ```shell
-docker run -it -p 4444:4444 vvoyer/selenium-standalone
+docker run -it -p 4444:4444 webdriverio/selenium-standalone
 ```
 
 ![screencast](screencast.gif)

@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:vvo/selenium-standalone.git"
+    "url": "git@github.com:webdriverio/selenium-standalone.git"
   },
   "bugs": {
-    "url": "https://github.com/vvo/selenium-standalone/issues"
+    "url": "https://github.com/webdriverio/selenium-standalone/issues"
   },
-  "homepage": "https://github.com/vvo/selenium-standalone",
+  "homepage": "https://github.com/webdriverio/selenium-standalone",
   "author": "Vincent Voyer <vincent@zeroload.net>",
   "license": "MIT",
   "husky": {
