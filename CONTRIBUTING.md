@@ -6,10 +6,4 @@ Any help is appreciated!
 
 ## Set Up Project
 
-`yarn install`
-
-## Release
-
-```sh
-npm run release [major|minor|patch|x.x.x]
-```
+`npm install`
