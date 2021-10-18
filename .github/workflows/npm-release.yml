@@ -47,7 +47,7 @@ jobs:
           git config --global user.email "christian+webdriverio-release@saucelabs.com"
           git config --global user.name "WebdriverIO Release Bot"
       - name: Install Dependencies
-        run: yarn install
+        run: npm install
       - name: Release
         run: npm run release:ci -- ${{github.event.inputs.releaseType}}
         env:
