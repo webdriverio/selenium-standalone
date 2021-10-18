@@ -62,7 +62,7 @@ describe('programmatic use', function () {
   });
 
   it('should start with custom seleniumArgs', (done) => {
-    testStart(done, { seleniumArgs: ['-port', '12345'] }, (cp) => {
+    testStart(done, { seleniumArgs: ['--port', '12345'] }, (cp) => {
       if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
         done(new Error('Chrome driver should be loaded'));
         return false;
@@ -80,7 +80,7 @@ describe('programmatic use', function () {
   });
 
   it('should start and merge drivers', (done) => {
-    const options = { seleniumArgs: ['-port', '4445'], drivers: { chrome: {} } };
+    const options = { seleniumArgs: ['--port', '4445'], drivers: { chrome: {} } };
     testStart(done, options, (cp) => {
       if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
         done(new Error('Chrome driver should be loaded'));
