@@ -1,16 +1,6 @@
 name: Manual Docker Publish
 
-on:
-  workflow_dispatch:
-    inputs:
-      releaseType:
-        description: 'Release type - major, minor or patch'
-        required: true
-        default: 'patch'
-      distTag:
-        description: 'NPM tag (e.g. use "next" to release a test version)'
-        required: true
-        default: 'latest'
+on: [workflow_dispatch]
 
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -57,12 +47,6 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=sha
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
