@@ -1,4 +1,9 @@
-FROM ubuntu:latest@sha256:aba80b77e27148d99c034a987e7da3a287ed455390352663418c0f2ed40417fe
+FROM ubuntu:bionic
+
+WORKDIR /usr/app
+
+ENV NODE_VERSION 16.11.1
+ENV NVM_DIR /usr/local/nvm
 
 LABEL author="Vincent Voyer <vincent@zeroload.net>"
 LABEL maintainer="Serban Ghita <serbanghita@gmail.com>"
@@ -29,28 +34,48 @@ RUN groupadd --gid 1000 node \
 RUN echo 'node ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt-get -qqy --no-install-recommends install \
-  nodejs \
-  firefox \
-  google-chrome-stable \
-  openjdk-11-jre-headless \
-  xvfb \
-  xfonts-100dpi \
-  xfonts-75dpi \
-  xfonts-scalable \
-  xfonts-cyrillic
+
+RUN \
+  apt-get update && \
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get -y install \
+      default-jre-headless \
+      firefox \
+      google-chrome-stable \
+      xvfb \
+      xfonts-100dpi \
+      xfonts-75dpi \
+      xfonts-scalable \
+      xfonts-cyrillic \
+  && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+# RUN apt-get -qqy --no-install-recommends install \
 
 RUN export DISPLAY=:99.0
 RUN Xvfb :99 -shmem -screen 0 1366x768x16 &
 
-WORKDIR /home/node
-# For development
-# ADD . ./selenium-standalone-local
-# RUN chown node:node -R .
-USER node
+# install nvm
+# https://github.com/creationix/nvm#install-script
+RUN mkdir -p $NVM_DIR
+RUN curl --silent -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# install node and npm
+RUN . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+# add node and npm to path so the commands are available
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+WORKDIR /home/selenium-standalone
 RUN npm init -y
-# RUN npm install -i ./selenium-standalone-local
-RUN npm install -i selenium-standalone
+
+COPY . .
+RUN npm install --production
 
 
-CMD DEBUG=selenium-standalone:* ./node_modules/.bin/selenium-standalone install && DEBUG=selenium-standalone:* ./node_modules/.bin/selenium-standalone start
+CMD DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start

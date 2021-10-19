@@ -10,6 +10,10 @@
   "scripts": {
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
     "test": "./bin/selenium-standalone install && mocha",
+    "docker:build": "run-s docker:build:*",
+    "docker:build:latest": "docker build -t webdriverio/${npm_package_name}:latest --cache-from webdriverio/${npm_package_name}:latest .",
+    "docker:build:tag": "docker build -t webdriverio/${npm_package_name}:${npm_package_version} --cache-from webdriverio/${npm_package_name}:${npm_package_version} .",
+    "docker:push": "docker push webdriverio/${npm_package_name}:latest",
     "release": "release-it --github.release",
     "release:ci": "npm run release -- --ci --npm.skipChecks --no-git.requireCleanWorkingDir",
     "release:patch": "npm run release -- patch",
@@ -61,6 +65,7 @@
     "json": "11.0.0",
     "mocha": "9.0.1",
     "mversion": "2.0.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "2.3.1",
     "release-it": "^14.10.0"
   }
