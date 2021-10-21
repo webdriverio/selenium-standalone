@@ -90,11 +90,15 @@ describe('programmatic use', function () {
   });
 
   it('should start with singleDriverStart options', (done) => {
-    testStart(done, { singleDriverStart: 'firefox', drivers: { chrome: {} , firefox: {} }, seleniumArgs: ['--port', '4446']}, (cp) => {
-      if (cp.spawnargs && cp.spawnargs.some(containsChrome)) {
-        done(new Error('Chrome driver should not be loaded'));
-        return false;
+    testStart(
+      done,
+      { singleDriverStart: 'firefox', drivers: { chrome: {}, firefox: {} }, seleniumArgs: ['--port', '4446'] },
+      (cp) => {
+        if (cp.spawnargs && cp.spawnargs.some(containsChrome)) {
+          done(new Error('Chrome driver should not be loaded'));
+          return false;
+        }
       }
-    });
+    );
   });
 });

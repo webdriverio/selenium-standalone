@@ -56,7 +56,7 @@ capabilities: {
 }
 ```
 
-If you are looking for more sophisticated Docker container that allow you to run browser, check out the [Docker Selenium](https://github.com/SeleniumHQ/docker-selenium) project.
+If you are looking for more sophisticated Docker container that allows you to run browser, check out the [Docker Selenium](https://github.com/SeleniumHQ/docker-selenium) project.
 
 ## Command line interface ([CLI](./docs/CLI.md))
 
