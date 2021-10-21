@@ -38,6 +38,9 @@ selenium-standalone start -- hub
 selenium-standalone start -- node --grid-url http://localhost:4444/grid/register
 selenium-standalone start -- node --grid-url http://localhost:4444/grid/register -port 5556
 
+# start a single driver
+selenium-standalone start --singleDriverStart=chrome
+
 # don't forget to specify downloaded version for v4 alpha
 ./bin/selenium-standalone start --version=4.0.0-alpha-7
 
