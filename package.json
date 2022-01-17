@@ -1,6 +1,6 @@
 {
   "name": "selenium-standalone",
-  "version": "8.0.8",
+  "version": "8.0.9",
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "engines": {
