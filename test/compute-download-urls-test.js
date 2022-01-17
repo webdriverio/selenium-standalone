@@ -62,6 +62,36 @@ describe('compute-download-urls', () => {
       );
     });
 
+    it('version 4 basic', async () => {
+      const actual = await computeDownloadUrls({
+        seleniumVersion: '4.1.0',
+        seleniumBaseURL: 'https://localhost',
+        drivers: {},
+      });
+
+      assert.strictEqual(actual.selenium, 'https://localhost/selenium-4.1.0/selenium-server-4.1.0.jar');
+    });
+
+    it('version 4 with patch', async () => {
+      const actual = await computeDownloadUrls({
+        seleniumVersion: '4.1.1',
+        seleniumBaseURL: 'https://localhost',
+        drivers: {},
+      });
+
+      assert.strictEqual(actual.selenium, 'https://localhost/selenium-4.1.0/selenium-server-4.1.1.jar');
+    });
+
+    it('version 4 with beta string', async () => {
+      const actual = await computeDownloadUrls({
+        seleniumVersion: '4.0.0-beta-3',
+        seleniumBaseURL: 'https://localhost',
+        drivers: {},
+      });
+
+      assert.strictEqual(actual.selenium, 'https://localhost/selenium-4.0.0-beta-3/selenium-server-4.0.0-beta-3.jar');
+    });
+
     it('fullURL', async () => {
       const actual = await computeDownloadUrls({
         seleniumVersion: '4.0.0-alpha-7',
