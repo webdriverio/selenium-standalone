@@ -15,7 +15,7 @@
 ## Sample configuration object
 
 Here you can find an up-to-date example of the configuration object:
-[lib/default-config.js](lib/default-config.js)
+[lib/default-config.js](../lib/default-config.js)
 
 ## Example
 
@@ -67,7 +67,7 @@ async function myFn() {
 
 `opts.drivers` map of drivers to download and install along with selenium standalone server.
 
-The current defaults can be found in [lib/default-config.js](lib/default-config.js).
+The current defaults can be found in [lib/default-config.js](../lib/default-config.js).
 
 `opts.arch` is either `ia32` or `x64`, it's here because you might want to switch to a particular
 arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
