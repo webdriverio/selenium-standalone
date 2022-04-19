@@ -36,7 +36,7 @@ describe('compute-download-urls', () => {
         drivers: {},
       });
 
-      assert.strictEqual(actual.selenium, 'https://localhost/selenium-1.0/selenium-server-standalone-1.0.jar');
+      assert.strictEqual(actual.selenium, 'https://localhost/1.0/selenium-server-standalone-1.0.jar');
     });
 
     it('version with patch', async () => {
@@ -46,7 +46,7 @@ describe('compute-download-urls', () => {
         drivers: {},
       });
 
-      assert.strictEqual(actual.selenium, 'https://localhost/selenium-1.0.1/selenium-server-standalone-1.0.1.jar');
+      assert.strictEqual(actual.selenium, 'https://localhost/1.0/selenium-server-standalone-1.0.1.jar');
     });
 
     it('version with beta string', async () => {
@@ -58,7 +58,7 @@ describe('compute-download-urls', () => {
 
       assert.strictEqual(
         actual.selenium,
-        'https://localhost/selenium-3.0.0-beta2/selenium-server-standalone-3.0.0-beta2.jar'
+        'https://localhost/3.0-beta2/selenium-server-standalone-3.0.0-beta2.jar'
       );
     });
 
