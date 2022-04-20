@@ -56,10 +56,7 @@ describe('compute-download-urls', () => {
         drivers: {},
       });
 
-      assert.strictEqual(
-        actual.selenium,
-        'https://localhost/3.0-beta2/selenium-server-standalone-3.0.0-beta2.jar'
-      );
+      assert.strictEqual(actual.selenium, 'https://localhost/3.0-beta2/selenium-server-standalone-3.0.0-beta2.jar');
     });
 
     it('version 4 basic', async () => {
