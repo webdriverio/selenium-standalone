@@ -1,4 +1,6 @@
 const assert = require('assert');
+const got = require('got');
+const defaults = require('../lib/default-config.js')();
 
 let computeDownloadUrls;
 
@@ -56,7 +58,10 @@ describe('compute-download-urls', () => {
         drivers: {},
       });
 
-      assert.strictEqual(actual.selenium, 'https://localhost/selenium-3.0.0-beta2/selenium-server-standalone-3.0.0-beta2.jar');
+      assert.strictEqual(
+        actual.selenium,
+        'https://localhost/selenium-3.0.0-beta2/selenium-server-standalone-3.0.0-beta2.jar'
+      );
     });
 
     it('version 4 basic', async () => {
@@ -101,6 +106,38 @@ describe('compute-download-urls', () => {
         actual.selenium,
         'https://selenium-release.storage.googleapis.com/4.0-alpha-7/selenium-server-4.0.0-alpha-7.jar'
       );
+    });
+
+    it('generates URLs that respond successfully', async function () {
+      this.timeout(5000); // HTTP requests take a few seconds
+
+      const versionsExpectedToFail = ['3.150.0'];
+
+      let data;
+      try {
+        const releasesURL = 'https://api.github.com/repos/SeleniumHQ/selenium/releases';
+        data = await got(releasesURL).json();
+      } catch (e) {
+        // Likely no internet connection so skip but output error to help
+        // debug in case something else.
+        console.debug(e);
+        return this.skip();
+      }
+
+      const versions = data.map((release) => release.tag_name.replace(/^selenium-/, ''));
+      const checks = versions.map(async (version) => {
+        if (versionsExpectedToFail.includes(version)) return;
+
+        const urls = await computeDownloadUrls({
+          seleniumVersion: version,
+          seleniumBaseURL: defaults.baseURL,
+          drivers: {},
+        });
+
+        const { statusCode } = await got(urls.selenium, { method: 'HEAD', throwHttpErrors: false });
+        assert.strictEqual(statusCode, 200, `URL for Selenium ${version} does not look valid`);
+      });
+      await Promise.all(checks);
     });
   });
 
