@@ -21,16 +21,27 @@ describe('programmatic use', function () {
         }
       });
   };
-  const testStart = function (done, options, callback) {
+  const testStart = function (done, rawOptions, callback) {
     const selenium = require('../');
+    const stdio = [
+      'ignore', // stdin
+      'pipe', // stdout
+      'ignore', // stderr
+    ];
+    const options = Object.assign({}, rawOptions);
+    options.spawnOptions = Object.assign({ stdio }, options.spawnOptions);
     selenium
       .start(options)
       .catch(done)
       .then((cp) => {
         cp.kill();
-        if (callback(cp) !== false) {
-          done();
-        }
+        let stdout = '';
+        cp.stdout.on('data', (chunk) => (stdout += chunk));
+        cp.stdout.on('end', () => {
+          if (callback(stdout) !== false) {
+            done();
+          }
+        });
       });
   };
 
@@ -53,8 +64,8 @@ describe('programmatic use', function () {
   });
 
   it('should start', (done) => {
-    testStart(done, {}, (cp) => {
-      if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
+    testStart(done, {}, (log) => {
+      if (!containsChrome(log)) {
         done(new Error('Chrome driver should be loaded'));
         return false;
       }
@@ -62,8 +73,8 @@ describe('programmatic use', function () {
   });
 
   it('should start with custom seleniumArgs', (done) => {
-    testStart(done, { seleniumArgs: ['--port', '12345'] }, (cp) => {
-      if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
+    testStart(done, { seleniumArgs: ['--port', '12345'] }, (log) => {
+      if (!containsChrome(log)) {
         done(new Error('Chrome driver should be loaded'));
         return false;
       }
@@ -71,8 +82,8 @@ describe('programmatic use', function () {
   });
 
   it('should start with the given drivers', (done) => {
-    testStart(done, { drivers: {} }, (cp) => {
-      if (cp.spawnargs && cp.spawnargs.some(containsChrome)) {
+    testStart(done, { drivers: { firefox: {} } }, (log) => {
+      if (containsChrome(log)) {
         done(new Error('Chrome driver should not be loaded'));
         return false;
       }
@@ -81,8 +92,8 @@ describe('programmatic use', function () {
 
   it('should start and merge drivers', (done) => {
     const options = { seleniumArgs: ['--port', '4445'], drivers: { chrome: {} } };
-    testStart(done, options, (cp) => {
-      if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
+    testStart(done, options, (log) => {
+      if (!containsChrome(log)) {
         done(new Error('Chrome driver should be loaded'));
         return false;
       }
@@ -93,8 +104,8 @@ describe('programmatic use', function () {
     testStart(
       done,
       { singleDriverStart: 'firefox', drivers: { chrome: {}, firefox: {} }, seleniumArgs: ['--port', '4446'] },
-      (cp) => {
-        if (cp.spawnargs && cp.spawnargs.some(containsChrome)) {
+      (log) => {
+        if (containsChrome(log)) {
           done(new Error('Chrome driver should not be loaded'));
           return false;
         }
