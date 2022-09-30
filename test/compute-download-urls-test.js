@@ -218,6 +218,20 @@ describe('compute-download-urls', () => {
         const actual = await computeDownloadUrls(opts);
         assert.strictEqual(actual.chrome, 'https://localhost/91.0.864.53/chromedriver_mac64_m1.zip');
       });
+
+      it('Use `mac_arm64` starting from Chrome 106', async () => {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '106.0.5249.61',
+        };
+
+        Object.defineProperty(process, 'arch', {
+          value: 'arm64',
+        });
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chrome, 'https://localhost/106.0.5249.61/chromedriver_mac_arm64.zip');
+      });
     });
 
     describe('win', () => {
