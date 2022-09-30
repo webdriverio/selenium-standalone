@@ -157,7 +157,7 @@ describe('default-downloads', function () {
       it('x64 download exists', async () => {
         computedUrls = await computeDownloadUrls(opts);
 
-        assert(computedUrls.chrome.indexOf('mac64') > 0);
+        assert(computedUrls.chrome.indexOf('mac_arm64') > 0);
         await doesDownloadExist(computedUrls.chrome);
       });
     });
