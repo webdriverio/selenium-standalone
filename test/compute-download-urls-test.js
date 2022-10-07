@@ -544,6 +544,28 @@ describe('compute-download-urls', () => {
         const actual = await computeDownloadUrls(opts);
         assert.strictEqual(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_mac64.zip');
       });
+
+      it('Use `mac64` on arm64 before Edge 105', async () => {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '104.0.1293.70',
+          arch: 'arm64',
+        };
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chromiumedge, 'https://localhost/104.0.1293.70/edgedriver_mac64.zip');
+      });
+
+      it('Use `mac64_m1` on arm64 starting from Edge 105', async () => {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '105.0.1343.34',
+          arch: 'arm64',
+        };
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chromiumedge, 'https://localhost/105.0.1343.34/edgedriver_mac64_m1.zip');
+      });
     });
 
     describe('win', () => {
