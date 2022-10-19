@@ -109,7 +109,7 @@ describe('compute-download-urls', () => {
     });
 
     it('generates URLs that respond successfully', async function () {
-      this.timeout(5000); // HTTP requests take a few seconds
+      this.timeout(10000); // HTTP requests take a few seconds
 
       const versionsExpectedToFail = ['3.150.0'];
 
