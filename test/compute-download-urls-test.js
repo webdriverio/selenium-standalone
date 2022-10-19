@@ -1,4 +1,6 @@
 const assert = require('assert');
+const got = require('got');
+const defaults = require('../lib/default-config.js')();
 
 let computeDownloadUrls;
 
@@ -105,6 +107,38 @@ describe('compute-download-urls', () => {
         'https://selenium-release.storage.googleapis.com/4.0-alpha-7/selenium-server-4.0.0-alpha-7.jar'
       );
     });
+
+    it('generates URLs that respond successfully', async function () {
+      this.timeout(5000); // HTTP requests take a few seconds
+
+      const versionsExpectedToFail = ['3.150.0'];
+
+      let data;
+      try {
+        const releasesURL = 'https://api.github.com/repos/SeleniumHQ/selenium/releases';
+        data = await got(releasesURL).json();
+      } catch (e) {
+        // Likely no internet connection so skip but output error to help
+        // debug in case something else.
+        console.debug(e);
+        return this.skip();
+      }
+
+      const versions = data.map((release) => release.tag_name.replace(/^selenium-/, ''));
+      const checks = versions.map(async (version) => {
+        if (versionsExpectedToFail.includes(version)) return;
+
+        const urls = await computeDownloadUrls({
+          seleniumVersion: version,
+          seleniumBaseURL: defaults.baseURL,
+          drivers: {},
+        });
+
+        const { statusCode } = await got(urls.selenium, { method: 'HEAD', throwHttpErrors: false });
+        assert.strictEqual(statusCode, 200, `URL for Selenium ${version} does not look valid`);
+      });
+      await Promise.all(checks);
+    });
   });
 
   describe('chrome', () => {
@@ -183,6 +217,20 @@ describe('compute-download-urls', () => {
 
         const actual = await computeDownloadUrls(opts);
         assert.strictEqual(actual.chrome, 'https://localhost/91.0.864.53/chromedriver_mac64_m1.zip');
+      });
+
+      it('Use `mac_arm64` starting from Chrome 106', async () => {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '106.0.5249.61',
+        };
+
+        Object.defineProperty(process, 'arch', {
+          value: 'arm64',
+        });
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chrome, 'https://localhost/106.0.5249.61/chromedriver_mac_arm64.zip');
       });
     });
 
@@ -294,7 +342,6 @@ describe('compute-download-urls', () => {
         };
 
         const actual = await computeDownloadUrls(opts);
-        console.log(actual.firefox);
         assert(actual.firefox.indexOf('macos.') > 0);
       });
 
@@ -496,6 +543,28 @@ describe('compute-download-urls', () => {
 
         const actual = await computeDownloadUrls(opts);
         assert.strictEqual(actual.chromiumedge, 'https://localhost/86.0.600.0/edgedriver_mac64.zip');
+      });
+
+      it('Use `mac64` on arm64 before Edge 105', async () => {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '104.0.1293.70',
+          arch: 'arm64',
+        };
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chromiumedge, 'https://localhost/104.0.1293.70/edgedriver_mac64.zip');
+      });
+
+      it('Use `mac64_m1` on arm64 starting from Edge 105', async () => {
+        opts.drivers.chromiumedge = {
+          baseURL: 'https://localhost',
+          version: '105.0.1343.34',
+          arch: 'arm64',
+        };
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chromiumedge, 'https://localhost/105.0.1343.34/edgedriver_mac64_m1.zip');
       });
     });
 
