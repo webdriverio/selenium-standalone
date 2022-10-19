@@ -29,6 +29,7 @@ describe('getRunningProcessType', () => {
 });
 
 describe('getSeleniumStatusUrl', () => {
+  // selenium 4 version
   const seleniumVersion = '4.5.0';
   const data = [
     // Started as a standalone Selenium Server
