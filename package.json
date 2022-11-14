@@ -56,7 +56,7 @@
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
-    "chai": "4.3.6",
+    "chai": "4.3.7",
     "doctoc": "2.2.1",
     "eslint": "8.27.0",
     "eslint-config-prettier": "8.5.0",
