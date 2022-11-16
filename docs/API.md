@@ -26,7 +26,7 @@ async function myFn() {
   await selenium.install({
     // check for more recent versions of selenium here:
     // https://selenium-release.storage.googleapis.com/index.html
-    version: '3.141.59',
+    version: process.env.SELENIUM_VERSION || '4.4.0',
     baseURL: 'https://selenium-release.storage.googleapis.com',
     drivers: {
       chrome: {
@@ -120,3 +120,7 @@ If you're getting this error, it means that you didn't shut down the server succ
 ```shell
 pkill -f selenium-standalone
 ```
+
+## Set `selenium-standalone` Version as NodeJS environment parameter
+
+You can set any version by `process.env.SELENIUM_VERSION=3.141.59` before starting selenium-standalone. Default values are here: [lib/default-config.js](../lib/default-config.js)
