@@ -123,5 +123,5 @@ pkill -f selenium-standalone
 
 ## set selenium-standalone version as node env parameter
 
-You can set `process.env.SELENIUM_VERSION=3.141.59` before starting selenium-standalone
+You can set any version by `process.env.SELENIUM_VERSION=3.141.59` before starting selenium-standalone  
 Default values are here: [lib/default-config.js](../lib/default-config.js)
