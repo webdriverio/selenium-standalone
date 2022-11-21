@@ -36,7 +36,7 @@ selenium-standalone install --singleDriverInstall=chrome
 # specify hub and nodes to setup your own selenium grid
 selenium-standalone start -- hub
 selenium-standalone start -- node --grid-url http://localhost:4444/grid/register
-selenium-standalone start -- node --grid-url http://localhost:4444/grid/register -port 5556
+selenium-standalone start -- node --grid-url http://localhost:4444/grid/register --port 5556
 
 # start a single driver
 selenium-standalone start --singleDriverStart=chrome
