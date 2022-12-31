@@ -7,3 +7,7 @@ updates:
     time: "11:00"
   open-pull-requests-limit: 10
   versioning-strategy: increase-if-necessary
+  ignore:
+    # fs-extra v11 >= is node14 >=
+    - dependency-name: "fs-extra"
+      update-types: ["version-update:semver-major"]
