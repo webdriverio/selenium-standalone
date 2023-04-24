@@ -58,7 +58,7 @@
   "devDependencies": {
     "chai": "4.3.7",
     "doctoc": "2.2.1",
-    "eslint": "8.38.0",
+    "eslint": "8.39.0",
     "eslint-config-prettier": "8.7.0",
     "eslint-plugin-prettier": "4.2.1",
     "husky": "8.0.3",
