@@ -155,6 +155,27 @@ describe('default-downloads', function () {
       });
 
       it('x64 download exists', async () => {
+        opts = merge(opts, {
+          drivers: {
+            chrome: {
+              arch: 'x64',
+            },
+          },
+        });
+        computedUrls = await computeDownloadUrls(opts);
+
+        assert(computedUrls.chrome.indexOf('mac64') > 0);
+        await doesDownloadExist(computedUrls.chrome);
+      });
+
+      it('arm64 download exists', async () => {
+        opts = merge(opts, {
+          drivers: {
+            chrome: {
+              arch: 'arm64',
+            },
+          },
+        });
         computedUrls = await computeDownloadUrls(opts);
 
         assert(computedUrls.chrome.indexOf('mac-arm64') > 0);

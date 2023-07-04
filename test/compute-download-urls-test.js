@@ -232,6 +232,36 @@ describe('compute-download-urls', () => {
         const actual = await computeDownloadUrls(opts);
         assert.strictEqual(actual.chrome, 'https://localhost/106.0.5249.61/chromedriver_mac_arm64.zip');
       });
+
+      it('Use `mac_arm64` on x64 arch when requested arch is arm64', async () => {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '106.0.5249.61',
+          arch: 'arm64',
+        };
+
+        Object.defineProperty(process, 'arch', {
+          value: 'x64',
+        });
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chrome, 'https://localhost/106.0.5249.61/chromedriver_mac_arm64.zip');
+      });
+
+      it('Use `mac64` on arm64 arch when requested arch is x64', async () => {
+        opts.drivers.chrome = {
+          baseURL: 'https://localhost',
+          version: '106.0.5249.61',
+          arch: 'x64',
+        };
+
+        Object.defineProperty(process, 'arch', {
+          value: 'arm64',
+        });
+
+        const actual = await computeDownloadUrls(opts);
+        assert.strictEqual(actual.chrome, 'https://localhost/106.0.5249.61/chromedriver_mac64.zip');
+      });
     });
 
     describe('win', () => {
