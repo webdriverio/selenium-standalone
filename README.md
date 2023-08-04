@@ -1,3 +1,5 @@
+⚠️ __ATTENTION:__ we are looking for people taking on maintenance for this package. Read more in [`webdriverio/selenium-standalone#813`](https://github.com/webdriverio/selenium-standalone/issues/813).
+
 Node.js Selenium Standalone [![Test](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml)
 ===========================
 
