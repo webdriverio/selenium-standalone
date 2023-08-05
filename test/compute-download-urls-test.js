@@ -22,7 +22,7 @@ describe('compute-download-urls', () => {
 
   // Ensure that any internal state of the module is clean for each test
   beforeEach(() => {
-    computeDownloadUrls = require('../lib/compute-download-urls');
+    computeDownloadUrls = require('../lib/compute-download-urls').computeDownloadUrls;
   });
   afterEach(() => {
     delete require.cache[require.resolve('../lib/compute-download-urls')];
@@ -124,7 +124,7 @@ describe('compute-download-urls', () => {
         return this.skip();
       }
 
-      const versions = data.map((release) => release.tag_name.replace(/^selenium-/, ''));
+      const versions = data.map((release) => release.tag_name.replace(/^selenium-/, '')).filter((f) => f !== 'nightly');
       const checks = versions.map(async (version) => {
         if (versionsExpectedToFail.includes(version)) return;
 
