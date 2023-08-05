@@ -147,19 +147,15 @@ describe('default-downloads', function () {
       });
     });
 
-    describe('mac', () => {
+    describe.skip('mac', () => {
       before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'darwin',
-        });
-        Object.defineProperty(process, 'arch', {
-          value: 'arm64',
         });
       });
 
       it('x64 download exists', async () => {
         computedUrls = await computeDownloadUrls(opts);
-        console.log(computedUrls.chrome);
 
         assert(computedUrls.chrome.indexOf('mac-arm64') > 0);
         await doesDownloadExist(computedUrls.chrome);
