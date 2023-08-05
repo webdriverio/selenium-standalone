@@ -1,6 +1,6 @@
 {
   "name": "selenium-standalone",
-  "version": "8.3.0",
+  "version": "9.0.0",
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "engines": {
@@ -40,6 +40,8 @@
     }
   },
   "dependencies": {
+    "@puppeteer/browsers": "^1.5.0",
+    "axios": "^1.4.0",
     "commander": "^10.0.0",
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.1",
