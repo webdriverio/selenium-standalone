@@ -147,7 +147,7 @@ describe('default-downloads', function () {
       });
     });
 
-    describe.skip('mac', () => {
+    describe('mac', () => {
       before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'darwin',
