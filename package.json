@@ -4,8 +4,8 @@
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "engines": {
-    "node": ">=12.0.0",
-    "npm": ">=6.0.0"
+    "node": ">=16.3.0",
+    "npm": ">=8.0.0"
   },
   "scripts": {
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
