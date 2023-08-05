@@ -152,6 +152,9 @@ describe('default-downloads', function () {
         Object.defineProperty(process, 'platform', {
           value: 'darwin',
         });
+        Object.defineProperty(process, 'arch', {
+          value: 'arm64',
+        });
       });
 
       it('x64 download exists', async () => {
