@@ -43,7 +43,7 @@ describe('default-downloads', function () {
 
   // Ensure that any internal state of the module is clean for each test
   beforeEach(() => {
-    computeDownloadUrls = require('../lib/compute-download-urls');
+    computeDownloadUrls = require('../lib/compute-download-urls').computeDownloadUrls;
   });
   afterEach(() => {
     delete require.cache[require.resolve('../lib/compute-download-urls')];
@@ -157,7 +157,7 @@ describe('default-downloads', function () {
       it('x64 download exists', async () => {
         computedUrls = await computeDownloadUrls(opts);
 
-        assert(computedUrls.chrome.indexOf('mac_arm64') > 0);
+        assert(computedUrls.chrome.indexOf('mac-arm64') > 0);
         await doesDownloadExist(computedUrls.chrome);
       });
     });
@@ -166,6 +166,9 @@ describe('default-downloads', function () {
       before(() => {
         Object.defineProperty(process, 'platform', {
           value: 'win32',
+        });
+        Object.defineProperty(process, 'arch', {
+          value: 'x32',
         });
       });
 
