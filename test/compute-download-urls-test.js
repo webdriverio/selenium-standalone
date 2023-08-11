@@ -233,35 +233,65 @@ describe('compute-download-urls', () => {
         assert.strictEqual(actual.chrome, 'https://localhost/106.0.5249.61/chromedriver_mac_arm64.zip');
       });
 
-      it('Use `mac_arm64` on x64 arch when requested arch is arm64', async () => {
-        opts.drivers.chrome = {
-          baseURL: 'https://localhost',
-          version: '106.0.5249.61',
-          arch: 'arm64',
-        };
+      // the value of opt.drivers.chrome.version changes which logic we use to find the architecture
+      [{
+        description: "use `mac_arm64` on x64 arch when requested arch is arm64 for version <=114",
+        requestedVersion: "106.0.5249.61",
+        requestedArch: 'arm64',
+        processArch: 'x64',
+        expectedUrl: 'https://localhost/106.0.5249.61/chromedriver_mac_arm64.zip'
+      }, {
+        description: "use `mac64` on arm64 arch when requested arch is x64 for version <=114",
+        requestedVersion: "106.0.5249.61",
+        requestedArch: 'x64',
+        processArch: 'arm64',
+        expectedUrl: 'https://localhost/106.0.5249.61/chromedriver_mac64.zip'
+      }, {
+        description: "use `mac_arm64` on x64 arch when requested arch is arm64 for version > 114",
+        requestedVersion: "115.0.5790.170",
+        requestedArch: 'arm64',
+        processArch: 'x64',
+        expectedUrl: 'https://localhost/115.0.5790.170/mac-arm64/chromedriver-mac-arm64.zip'
+      }, {
+        description: "use `mac64` on arm64 arch when requested arch is x64 for version > 114",
+        requestedVersion: "115.0.5790.170",
+        requestedArch: 'x64',
+        processArch: 'arm64',
+        expectedUrl: 'https://localhost/115.0.5790.170/mac-x64/chromedriver-mac64.zip'
+      }, {
+        description: "use `mac_arm64` on x64 arch when requested arch is arm64 for version `latest`",
+        requestedVersion: "latest",
+        requestedArch: 'arm64',
+        processArch: 'x64',
+        expectedRegex: /https:\/\/localhost\/.*\/mac-arm64\/chromedriver-mac-arm64.zip/
+      }, {
+        description: "use `mac64` on arm64 arch when requested arch is x64 for version `latest`",
+        requestedVersion: "latest",
+        requestedArch: 'x64',
+        processArch: 'arm64',
+        expectedRegex: /https:\/\/localhost\/.*\/mac-x64\/chromedriver-mac64.zip/
+      }].forEach(scenario => {
+        it(scenario.description, async () => {
+          opts.drivers.chrome = {
+            baseURL: 'https://localhost',
+            version: scenario.requestedVersion,
+            arch: scenario.requestedArch,
+          };
 
-        Object.defineProperty(process, 'arch', {
-          value: 'x64',
+          Object.defineProperty(process, 'arch', {
+            value: scenario.processArch,
+          });
+
+          const actual = await computeDownloadUrls(opts);
+          if (scenario.expectedRegex) {
+            assert.match(actual.chrome, scenario.expectedUrl);
+            return;
+          }
+          assert.strictEqual(actual.chrome, scenario.expectedUrl);
         });
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.chrome, 'https://localhost/106.0.5249.61/chromedriver_mac_arm64.zip');
       });
 
-      it('Use `mac64` on arm64 arch when requested arch is x64', async () => {
-        opts.drivers.chrome = {
-          baseURL: 'https://localhost',
-          version: '106.0.5249.61',
-          arch: 'x64',
-        };
 
-        Object.defineProperty(process, 'arch', {
-          value: 'arm64',
-        });
-
-        const actual = await computeDownloadUrls(opts);
-        assert.strictEqual(actual.chrome, 'https://localhost/106.0.5249.61/chromedriver_mac64.zip');
-      });
     });
 
     describe('win', () => {
