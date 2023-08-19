@@ -1,3 +1,4 @@
+const { assert } = require('chai');
 const fs = require('fs');
 const path = require('path');
 
@@ -5,9 +6,16 @@ describe('when files are missing', () => {
   const from = path.join(__dirname, '..', '.selenium');
   const to = path.join(__dirname, '..', '.selenium-tmp');
 
-  it('should fail', (done) => {
+  it('should fail', async () => {
     const selenium = require('../');
-    selenium.start().catch(() => done());
+
+    try {
+      await selenium.start();
+
+      throw new Error();
+    } catch {
+      assert(true);
+    }
   });
 
   before(() => {
