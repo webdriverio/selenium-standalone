@@ -77,7 +77,7 @@ describe('programmatic use', function () {
   });
 
   it(`should start`, (done) => {
-    if (process.env.SELENIUM_VERSION.includes('3.141.59')) {
+    if (process.env.SELENIUM_VERSION && process.env.SELENIUM_VERSION.includes('3.141.59')) {
       testStartSelenium3(done, {}, (cp) => {
         if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
           done(new Error('Chrome driver should be loaded'));
@@ -95,7 +95,7 @@ describe('programmatic use', function () {
   });
 
   it('should start with custom seleniumArgs', (done) => {
-    if (process.env.SELENIUM_VERSION.includes('3.141.59')) {
+    if (process.env.SELENIUM_VERSION && process.env.SELENIUM_VERSION.includes('3.141.59')) {
       testStartSelenium3(done, { seleniumArgs: ['-port', '12345'] }, (cp) => {
         if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
           done(new Error('Chrome driver should be loaded'));
@@ -113,7 +113,7 @@ describe('programmatic use', function () {
   });
 
   it('should start with the given drivers', (done) => {
-    if (process.env.SELENIUM_VERSION.includes('3.141.59')) {
+    if (process.env.SELENIUM_VERSION && process.env.SELENIUM_VERSION.includes('3.141.59')) {
       testStartSelenium3(done, { drivers: { firefox: {} } }, (cp) => {
         if (cp.spawnargs && cp.spawnargs.some(containsChrome)) {
           done(new Error('Chrome driver should be loaded'));
@@ -131,7 +131,7 @@ describe('programmatic use', function () {
   });
 
   it('should start and merge drivers', (done) => {
-    if (process.env.SELENIUM_VERSION.includes('3.141.59')) {
+    if (process.env.SELENIUM_VERSION && process.env.SELENIUM_VERSION.includes('3.141.59')) {
       const options = { seleniumArgs: ['-port', '4445'], drivers: { chrome: {} } };
       testStartSelenium3(done, options, (cp) => {
         if (cp.spawnargs && !cp.spawnargs.some(containsChrome)) {
@@ -151,7 +151,7 @@ describe('programmatic use', function () {
   });
 
   it('should start with singleDriverStart options', (done) => {
-    if (process.env.SELENIUM_VERSION.includes('3.141.59')) {
+    if (process.env.SELENIUM_VERSION && process.env.SELENIUM_VERSION.includes('3.141.59')) {
       testStartSelenium3(
         done,
         { singleDriverStart: 'firefox', drivers: { chrome: {}, firefox: {} }, seleniumArgs: ['-port', '4446'] },
