@@ -11,3 +11,5 @@ updates:
     # fs-extra v11 >= is node14 >=
     - dependency-name: "fs-extra"
       update-types: ["version-update:semver-major"]
+    - dependency-name: "got"
+      update-types: ["version-update:semver-major"]
