@@ -13,3 +13,5 @@ updates:
       update-types: ["version-update:semver-major"]
     - dependency-name: "got"
       update-types: ["version-update:semver-major"]
+    - dependency-name: "mocha"
+      update-types: ["version-update:semver-major"]
