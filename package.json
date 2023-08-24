@@ -4,7 +4,7 @@
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
-    "start": "node ./bin/selenium-standalone install",
+    "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
     "test": "export SELENIUM_VERSION=4.9.0&& ./bin/selenium-standalone install && mocha --timeout=15000 && export SELENIUM_VERSION=3.141.59&& ./bin/selenium-standalone install && mocha 'test/programmatic.js' --timeout=15000",
     "docker:build": "run-s docker:build:*",
     "docker:build:latest": "docker build -t webdriverio/${npm_package_name}:latest --cache-from webdriverio/${npm_package_name}:latest .",
