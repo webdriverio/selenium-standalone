@@ -8,7 +8,6 @@ updates:
   open-pull-requests-limit: 10
   versioning-strategy: increase-if-necessary
   ignore:
-    # fs-extra v11 >= is node14 >=
     - dependency-name: "fs-extra"
       update-types: ["version-update:semver-major"]
     - dependency-name: "got"
@@ -19,5 +18,13 @@ updates:
       update-types: ["version-update:semver-major"]
     - dependency-name: "husky"
       update-types: ["version-update:semver-major"]
+    - dependency-name: "release-it"
+      update-types: ["version-update:semver-major"]
+    - dependency-name: "commander"
+      update-types: ["version-update:semver-major"]
+    - dependency-name: "eslint-plugin-prettier"
+      update-types: ["version-update:semver-major"]
+    - dependency-name: "eslint"
+      update-types: ["version-update:semver-major"]  
 
       
