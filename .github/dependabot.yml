@@ -15,3 +15,9 @@ updates:
       update-types: ["version-update:semver-major"]
     - dependency-name: "mocha"
       update-types: ["version-update:semver-major"]
+    - dependency-name: "axios"
+      update-types: ["version-update:semver-major"]
+    - dependency-name: "husky"
+      update-types: ["version-update:semver-major"]
+
+      
