@@ -94,7 +94,7 @@ describe('config without processKiller property"', () => {
   it('start selenium server twice processKiller is undefined', async () => {
     let testErr;
 
-    opts = delete opts.processKiller;
+    delete opts.processKiller;
 
     try {
       await start(opts);
