@@ -1,3 +1,9 @@
+# 9.1.0 (2023-08-26)
+* added new feature processKiller
+
+# 9.0.6 (2023-08-24)
+* support new storage for the latest chromedriver, since v116 (channel: stable, beta, dev, canary)
+
 # 7.1.0 (2021-07-01)
 * support Apple M1 for chrome and gecko drivers #558
 * prevent selenium process from hagning if spawned programmatically without stdout/stderr handlers
