@@ -11,11 +11,11 @@ let opts = {
 };
 
 describe('check killing before starting with processKiller property like 4444', () => {
-  before(async function () {
+  before(async () => {
     await processKiller({}, ':4444');
   });
 
-  after(async function () {
+  after(async () => {
     await processKiller({}, ':4444');
   });
 
@@ -34,11 +34,11 @@ describe('check killing before starting with processKiller property like 4444', 
 });
 
 describe('check killing before starting with processKiller property like :4444', () => {
-  before(async function () {
+  before(async () => {
     await processKiller({}, ':4444');
   });
 
-  after(async function () {
+  after(async () => {
     await processKiller({}, ':4444');
   });
 
@@ -57,11 +57,11 @@ describe('check killing before starting with processKiller property like :4444',
 });
 
 describe('config with wrong processKiller property', () => {
-  before(async function () {
+  before(async () => {
     await processKiller({}, ':4444');
   });
 
-  after(async function () {
+  after(async () => {
     await processKiller({}, ':4444');
   });
 
@@ -83,11 +83,11 @@ describe('config with wrong processKiller property', () => {
 });
 
 describe('config without processKiller property"', () => {
-  before(async function () {
+  before(async () => {
     await processKiller({}, ':4444');
   });
 
-  after(async function () {
+  after(async () => {
     await processKiller({}, ':4444');
   });
 
@@ -107,11 +107,11 @@ describe('config without processKiller property"', () => {
 });
 
 describe('config with processKiller property like 5555 when is running 4444"', () => {
-  before(async function () {
+  before(async () => {
     await processKiller({}, ':4444');
   });
 
-  after(async function () {
+  after(async () => {
     await processKiller({}, ':4444');
   });
 
