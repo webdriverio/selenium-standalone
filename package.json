@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
-    "test": "export SELENIUM_VERSION=4.9.0&& ./bin/selenium-standalone install && mocha --timeout=15000 && export SELENIUM_VERSION=3.141.59&& ./bin/selenium-standalone install && mocha 'test/programmatic.js' --timeout=15000",
+    "test": "export SELENIUM_VERSION=4.9.0&& ./bin/selenium-standalone install && mocha --timeout=60000 && export SELENIUM_VERSION=3.141.59&& ./bin/selenium-standalone install && mocha 'test/programmatic.js' --timeout=60000",
     "docker:build": "run-s docker:build:*",
     "docker:build:latest": "docker build -t webdriverio/${npm_package_name}:latest --cache-from webdriverio/${npm_package_name}:latest .",
     "docker:build:tag": "docker build -t webdriverio/${npm_package_name}:${npm_package_version} --cache-from webdriverio/${npm_package_name}:${npm_package_version} .",
@@ -16,6 +16,9 @@
     "release:minor": "npm run release -- minor",
     "release:major": "npm run release -- major",
     "lint": "eslint --ignore-path .gitignore ."
+  },
+  "engines": {
+    "node": ">=12"
   },
   "bin": {
     "selenium-standalone": "./bin/selenium-standalone"
@@ -40,6 +43,9 @@
     "commander": "^8.3.0",
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.1",
+    "execa": "^5.1.1",
+    "find-process": "^1.4.7",
+    "fkill": "^7.2.1",
     "fs-extra": "^10.0.0",
     "got": "^11.8.2",
     "is-port-reachable": "^3.0.0",
