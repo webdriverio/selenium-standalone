@@ -111,7 +111,7 @@ By default all drivers are loaded, you only control and change the versions or a
 
 `opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.
 
-`opts.processKiller` set it like true for killing selenium server port.
+`opts.processKiller` set for that truthy value, for killing selenium server port.
 
 returns `Promise<ChildProcess>`
 
@@ -123,7 +123,7 @@ If you're getting this error, it means that you didn't shut down the server succ
 pkill -f selenium-standalone
 ```
 
-or use `opts.processKiller` in config
+or use truthy `opts.processKiller` in config
 
 ## Set `selenium-standalone` Version as NodeJS environment parameter
 

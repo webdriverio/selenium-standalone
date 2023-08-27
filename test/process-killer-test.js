@@ -10,7 +10,7 @@ let opts = {
   drivers: defaultConfig.drivers,
 };
 
-describe('check killing before starting with processKiller property like 4444', () => {
+describe('check usual a start is going to be without killing processes', () => {
   before(async () => {
     await processKiller({}, ':4444');
   });
@@ -19,9 +19,31 @@ describe('check killing before starting with processKiller property like 4444', 
     await processKiller({}, ':4444');
   });
 
-  it('start selenium server twice processKiller is 4444', async () => {
+  it('check usual a start', async () => {
     opts = merge(opts, {
-      processKiller: '4444',
+      processKiller: true,
+    });
+
+    try {
+      await start(opts);
+    } catch (err) {
+      assert(false);
+    }
+  });
+});
+
+describe('check killing before starting with truthy processKiller property', () => {
+  before(async () => {
+    await processKiller({}, ':4444');
+  });
+
+  after(async () => {
+    await processKiller({}, ':4444');
+  });
+
+  it('start selenium server twice with processKiller', async () => {
+    opts = merge(opts, {
+      processKiller: true,
     });
 
     try {
@@ -33,7 +55,7 @@ describe('check killing before starting with processKiller property like 4444', 
   });
 });
 
-describe('check killing before starting with processKiller property like :4444', () => {
+describe('check killing before starting without processKiller property', () => {
   before(async () => {
     await processKiller({}, ':4444');
   });
@@ -42,56 +64,7 @@ describe('check killing before starting with processKiller property like :4444',
     await processKiller({}, ':4444');
   });
 
-  it('start selenium server twice processKiller is :4444', async () => {
-    opts = merge(opts, {
-      processKiller: ':4444',
-    });
-
-    try {
-      await start(opts);
-      await start(opts);
-    } catch (err) {
-      assert(!err.message.includes('Port 4444 is already in use'));
-    }
-  });
-});
-
-describe('config with wrong processKiller property', () => {
-  before(async () => {
-    await processKiller({}, ':4444');
-  });
-
-  after(async () => {
-    await processKiller({}, ':4444');
-  });
-
-  it('start selenium server twice processKiller is "wrong"', async () => {
-    let testErr;
-
-    opts = merge(opts, {
-      processKiller: 'wrong',
-    });
-
-    try {
-      await start(opts);
-      await start(opts);
-    } catch (err) {
-      testErr = err;
-    }
-    assert(!testErr || ('message' in testErr && testErr.message.includes('Port 4444 is already in use')));
-  });
-});
-
-describe('config without processKiller property"', () => {
-  before(async () => {
-    await processKiller({}, ':4444');
-  });
-
-  after(async () => {
-    await processKiller({}, ':4444');
-  });
-
-  it('start selenium server twice processKiller is undefined', async () => {
+  it('start selenium server twice without processKiller', async () => {
     let testErr;
 
     delete opts.processKiller;
@@ -106,7 +79,7 @@ describe('config without processKiller property"', () => {
   });
 });
 
-describe('config with processKiller property like 5555 when is running 4444"', () => {
+describe('check killing before starting with falsy processKiller property', () => {
   before(async () => {
     await processKiller({}, ':4444');
   });
@@ -115,11 +88,11 @@ describe('config with processKiller property like 5555 when is running 4444"', (
     await processKiller({}, ':4444');
   });
 
-  it('start selenium server twice port 5555', async () => {
+  it('start selenium server twice with falsy processKiller property', async () => {
     let testErr;
 
     opts = merge(opts, {
-      processKiller: '5555',
+      processKiller: false,
     });
 
     try {
