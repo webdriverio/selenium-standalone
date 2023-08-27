@@ -50,7 +50,7 @@ selenium-standalone install --config=/path/to/config.json
 selenium-standalone start --config=./config/seleniumConfig.js
 
 # killing process before starting
-selenium-standalone start --processKiller=4444
+selenium-standalone start --processKiller
 
 ```
 

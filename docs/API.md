@@ -111,7 +111,7 @@ By default all drivers are loaded, you only control and change the versions or a
 
 `opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.
 
-`opts.processKiller` set port of selenium server for killing, could be ;ile `4444` or `:4444`.
+`opts.processKiller` set it like true for killing selenium server port.
 
 returns `Promise<ChildProcess>`
 
