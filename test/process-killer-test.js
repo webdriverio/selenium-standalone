@@ -46,7 +46,7 @@ describe('check killing before starting by default', () => {
       await start(opts);
       await start(opts);
     } catch (err) {
-      assert(err.message.includes('Port 4444 is already in use'));
+      assert(false);
     }
   });
 });
@@ -61,15 +61,12 @@ describe('check killing before when started twice', () => {
   });
 
   it('start selenium server twice', async () => {
-    let testErr;
-
     try {
       await start(opts);
       await start(opts);
     } catch (err) {
-      testErr = err;
+      assert(false);
     }
-    assert(!('message' in testErr && testErr.message.includes('Port 4444 is already in use')));
   });
 });
 
@@ -95,6 +92,6 @@ describe('check killing before starting with falsy processKiller property', () =
     } catch (err) {
       testErr = err;
     }
-    assert('message' in testErr && testErr.message.includes('Port 4444 is already in use'));
+    assert(testErr && testErr.message.includes('Port 4444 is already in use'));
   });
 });
