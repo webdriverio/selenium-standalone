@@ -49,8 +49,8 @@ selenium-standalone start --singleDriverStart=chrome
 selenium-standalone install --config=/path/to/config.json
 selenium-standalone start --config=./config/seleniumConfig.js
 
-# killing process before starting
-selenium-standalone start --processKiller=true
+# prevent killing selenium process before start
+selenium-standalone start --processKiller=false
 
 ```
 
