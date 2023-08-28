@@ -49,6 +49,9 @@ selenium-standalone start --singleDriverStart=chrome
 selenium-standalone install --config=/path/to/config.json
 selenium-standalone start --config=./config/seleniumConfig.js
 
+# killing process before starting
+selenium-standalone start --processKiller=true
+
 ```
 
 Config file can be a JSON file or a [module file](https://nodejs.org/api/modules.html#modules_file_modules) that exports options as an object:

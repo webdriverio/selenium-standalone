@@ -26,5 +26,13 @@ updates:
       update-types: ["version-update:semver-major"]
     - dependency-name: "eslint"
       update-types: ["version-update:semver-major"]  
+    - dependency-name: "execa"
+      update-types: ["version-update:semver-major"]  
+    - dependency-name: "find-process"
+      update-types: ["version-update:semver-major"]  
+    - dependency-name: "fkill"
+      update-types: ["version-update:semver-major"]  
+    - dependency-name: "prettier"
+      update-types: ["version-update:semver-major"]  
 
       

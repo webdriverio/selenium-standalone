@@ -1,6 +1,6 @@
 ⚠️ __ATTENTION:__ we are looking for people taking on maintenance for this package. Read more in [`webdriverio/selenium-standalone#813`](https://github.com/webdriverio/selenium-standalone/issues/813).
 
-Node.js Selenium Standalone [![Test](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml)
+Node.js Selenium Standalone [![Test](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml) ![Supported node versions](https://img.shields.io/badge/node-12%2C%2013%2C%2014%2C%2015%2C%2016%2C%2017%2C%2018%2C%2019%2C%2020-green)
 ===========================
 
 > A node based CLI library for launching [Selenium](http://www.seleniumhq.org/download/) with [WebDriver](https://w3c.github.io/webdriver/) support.
@@ -13,6 +13,13 @@ Supported Drivers:
  * [Edge WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads)
  * [Chromium Edge WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads)
 
+## Available browsers
+
+By default, Google Chrome, Firefox and Microsoft Edge are available when installed on the host system.
+
+Starting from `v6.22` chrome, edgechromium, and geckodriver support `latest` as version.
+
+Starting from `v9.0.6` support changes regarding new storage for `latest` versions of chromedriver.
 
 ## Install & Run
 
@@ -67,12 +74,6 @@ See [CLI](./docs/CLI.md) docs
 ## Application Programming Interface ([API](./docs/API.md))
 
 See [API](./docs/API.md) docs
-
-## Available browsers
-
-By default, Google Chrome, Firefox and Microsoft Edge are available when installed on the host system.
-
-Starting from `v6.22` chrome, edgechromium, and geckodriver support `latest` as version.
 
 ## Tips
 
