@@ -8,8 +8,6 @@ updates:
   open-pull-requests-limit: 10
   versioning-strategy: increase-if-necessary
   ignore:
-    - dependency-name: "fs-extra"
-      update-types: ["version-update:semver-major"]
     - dependency-name: "got"
       update-types: ["version-update:semver-major"]
     - dependency-name: "mocha"
@@ -25,14 +23,14 @@ updates:
     - dependency-name: "eslint-plugin-prettier"
       update-types: ["version-update:semver-major"]
     - dependency-name: "eslint"
-      update-types: ["version-update:semver-major"]  
+      update-types: ["version-update:semver-major"]
     - dependency-name: "execa"
-      update-types: ["version-update:semver-major"]  
+      update-types: ["version-update:semver-major"]
     - dependency-name: "find-process"
-      update-types: ["version-update:semver-major"]  
+      update-types: ["version-update:semver-major"]
     - dependency-name: "fkill"
-      update-types: ["version-update:semver-major"]  
+      update-types: ["version-update:semver-major"]
     - dependency-name: "prettier"
-      update-types: ["version-update:semver-major"]  
+      update-types: ["version-update:semver-major"]
 
-      
+
