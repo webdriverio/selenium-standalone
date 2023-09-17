@@ -46,7 +46,6 @@
     "execa": "^5.1.1",
     "find-process": "^1.4.7",
     "fkill": "^7.2.1",
-    "fs-extra": "^10.0.0",
     "got": "^11.8.2",
     "is-port-reachable": "^3.0.0",
     "lodash.mapvalues": "^4.6.0",
