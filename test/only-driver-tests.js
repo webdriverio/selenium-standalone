@@ -8,7 +8,7 @@ const checkPathsExistence = require('../lib/check-paths-existence');
 const computeFsPaths = require('../lib/compute-fs-paths');
 const path = require('path');
 
-let opts = {
+const opts = {
   seleniumVersion: defaultConfig.version,
   seleniumBaseURL: defaultConfig.baseURL,
   drivers: defaultConfig.drivers,
@@ -21,7 +21,7 @@ describe('check onlyDriver downloading only driver without selenium server and o
     const paths = await install(testOpt);
 
     testOpt.drivers = {};
-    testOpt.drivers.chrome = opts.drivers['chrome'];
+    testOpt.drivers.chrome = opts.drivers.chrome;
 
     const fsPaths = await computeFsPaths({
       seleniumVersion: opts.seleniumVersion,
@@ -80,7 +80,9 @@ describe('check onlyDriver with certain name of driver', () => {
       await install(testOpt);
 
       assert(false);
-    } catch {}
+    } catch (_) {
+      // eslint-disable-next-line no-empty
+    }
   });
 });
 
