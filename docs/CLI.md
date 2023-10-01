@@ -52,6 +52,10 @@ selenium-standalone start --config=./config/seleniumConfig.js
 # prevent killing selenium process before start
 selenium-standalone start --processKiller=false
 
+# install or start only certain driver
+selenium-standalone install --onlyDriver=chrome
+selenium-standalone start --onlyDriver=chrome
+
 ```
 
 Config file can be a JSON file or a [module file](https://nodejs.org/api/modules.html#modules_file_modules) that exports options as an object:
