@@ -22,12 +22,15 @@ const actions = {
     const killEvents = ['exit', 'SIGTERM', 'SIGINT'];
     const cp = await selenium.start(options);
 
-    console.log('Selenium started');
+    if (!options.onlyDriver) {
+      console.log('Selenium started');
 
-    killEvents.forEach((evName) => {
-      process.once(evName, () => cp.kill('SIGTERM'));
-    });
-
+      killEvents.forEach((evName) => {
+        process.once(evName, () => cp.kill('SIGTERM'));
+      });
+    } else if (cp._handle) {
+      console.log(`started driver path ${cp.spawnfile}`);
+    }
     return cp;
   },
   install: async function (options) {
@@ -56,8 +59,9 @@ const actions = {
 
       bar.tick(chunk);
     }
+    const paths = await selenium.install(options);
 
-    await selenium.install(options);
+    return paths;
   },
 };
 

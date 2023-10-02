@@ -26,7 +26,7 @@ async function myFn() {
   await selenium.install({
     // check for more recent versions of selenium here:
     // https://selenium-release.storage.googleapis.com/index.html
-    version: process.env.SELENIUM_VERSION || '4.4.0',
+    version: process.env.SELENIUM_VERSION || '4.9.0',
     baseURL: 'https://selenium-release.storage.googleapis.com',
     drivers: {
       chrome: {
@@ -86,6 +86,8 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.
 
+`opts.onlyDriver` can be any valid 'chrome' | 'firefox' | 'chromiumedge' it allow to install any driver without selenium server 
+
 returns `Promise<void>`
 
 ## selenium.start([opts])
@@ -113,6 +115,8 @@ By default all drivers are loaded, you only control and change the versions or a
 
 `opts.processKiller` set to falsy value, for preventing killing selenium server port.
 
+`opts.onlyDriver` can be any valid 'chrome' | 'firefox' | 'chromiumedge' it allow to start any driver directly without selenium server
+
 returns `Promise<ChildProcess>`
 
 ## Error: Port 4444 is already in use.
@@ -122,8 +126,6 @@ If you're getting this error, it means that you didn't shut down the server succ
 ```shell
 pkill -f selenium-standalone
 ```
-
-or use truthy `opts.processKiller` in config
 
 ## Set `selenium-standalone` Version as NodeJS environment parameter
 
