@@ -23,7 +23,8 @@ Here you can find an up-to-date example of the configuration object:
 const selenium = require('selenium-standalone');
 
 async function myFn() {
-  await selenium.install({
+  //result is obj with paths to binary and some info like urls to installed files { fsPaths, urls, opts }
+  const details = await selenium.install({
     // check for more recent versions of selenium here:
     // https://selenium-release.storage.googleapis.com/index.html
     version: process.env.SELENIUM_VERSION || '4.9.0',
@@ -31,17 +32,11 @@ async function myFn() {
     drivers: {
       chrome: {
         // check for more recent versions of chrome driver here:
-        // https://chromedriver.storage.googleapis.com/index.html
+        // https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing
         version: 'latest',
         arch: process.arch,
-        baseURL: 'https://chromedriver.storage.googleapis.com'
-      },
-      ie: {
-        // check for more recent versions of internet explorer driver here:
-        // https://selenium-release.storage.googleapis.com/index.html
-        version: '3.150.1',
-        arch: process.arch,
-        baseURL: 'https://selenium-release.storage.googleapis.com'
+        baseURL: 'https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing'
+        channel: 'stable', //option
       }
     }
   });
@@ -50,6 +45,18 @@ async function myFn() {
     drivers: {
       chrome: {
         version: 'latest',
+      },
+    }
+  });
+
+  //or
+  //staring drivers 'chrome' | 'firefox' | 'chromiumedge' without selenium-server
+  const chromeDriverChildProcess = await selenium.start({
+    onlyDriver: 'chrome'
+    drivers: {
+      chrome: {
+        version: 'latest',
+        onlyDriverArgs: [],//option
       },
     }
   });
@@ -86,7 +93,7 @@ arch [sometimes](https://code.google.com/p/selenium/issues/detail?id=5116#c9).
 
 `opts.requestOpts` can be any valid [`got` options object](https://www.npmjs.com/package/got#proxies). You can use this for example to set a timeout.
 
-`opts.onlyDriver` can be any valid 'chrome' | 'firefox' | 'chromiumedge' it allow to install any driver without selenium server 
+`opts.onlyDriver` can be any valid 'chrome' | 'firefox' | 'chromiumedge' it allow to install any driver without selenium server, driver also can be parametrized with onlyDriverArgs, it's []
 
 returns `Promise<void>`
 
@@ -126,6 +133,8 @@ If you're getting this error, it means that you didn't shut down the server succ
 ```shell
 pkill -f selenium-standalone
 ```
+
+since 9.1.0 it's been checked and killed automatically
 
 ## Set `selenium-standalone` Version as NodeJS environment parameter
 
