@@ -46,7 +46,7 @@
     "execa": "^5.1.1",
     "find-process": "^1.4.7",
     "fkill": "^7.2.1",
-    "got": "^11.8.2",
+    "got": "^11.8.6",
     "is-port-reachable": "^3.0.0",
     "lodash.mapvalues": "^4.6.0",
     "lodash.merge": "^4.6.2",
