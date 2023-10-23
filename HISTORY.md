@@ -1,3 +1,12 @@
+# 9.2.3 (2023-10-21)
+* fixed onCancel bug with got
+
+# 9.2.2 (2023-08-26)
+* fixed splitting opts.javaArgs
+
+# 9.2.1 (2023-08-26)
+* added checking downloaded files 
+
 # 9.1.0 (2023-08-26)
 * added new feature processKiller
 
