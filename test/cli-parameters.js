@@ -137,7 +137,7 @@ describe('`selenium-standalone` command parameters', () => {
       process.argv = buildArgv([
         'install',
         '--config=' + path.join(__dirname, 'fixtures', 'config.valid.js'),
-        '--drivers.ie.version=43',
+        '--drivers.chrome.version=43',
         '--',
         '--some=seleniumArgs',
       ]);
@@ -145,8 +145,8 @@ describe('`selenium-standalone` command parameters', () => {
       const parsed = parseCommandAndOptions('/somewhere');
 
       expect(parsed[1].version).to.be.equal('42');
-      expect(parsed[1].drivers.ie.arch).to.be.equal(defaultValues.drivers.ie.arch);
-      expect(parsed[1].drivers.ie.version).to.be.equal('43');
+      expect(parsed[1].drivers.chrome.arch).to.be.equal(defaultValues.drivers.chrome.arch);
+      expect(parsed[1].drivers.chrome.version).to.be.equal('43');
       expect(parsed[1].seleniumArgs).to.be.deep.equal(['--some=seleniumArgs']);
     });
 
