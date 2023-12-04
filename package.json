@@ -62,7 +62,7 @@
     "chai": "4.3.10",
     "doctoc": "2.2.1",
     "eslint": "8.55.0",
-    "eslint-config-prettier": "9.0.0",
+    "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "4.2.1",
     "husky": "^7.0.4",
     "json": "11.0.0",
