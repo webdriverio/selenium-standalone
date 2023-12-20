@@ -39,7 +39,7 @@
     }
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.6.2",
     "commander": "^8.3.0",
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.1",
@@ -66,10 +66,10 @@
     "eslint-plugin-prettier": "4.2.1",
     "husky": "^7.0.4",
     "json": "11.0.0",
-    "mocha": "8.4.0",
-    "mversion": "2.0.1",
+    "mocha": "^10.2.0",
+    "mversion": "^1.2.0",
     "npm-run-all": "^4.1.5",
     "prettier": "2.8.8",
-    "release-it": "^14.14.3"
+    "release-it": "^17.0.1"
   }
 }
