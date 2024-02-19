@@ -56,7 +56,7 @@
     "progress": "2.0.3",
     "tar-stream": "3.1.6",
     "which": "^2.0.2",
-    "yauzl": "^2.10.0"
+    "yauzl": "^3.1.0"
   },
   "devDependencies": {
     "chai": "4.3.10",
