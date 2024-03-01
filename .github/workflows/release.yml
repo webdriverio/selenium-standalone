@@ -30,7 +30,7 @@ jobs:
           team: technical-steering-committee
           organisation: webdriverio
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_WDIO_BOT }}
+          GITHUB_TOKEN: ${{ secrets.WDIO_BOT_GITHUB_TOKEN }}
   npm-release:
     needs: [authorize]
     runs-on: ubuntu-latest
