@@ -75,7 +75,7 @@ jobs:
 
       - name: Retrieve version
         run: |
-          echo "::set-output name=TAG_NAME::$(node -e 'console.log(require(`./package.json`).version)')"
+          echo "TAG_NAME=$(node -e 'console.log(require(`./package.json`).version)')" >> $GITHUB_OUTPUT
         id: version
 
       - name: Set up QEMU
