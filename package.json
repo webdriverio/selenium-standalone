@@ -60,6 +60,7 @@
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.12",
     "@types/mocha": "^10.0.6",
     "chai": "4.3.10",
     "doctoc": "2.2.1",

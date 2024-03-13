@@ -4,9 +4,9 @@ const start = require('../lib/start');
 const defaultConfig = require('../lib/default-config')();
 const processKiller = require('../lib/processKiller');
 
+/** @type {import('../lib/start').StartOptions} */
 let opts = {
-  seleniumVersion: defaultConfig.version,
-  seleniumBaseURL: defaultConfig.baseURL,
+  version: defaultConfig.version,
   drivers: defaultConfig.drivers,
 };
 

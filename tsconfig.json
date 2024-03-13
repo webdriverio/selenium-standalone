@@ -4,7 +4,10 @@
         "noEmit": true,
 
         // Check JavaScript
-        "checkJs": true
+        "checkJs": true,
+
+        // Enable importing .json modules
+        "resolveJsonModule": true
     },
 
     "include": [

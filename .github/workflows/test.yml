@@ -30,8 +30,9 @@ jobs:
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-      # - name: Build
-      #   run: npm run build
+      - name: Build
+        run: npm run build
+        continue-on-error: true   # Allow the step to fail while we resolve problems reported by TypeScript
       - name: Lint
         run: npm run lint
       - name: Test
