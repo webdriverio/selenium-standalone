@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        // Do not output files
+        "noEmit": true,
+
+        // Check JavaScript
+        "checkJs": true
+    },
+
+    "include": [
+        "bin",
+        "lib",
+        "test"
+    ]
+}
