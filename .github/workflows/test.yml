@@ -32,9 +32,12 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-        continue-on-error: true   # Allow the step to fail while we resolve problems reported by TypeScript
-      - name: Lint
+
+        # Allow the build to fail while we resolve problems reported by TypeScript
+      - if: ${{ !cancelled() }}
+        name: Lint
         run: npm run lint
+        
       - name: Test
         run: npm run test
         env:
