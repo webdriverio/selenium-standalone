@@ -64,7 +64,7 @@
   "devDependencies": {
     "@types/chai": "^4.3.12",
     "@types/mocha": "^10.0.6",
-    "chai": "5.1.0",
+    "chai": "^4.4.1",
     "doctoc": "2.2.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
