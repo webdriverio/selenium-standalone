@@ -1,6 +1,6 @@
 const assert = require('assert');
 const merge = require('lodash.merge');
-const got = require('got');
+const { default: got } = require('got');
 
 const defaultConfig = require('../lib/default-config')();
 

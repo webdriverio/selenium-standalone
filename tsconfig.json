@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        // Do not output files
+        "noEmit": true,
+
+        // Check JavaScript
+        "checkJs": true,
+
+        // Enable importing .json modules
+        "resolveJsonModule": true
+    },
+
+    "include": [
+        "bin",
+        "lib",
+        "test"
+    ]
+}

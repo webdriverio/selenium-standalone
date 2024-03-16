@@ -8,23 +8,24 @@ const checkPathsExistence = require('../lib/check-paths-existence');
 const computeFsPaths = require('../lib/compute-fs-paths');
 const path = require('path');
 
+/** @type {import('../lib/install').InstallOptions} */
 const opts = {
-  seleniumVersion: defaultConfig.version,
-  seleniumBaseURL: defaultConfig.baseURL,
+  version: defaultConfig.version,
+  baseURL: defaultConfig.baseURL,
   drivers: defaultConfig.drivers,
 };
 
 describe('check onlyDriver downloading only driver without selenium server and others drivers', () => {
   it('check onlyDriver', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'chrome' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('chrome') };
     const paths = await install(testOpt);
 
     testOpt.drivers = {};
     testOpt.drivers.chrome = opts.drivers.chrome;
 
     const fsPaths = await computeFsPaths({
-      seleniumVersion: opts.seleniumVersion,
+      seleniumVersion: opts.version,
       drivers: testOpt.drivers,
       basePath: path.join(__dirname, '..', '.selenium'),
     });
@@ -50,7 +51,7 @@ describe('check onlyDriver downloading only driver without selenium server and o
 describe('check onlyDriver with certain name of driver', () => {
   it('check "install" method with onlyDriver chromiumedge should return path with only certain driver', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'chromiumedge' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('chromiumedge') };
     const paths = await install(testOpt);
 
     assert(Object.keys(paths.fsPaths).length === 1 && Object.keys(paths.fsPaths).every((i) => i === 'chromiumedge'));
@@ -58,7 +59,7 @@ describe('check onlyDriver with certain name of driver', () => {
 
   it('check "install" method with onlyDriver chrome should return path with only certain driver', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'chrome' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('chrome') };
     const paths = await install(testOpt);
 
     assert(Object.keys(paths.fsPaths).length === 1 && Object.keys(paths.fsPaths).every((i) => i === 'chrome'));
@@ -66,7 +67,7 @@ describe('check onlyDriver with certain name of driver', () => {
 
   it('check "install" method with onlyDriver firefox should return path with only certain driver', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'firefox' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('firefox') };
     const paths = await install(testOpt);
 
     assert(Object.keys(paths.fsPaths).length === 1 && Object.keys(paths.fsPaths).every((i) => i === 'firefox'));
@@ -74,7 +75,7 @@ describe('check onlyDriver with certain name of driver', () => {
 
   it('check "install" method with onlyDriver firefox should return path with only certain driver', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'unknown' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {any} */ ('unknown') };
 
     try {
       await install(testOpt);
@@ -89,7 +90,7 @@ describe('check onlyDriver with certain name of driver', () => {
 describe('check staring drivers twice with onlyDriver option', () => {
   it('check staring twice chromedriver', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'chrome' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('chrome') };
     const process1 = await start(testOpt);
 
     assert(await isPortReachable(9515));
@@ -104,7 +105,7 @@ describe('check staring drivers twice with onlyDriver option', () => {
 
   it('check staring twice chromiumedge', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'chromiumedge' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('chromiumedge') };
     const process1 = await start(testOpt);
 
     assert(await isPortReachable(9515));
@@ -119,7 +120,7 @@ describe('check staring drivers twice with onlyDriver option', () => {
 
   it('check staring twice firefox', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'firefox' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('firefox') };
     const process1 = await start(testOpt);
 
     assert(await isPortReachable(4444, { timeout: 1000, host: '127.0.0.1' }));
@@ -140,7 +141,7 @@ describe('check staring drivers port existence', () => {
 
   it('check staring drivers port chrome', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'chrome' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('chrome') };
     await start(testOpt);
 
     assert(await isPortReachable(9515));
@@ -148,7 +149,7 @@ describe('check staring drivers port existence', () => {
 
   it('check staring drivers port firefox', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'firefox' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('firefox') };
     await start(testOpt);
 
     assert(await isPortReachable(4444, { timeout: 1000, host: '127.0.0.1' }));
@@ -156,7 +157,7 @@ describe('check staring drivers port existence', () => {
 
   it('check staring drivers port chromiumedge', async () => {
     await processKiller([9515, 4444]);
-    const testOpt = { ...{ onlyDriver: 'chromiumedge' }, ...opts };
+    const testOpt = { ...opts, onlyDriver: /** @type {const} */ ('chromiumedge') };
     await start(testOpt);
 
     assert(await isPortReachable(9515));

@@ -4,8 +4,9 @@
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
+    "build": "tsc -p .",
     "start": "DEBUG=selenium-standalone:* ./bin/selenium-standalone install && DEBUG=selenium-standalone:* ./bin/selenium-standalone start",
-    "test": "export SELENIUM_VERSION=4.9.0&& ./bin/selenium-standalone install && mocha --timeout=60000 && export SELENIUM_VERSION=3.141.59&& ./bin/selenium-standalone install && mocha 'test/programmatic.js' --timeout=60000",
+    "test": "export SELENIUM_VERSION=4.9.0&& ./bin/selenium-standalone install && nyc --silent mocha --timeout=60000 && export SELENIUM_VERSION=3.141.59&& ./bin/selenium-standalone install && nyc --silent mocha 'test/programmatic.js' --timeout=60000; nyc report --reporter=text --reporter=html",
     "docker:build": "run-s docker:build:*",
     "docker:build:latest": "docker build -t webdriverio/${npm_package_name}:latest --cache-from webdriverio/${npm_package_name}:latest .",
     "docker:build:tag": "docker build -t webdriverio/${npm_package_name}:${npm_package_version} --cache-from webdriverio/${npm_package_name}:${npm_package_version} .",
@@ -59,6 +60,8 @@
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.12",
+    "@types/mocha": "^10.0.6",
     "chai": "4.3.10",
     "doctoc": "2.2.1",
     "eslint": "8.57.0",
@@ -69,7 +72,9 @@
     "mocha": "^10.2.0",
     "mversion": "^1.2.0",
     "npm-run-all": "^4.1.5",
+    "nyc": "^15.1.0",
     "prettier": "2.8.8",
-    "release-it": "^17.0.1"
+    "release-it": "^17.0.1",
+    "typescript": "^5.4.2"
   }
 }

@@ -1,5 +1,5 @@
 const assert = require('assert');
-const got = require('got');
+const { default: got } = require('got');
 const defaults = require('../lib/default-config.js')();
 
 let computeDownloadUrls;
