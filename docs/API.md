@@ -27,7 +27,7 @@ async function myFn() {
   const details = await selenium.install({
     // check for more recent versions of selenium here:
     // https://selenium-release.storage.googleapis.com/index.html
-    version: process.env.SELENIUM_VERSION || '4.9.0',
+    version: process.env.SELENIUM_VERSION || '4.10.0',
     baseURL: 'https://selenium-release.storage.googleapis.com',
     drivers: {
       chrome: {
