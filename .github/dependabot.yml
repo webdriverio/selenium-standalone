@@ -1,36 +1,32 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: weekly
-    time: "11:00"
-  open-pull-requests-limit: 10
-  versioning-strategy: increase-if-necessary
-  ignore:
-    - dependency-name: "got"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "mocha"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "axios"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "husky"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "release-it"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "commander"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "eslint-plugin-prettier"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "eslint"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "execa"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "find-process"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "fkill"
-      update-types: ["version-update:semver-major"]
-    - dependency-name: "prettier"
-      update-types: ["version-update:semver-major"]
-
-
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      time: "11:00"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase-if-necessary
+    ignore:
+      - dependency-name: "got"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "mocha"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "husky"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "release-it"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "commander"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint-plugin-prettier"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "execa"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "find-process"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "fkill"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "prettier"
+        update-types: ["version-update:semver-major"]
