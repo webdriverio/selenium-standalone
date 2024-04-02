@@ -22,7 +22,6 @@ describe('when files are installed', () => {
       return files;
     }
     const installedFiles = walk(targetDir);
-    console.log('*** installedFiles', installedFiles);
 
     // Get last modified time of files that should already be installed in
     // the .selenium directory.
@@ -30,14 +29,12 @@ describe('when files are installed', () => {
       acc[filepath] = fs.statSync(filepath).mtime.getTime();
       return acc;
     }, {});
-    console.log('*** mtimes', mtimes);
 
     // Compare last modified time of files after running the installation
     // again. It shouldn't download any files, otherwise it fails.
     await selenium.install();
 
     const isModified = !installedFiles.every((filepath) => {
-      console.log('*** mtimes', filepath, mtimes[filepath], fs.statSync(filepath).mtime.getTime());
       return mtimes[filepath] === fs.statSync(filepath).mtime.getTime();
     });
 
