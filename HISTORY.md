@@ -15,7 +15,7 @@
 
 # 7.1.0 (2021-07-01)
 * support Apple M1 for chrome and gecko drivers #558
-* prevent selenium process from hagning if spawned programmatically without stdout/stderr handlers
+* prevent selenium process from hanging if spawned programmatically without stdout/stderr handlers
 
 # 7.0.1 (2021-07-01)
 * removed `spawnCb`

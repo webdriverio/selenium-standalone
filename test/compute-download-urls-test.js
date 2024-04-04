@@ -1,8 +1,7 @@
 const assert = require('assert');
 const { default: got } = require('got');
+const { computeDownloadUrls } = require('../lib/compute-download-urls');
 const defaults = require('../lib/default-config.js')();
-
-let computeDownloadUrls;
 
 /**
  * Tests for the `computeDownloadUrls` module.
@@ -21,9 +20,6 @@ describe('compute-download-urls', () => {
   });
 
   // Ensure that any internal state of the module is clean for each test
-  beforeEach(() => {
-    computeDownloadUrls = require('../lib/compute-download-urls').computeDownloadUrls;
-  });
   afterEach(() => {
     delete require.cache[require.resolve('../lib/compute-download-urls')];
   });
@@ -113,7 +109,13 @@ describe('compute-download-urls', () => {
 
       const versionsExpectedToFail = ['3.150.0'];
 
+      /**
+       * @typedef {Object} Release
+       * @property {string} tag_name
+       */
+      /** @type {ReadonlyArray<Release>} */
       let data;
+
       try {
         const releasesURL = 'https://api.github.com/repos/SeleniumHQ/selenium/releases';
         data = await got(releasesURL).json();

@@ -7,7 +7,16 @@
         "checkJs": true,
 
         // Enable importing .json modules
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+
+        // Identify unused code
+        "allowUnusedLabels": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+
+        // Use the "strict" family
+        "alwaysStrict": true,
+        "noImplicitAny": false
     },
 
     "include": [
