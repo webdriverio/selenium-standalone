@@ -7,7 +7,7 @@
 
 ### `Error: unable to get local issuer certificate`
 
-This error might happen when you are behind a specific proxy. Then you need to set some environement variables:
+This error might happen when you are behind a specific proxy. Then you need to set some environment variables:
 
 ```sh
 NODE_TLS_REJECT_UNAUTHORIZED=0 selenium-standalone install`

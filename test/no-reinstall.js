@@ -1,15 +1,20 @@
 const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
+const selenium = require('..');
+
+const targetDir = path.join(__dirname, '..', '.selenium');
 
 describe('when files are installed', () => {
   it('should not reinstall them', async function () {
     this.timeout(120000);
 
-    const fs = require('fs');
-    const path = require('path');
-    const targetDir = path.join(__dirname, '..', '.selenium');
-    const selenium = require('..');
-
-    // Recursively find files in the given directory
+    /**
+     * Recursively find files in the given directory
+     * @param {string} dirname
+     * @param {string[]} files
+     * @returns {string[]}
+     */
     function walk(dirname, files = []) {
       fs.readdirSync(dirname).forEach((name) => {
         const filepath = path.join(dirname, name);

@@ -62,7 +62,11 @@
   },
   "devDependencies": {
     "@types/chai": "^4.3.12",
+    "@types/debug": "^4.1.12",
+    "@types/lodash.mapvalues": "^4.6.9",
+    "@types/lodash.merge": "^4.6.9",
     "@types/mocha": "^10.0.6",
+    "@types/which": "^3.0.3",
     "chai": "^4.4.1",
     "cross-env": "^7.0.3",
     "doctoc": "2.2.1",

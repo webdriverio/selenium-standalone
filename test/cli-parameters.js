@@ -3,14 +3,16 @@ const chai = require('chai');
 
 const expect = chai.expect;
 let parseCommandAndOptions;
+
+/** @type {string | undefined} */
 let processNodeEnv;
 
 /**
  * Builds a valid ARGV array with passed arguments.
+ * @param {ReadonlyArray<string>} [args]
  */
 function buildArgv(args) {
   let argv = ['/somewhere/node', '/somewhere/selenium-standalone'];
-
   if (args) {
     argv = argv.concat(args);
   }
