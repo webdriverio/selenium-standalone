@@ -1,6 +1,6 @@
 {
   "name": "selenium-standalone",
-  "version": "9.6.0",
+  "version": "9.5.0",
   "description": "installs a `selenium-standalone` command line to install and start a standalone selenium server",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,8 @@
     "release:patch": "npm run release -- patch",
     "release:minor": "npm run release -- minor",
     "release:major": "npm run release -- major",
-    "lint": "eslint --ignore-path .gitignore ."
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "eslint --fix --ignore-path .gitignore ."
   },
   "engines": {
     "node": ">=14"
