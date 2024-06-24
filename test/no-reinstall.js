@@ -39,10 +39,11 @@ describe('when files are installed', () => {
     // again. It shouldn't download any files, otherwise it fails.
     await selenium.install();
 
-    const isModified = !installedFiles.every((filepath) => {
-      return mtimes[filepath] === fs.statSync(filepath).mtime.getTime();
-    });
+    const mtimesAfter = installedFiles.reduce((acc, filepath) => {
+      acc[filepath] = fs.statSync(filepath).mtime.getTime();
+      return acc;
+    }, {});
 
-    assert.strictEqual(isModified, false, 'It should not have reinstalled files');
+    assert.strictEqual(JSON.stringify(mtimes), JSON.stringify(mtimesAfter), 'It should not have reinstalled files');
   });
 });
