@@ -92,12 +92,12 @@ describe('check staring drivers twice with onlyDriver option', () => {
     const testOpt = { ...{ onlyDriver: 'chrome' }, ...opts };
     const process1 = await start(testOpt);
 
-    assert(await isPortReachable(9515, {timeout: 2500}));
+    assert(await isPortReachable(9515, { timeout: 2500 }));
     assert(process1._handle);
 
     const process2 = await start(testOpt);
 
-    assert(await isPortReachable(9515, {timeout: 2500}));
+    assert(await isPortReachable(9515, { timeout: 2500 }));
     assert(!process1._handle);
     assert(process2._handle);
   });
@@ -107,12 +107,12 @@ describe('check staring drivers twice with onlyDriver option', () => {
     const testOpt = { ...{ onlyDriver: 'chromiumedge' }, ...opts };
     const process1 = await start(testOpt);
 
-    assert(await isPortReachable(9515, {timeout: 2500}));
+    assert(await isPortReachable(9515, { timeout: 2500 }));
     assert(process1._handle);
 
     const process2 = await start(testOpt);
 
-    assert(await isPortReachable(9515, {timeout: 2500}));
+    assert(await isPortReachable(9515, { timeout: 2500 }));
     assert(!process1._handle);
     assert(process2._handle);
   });
@@ -143,7 +143,7 @@ describe('check staring drivers port existence', () => {
     const testOpt = { ...{ onlyDriver: 'chrome' }, ...opts };
     await start(testOpt);
 
-    assert(await isPortReachable(9515, {timeout: 2500}));
+    assert(await isPortReachable(9515, { timeout: 2500 }));
   });
 
   it('check staring drivers port firefox', async () => {
@@ -159,6 +159,6 @@ describe('check staring drivers port existence', () => {
     const testOpt = { ...{ onlyDriver: 'chromiumedge' }, ...opts };
     await start(testOpt);
 
-    assert(await isPortReachable(9515, {timeout: 2500}));
+    assert(await isPortReachable(9515, { timeout: 2500 }));
   });
 });
