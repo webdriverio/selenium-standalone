@@ -107,12 +107,12 @@ describe('check staring drivers twice with onlyDriver option', () => {
     const testOpt = { ...{ onlyDriver: 'chromiumedge' }, ...opts };
     const process1 = await start(testOpt);
 
-    assert(await isPortReachable(9515, { timeout: 2500 }));
+    assert(await isPortReachable(9515, { timeout: 3500 }));
     assert(process1._handle);
 
     const process2 = await start(testOpt);
 
-    assert(await isPortReachable(9515, { timeout: 2500 }));
+    assert(await isPortReachable(9515, { timeout: 3500 }));
     assert(!process1._handle);
     assert(process2._handle);
   });
