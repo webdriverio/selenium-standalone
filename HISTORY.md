@@ -1,3 +1,6 @@
+# 9.6.0 (2023-10-21)
+* added proxy complience
+
 # 9.2.3 (2023-10-21)
 * fixed onCancel bug with got
 

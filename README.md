@@ -1,4 +1,4 @@
-Node.js Selenium Standalone [![Test](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml) ![Supported node versions](https://img.shields.io/badge/node-12%2C%2013%2C%2014%2C%2015%2C%2016%2C%2017%2C%2018%2C%2019%2C%2020-green)
+Node.js Selenium Standalone [![Test](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/webdriverio/selenium-standalone/actions/workflows/test.yml) ![Supported node versions](https://img.shields.io/badge/node-%2014%2C%2016%2C%2018%2C%2020-green)
 ===========================
 
 > A node based CLI library for launching [Selenium](http://www.seleniumhq.org/download/) with [WebDriver](https://w3c.github.io/webdriver/) support.
