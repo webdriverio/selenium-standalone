@@ -139,3 +139,7 @@ since 9.1.0 it's been checked and killed automatically
 ## Set `selenium-standalone` Version as NodeJS environment parameter
 
 You can set any version by `process.env.SELENIUM_VERSION=3.141.59` before starting selenium-standalone. Default values are here: [lib/default-config.js](../lib/default-config.js)
+
+## Use the package behind corparate proxy
+
+Should be specified `process.env.HTTP_PROXY=http://proxy-url:port` and `process.env.HTTPS_PROXY=http://proxy-url:port` or the same system envirement variables `HTTP_PROXY=http://proxy-url:port`, `HTTPS_PROXY=http://proxy-url:port`

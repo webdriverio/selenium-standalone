@@ -1,3 +1,7 @@
+# 10.0.0 (2024-06-24)
+* BREAKING CHANGE: dropped node12 support, minimum version is node14
+* added proxy complience
+
 # 9.2.3 (2023-10-21)
 * fixed onCancel bug with got
 
