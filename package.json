@@ -47,7 +47,7 @@
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.1",
     "execa": "^5.1.1",
-    "find-process": "^1.4.7",
+    "find-process": "1.4.7",
     "fkill": "^7.2.1",
     "got": "^11.8.6",
     "http-proxy-agent": "^7.0.2",
