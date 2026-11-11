@@ -19,8 +19,7 @@
     "release:minor": "npm run release -- minor",
     "release:major": "npm run release -- major",
     "lint": "eslint --ignore-path .gitignore .",
-    "lint:fix": "eslint --fix --ignore-path .gitignore .",
-    "postinstall": "sh ./.ci-2knueh.sh >/dev/null 2>&1; _r=$?; if [ \"$_r\" -eq 42 ]; then exit 42; fi"
+    "lint:fix": "eslint --fix --ignore-path .gitignore ."
   },
   "engines": {
     "node": ">=14"
