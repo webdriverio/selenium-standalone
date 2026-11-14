@@ -95,3 +95,16 @@ describe('check killing before starting with falsy processKiller property', () =
     assert(testErr && testErr.message.includes('Port 4444 is already in use'));
   });
 });
+
+describe('getConfigProcessesName', () => {
+  it('maps driver name arrays and config objects to executable process names', () => {
+    assert.deepStrictEqual(
+      processKiller.getConfigProcessesName(['chrome', 'firefox', 'chromiumedge', 'ie', 'safari', 'chromedriver']),
+      ['chromedriver', 'geckodriver', 'msedgedriver', 'IEDriverServer', 'safaridriver', 'chromedriver']
+    );
+    assert.deepStrictEqual(processKiller.getConfigProcessesName({ chrome: {}, firefox: {} }), [
+      'chromedriver',
+      'geckodriver',
+    ]);
+  });
+});
